@@ -8,7 +8,7 @@ from naoqi import ALProxy
 #*  by Cyril Rouviere
 
 # NAO parameters
-IP, PORT = "172.20.25.41", 9559
+IP, PORT = "127.0.0.1", 9559
 ALMEMORY_KEY_NAMES = ["Device/SubDeviceList/HeadYaw/Position/Sensor/Value", "Device/SubDeviceList/HeadPitch/Position/Sensor/Value"]
 
 # Detection threshold and counter parameters
