@@ -11,6 +11,18 @@ Gui::Gui(){
 	pod_centre = cv::Point(TAILLE_POD / 2, TAILLE_POD / 2);
 }
 
+// Créer des trackbars pour une séparation des couleurs en HSV
+void Gui::Creer_trackbar_HSV_sep(const std::string titre_fenetre){
+/*	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
+	H_min = 0; H_max = 0; S_min = 0; S_max = 0; V_min = 0; V_max = 0;
+	cv::createTrackbar("H_min", titre_fenetre, H_min, 180);
+	cv::createTrackbar("H_max", titre_fenetre, H_max, 180);
+	cv::createTrackbar("S_min", titre_fenetre, S_min, 255);
+	cv::createTrackbar("S_max", titre_fenetre, S_max, 255);
+	cv::createTrackbar("V_min", titre_fenetre, V_min, 255);
+	cv::createTrackbar("V_max", titre_fenetre, V_max, 255);
+*/}
+
 // Afficher une image
 void Gui::Afficher_image(const std::string titre_fenetre, cv::Mat image){
 	imshow(titre_fenetre, image);
