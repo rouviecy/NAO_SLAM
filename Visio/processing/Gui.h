@@ -35,11 +35,13 @@ private:
 
 	#define TAILLE_POD 200
 
-	int *H_min, *H_max, *S_min, *S_max, *V_min, *V_max;
+	int H_min, H_max, S_min, S_max, V_min, V_max;
 
 	cv::Scalar rouge;
 	cv::Size dim_1;
 	cv::Point pod_centre;
+
+//	void Callback_H_min(int valeur, void *userdata);
 
 };
 

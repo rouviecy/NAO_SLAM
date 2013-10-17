@@ -33,6 +33,7 @@ int main(){
 		gui.Afficher_image("Video brute", blobs.Get_img_sep());
 	}
 
+
 	return 0;
 
 }
