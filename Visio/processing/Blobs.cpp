@@ -4,15 +4,22 @@ using namespace std;
 
 // Constructeurs
 Blobs::Blobs(){
-	Definir_limites_separation(0, 30, 150, 255, 120, 255);
+	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv->H_min = 0;
+	hsv->H_max = 30;
+	hsv->S_min = 150;
+	hsv->S_max = 255;
+	hsv->V_min = 120;
+	hsv->V_max = 255;
+	Definir_limites_separation(hsv);
 }
 
 // Séparateur de couleurs
 void Blobs::Separer(){inRange(img_brute, sep_min, sep_max, img_sep);}
 
-void Blobs::Definir_limites_separation(int H_min, int H_max, int S_min, int S_max, int V_min, int V_max){
-	sep_min = cv::Scalar(H_min, S_min, V_min);
-	sep_max = cv::Scalar(H_max, S_max, V_max);
+void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
+	sep_min = cv::Scalar(hsv->H_min, hsv->S_min, hsv->V_min);
+	sep_max = cv::Scalar(hsv->H_max, hsv->S_max, hsv->V_max);
 }
 
 // Getters et Setters

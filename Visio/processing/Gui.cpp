@@ -9,18 +9,19 @@ Gui::Gui(){
 	rouge = cv::Scalar(0, 0, 255);
 	dim_1 = cv::Size(1, 1);
 	pod_centre = cv::Point(TAILLE_POD / 2, TAILLE_POD / 2);
+	hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 }
 
 // Créer des trackbars pour une séparation des couleurs en HSV
 void Gui::Creer_trackbar_HSV_sep(const std::string titre_fenetre){
 	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
-	H_min = 0; H_max = 0; S_min = 0; S_max = 0; V_min = 0; V_max = 0;
-	cv::createTrackbar("H_min", titre_fenetre, &H_min, 180);
-	cv::createTrackbar("H_max", titre_fenetre, &H_max, 180);
-	cv::createTrackbar("S_min", titre_fenetre, &S_min, 255);
-	cv::createTrackbar("S_max", titre_fenetre, &S_max, 255);
-	cv::createTrackbar("V_min", titre_fenetre, &V_min, 255);
-	cv::createTrackbar("V_max", titre_fenetre, &V_max, 255);
+	hsv->H_min = 0; hsv->H_max = 0; hsv->S_min = 0; hsv->S_max = 0; hsv->V_min = 0; hsv->V_max = 0;
+	cv::createTrackbar("H_min", titre_fenetre, &(hsv->H_min), 180);
+	cv::createTrackbar("H_max", titre_fenetre, &(hsv->H_max), 180);
+	cv::createTrackbar("S_min", titre_fenetre, &(hsv->S_min), 255);
+	cv::createTrackbar("S_max", titre_fenetre, &(hsv->S_max), 255);
+	cv::createTrackbar("V_min", titre_fenetre, &(hsv->V_min), 255);
+	cv::createTrackbar("V_max", titre_fenetre, &(hsv->V_max), 255);
 }
 
 // Afficher une image
@@ -51,3 +52,6 @@ void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vecto
 	}
 	Afficher_image(titre_fenetre, img_show);
 }
+
+// Guetters et setters
+STRUCT_HSV_BOUND *Gui::Get_HSV_bound() const{return hsv;}

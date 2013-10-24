@@ -28,6 +28,7 @@ int main(){
 		flux.Update();
 		// séparer les blobs
 		blobs.Set_img(flux.Get_next());
+		blobs.Definir_limites_separation(gui.Get_HSV_bound());
 		blobs.Separer();
 		// afficher le résultat
 		gui.Afficher_image("Video brute", blobs.Get_img_sep());

@@ -14,6 +14,7 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include "struct_HSV_bound.h"
 
 class Gui{
 
@@ -22,6 +23,7 @@ public:
 	Gui();
 
 	void Creer_trackbar_HSV_sep(const std::string titre_fenetre);
+	STRUCT_HSV_BOUND *Get_HSV_bound() const;
 
 	void Afficher_image(const std::string titre_fenetre, cv::Mat image);
 	void Pad(const std::string titre_fenetre, const float dx, const float dy, const float dx_max, const float dy_max);
@@ -35,7 +37,7 @@ private:
 
 	#define TAILLE_POD 200
 
-	int H_min, H_max, S_min, S_max, V_min, V_max;
+	STRUCT_HSV_BOUND *hsv;
 
 	cv::Scalar rouge;
 	cv::Size dim_1;

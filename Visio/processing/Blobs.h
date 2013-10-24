@@ -13,6 +13,7 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include "struct_HSV_bound.h"
 
 class Blobs{
 
@@ -22,7 +23,7 @@ public:
 
 	cv::Mat Get_img_sep() const;
 	void Set_img(cv::Mat image);
-	void Definir_limites_separation(int H_min, int H_max, int S_min, int S_max, int V_min, int V_max);
+	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);
 	void Separer();
 
 private:
