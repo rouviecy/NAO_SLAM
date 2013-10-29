@@ -22,16 +22,22 @@ public:
 	Blobs();
 
 	cv::Mat Get_img_sep() const;
+	cv::Mat Get_img_blobs() const;
 	void Set_img(cv::Mat image);
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);
 	void Separer();
+	void Trouver_blobs();
 
 private:
 
 	cv::Mat img_brute;
 	cv::Mat img_sep;
+	cv::Mat img_blobs;
 	cv::Scalar sep_min;
 	cv::Scalar sep_max;
+
+	std::vector <std::vector <cv::Point2i> > liste_blobs;
+	std::vector <cv::Vec4i> hierarchie_blobs;
 
 };
 
