@@ -20,6 +20,7 @@ class Blobs{
 public:
 
 	Blobs();
+	~Blobs();
 
 	cv::Mat Get_img_sep() const;
 	void Set_img(cv::Mat image);

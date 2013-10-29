@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Constructeur
+// Constructeur - Destructeur
 Gui::Gui(){
 	rouge = cv::Scalar(0, 0, 255);
 	dim_1 = cv::Size(1, 1);
@@ -12,16 +12,29 @@ Gui::Gui(){
 	hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 }
 
+Gui::~Gui(){
+	free(hsv);
+}
+
 // Créer des trackbars pour une séparation des couleurs en HSV
-void Gui::Creer_trackbar_HSV_sep(const std::string titre_fenetre){
+void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
+	hsv->winname = (schar*) titre_fenetre;
 	hsv->H_min = 0; hsv->H_max = 0; hsv->S_min = 0; hsv->S_max = 0; hsv->V_min = 0; hsv->V_max = 0;
-	cv::createTrackbar("H_min", titre_fenetre, &(hsv->H_min), 180);
-	cv::createTrackbar("H_max", titre_fenetre, &(hsv->H_max), 180);
-	cv::createTrackbar("S_min", titre_fenetre, &(hsv->S_min), 255);
-	cv::createTrackbar("S_max", titre_fenetre, &(hsv->S_max), 255);
-	cv::createTrackbar("V_min", titre_fenetre, &(hsv->V_min), 255);
-	cv::createTrackbar("V_max", titre_fenetre, &(hsv->V_max), 255);
+	hsv->name_H_min = (schar*) "H_min"; hsv->name_S_min = (schar*) "S_min"; hsv->name_V_min = (schar*) "V_min";
+	hsv->name_H_max = (schar*) "H_max"; hsv->name_S_max = (schar*) "S_max"; hsv->name_V_max = (schar*) "V_max";
+	cv::createTrackbar((char*) hsv->name_H_min, (char*) hsv->winname, &(hsv->H_min), 180, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_H_max, (char*) hsv->winname, &(hsv->H_max), 180, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_S_min, (char*) hsv->winname, &(hsv->S_min), 255, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_S_max, (char*) hsv->winname, &(hsv->S_max), 255, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_V_min, (char*) hsv->winname, &(hsv->V_min), 255, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_V_max, (char*) hsv->winname, &(hsv->V_max), 255, Callback_HSV, hsv);
+}
+
+// Callback des trackbars
+void Gui::Callback_HSV(int value, void *object){
+	STRUCT_HSV_BOUND *arg = (STRUCT_HSV_BOUND*)object;
+	if(arg->H_min > arg->H_max){cv::setTrackbarPos((char*) arg->name_H_min, (char*) arg->winname, arg->H_max);};
 }
 
 // Afficher une image

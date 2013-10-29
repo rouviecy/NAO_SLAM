@@ -12,6 +12,9 @@
 #ifndef DEF_HSV_BOUND
 #define DEF_HSV_BOUND
 
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct{
 	int H_min;
 	int H_max;
@@ -19,6 +22,13 @@ typedef struct{
 	int S_max;
 	int V_min;
 	int V_max;
+	schar* name_H_min;
+	schar* name_H_max;
+	schar* name_S_min;
+	schar* name_S_max;
+	schar* name_V_min;
+	schar* name_V_max;
+	schar* winname;
 } STRUCT_HSV_BOUND;
 
 #endif

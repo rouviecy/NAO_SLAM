@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// Constructeurs
+// Constructeur - Destructeur
 Blobs::Blobs(){
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv->H_min = 0;
@@ -12,6 +12,11 @@ Blobs::Blobs(){
 	hsv->V_min = 120;
 	hsv->V_max = 255;
 	Definir_limites_separation(hsv);
+	free(hsv);
+}
+
+Blobs::~Blobs(){
+
 }
 
 // Séparateur de couleurs

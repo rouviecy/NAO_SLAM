@@ -31,7 +31,8 @@ int main(){
 		blobs.Definir_limites_separation(gui.Get_HSV_bound());
 		blobs.Separer();
 		// afficher le résultat
-		gui.Afficher_image("Video brute", blobs.Get_img_sep());
+		gui.Afficher_image("Video brute", flux.Get_cam());
+		gui.Afficher_image("Video segmentee", blobs.Get_img_sep());
 	}
 
 
