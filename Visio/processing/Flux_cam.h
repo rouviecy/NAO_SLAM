@@ -1,6 +1,6 @@
 /*
  * @(#)		Flux_cam.h
- * @version	1.2
+ * @version	1.3
  * @autor	C. Rouvière
  */
 

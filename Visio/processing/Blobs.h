@@ -1,6 +1,6 @@
 /*
  * @(#)		Blobs.h
- * @version	1.0
+ * @version	1.3
  * @autor	C. Rouvière
  */
 
@@ -20,7 +20,6 @@ class Blobs{
 public:
 
 	Blobs();
-	~Blobs();
 
 	cv::Mat Get_img_sep() const;
 	void Set_img(cv::Mat image);

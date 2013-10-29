@@ -1,6 +1,6 @@
 /*
  * @(#)		struct_HSV_bound.h
- * @version	1.0
+ * @version	1.3
  * @autor	C. Rouvière
  */
 
