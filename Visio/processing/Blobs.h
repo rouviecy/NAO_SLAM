@@ -24,6 +24,8 @@ public:
 	cv::Mat Get_img_sep() const;
 	cv::Mat Get_img_blobs() const;
 	cv::Mat Get_img_centers() const;
+	std::vector <cv::Moments> Get_mu() const;
+	std::vector <cv::Point2f> Get_mc() const;
 	void Set_img(cv::Mat image);
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);
 	void Separer();
@@ -43,6 +45,8 @@ private:
 
 	std::vector <std::vector <cv::Point2i> > liste_blobs;
 	std::vector <cv::Vec4i> hierarchie_blobs;
+	std::vector <cv::Moments> mu;
+	std::vector <cv::Point2f> mc;
 
 };
 
