@@ -51,4 +51,3 @@ cv::Mat Blobs::Get_img_sep() const{return img_sep;}
 cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
 cv::Mat Blobs::Get_img_centers() const{return img_centers;}
 void Blobs::Set_img(cv::Mat image){image.copyTo(img_brute);}
-void Blobs::Set_seuil_taille_blobs(double seuil){this->seuil_taille_blobs = seuil;}
