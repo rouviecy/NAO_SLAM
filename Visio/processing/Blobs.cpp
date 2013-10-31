@@ -4,7 +4,7 @@ using namespace std;
 
 // Constructeur
 Blobs::Blobs(){
-	rouge = cv::Scalar(0, 0, 255);
+	rouge = cv::Scalar(0, 0, 255); bleu = cv::Scalar(255, 0, 0);
 	seuil_taille_blobs = 42;
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv->H_min = 0;
@@ -30,7 +30,6 @@ void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
 // Séparer les blobs
 void Blobs::Trouver_blobs(){
 	img_blobs = cv::Mat::zeros(img_sep.size(), CV_8UC3);
-	img_centers = cv::Mat::zeros(img_sep.size(), CV_8UC3);
 	cv::findContours(img_sep, liste_blobs, hierarchie_blobs, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 	if(hierarchie_blobs.size() <= 0){return;}
 	mu.clear(); mc.clear();
@@ -39,16 +38,14 @@ void Blobs::Trouver_blobs(){
 		mc.push_back(cv::Point2f(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00));
 		double aire = cv::contourArea(liste_blobs[i], false);
 		if(aire < seuil_taille_blobs){continue;}
-		cv::Scalar couleur(rand()&255, rand()&255, rand()&255);
-		drawContours(img_blobs, liste_blobs, i, couleur, CV_FILLED, 8, hierarchie_blobs);
-		cv::circle(img_centers, mc[i], 4, rouge, -1, 8, 0);
+		drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
+		cv::circle(img_blobs, mc[i], 4, rouge, -1, 8, 0);
 	}
 }
 
 // Getters et Setters
 cv::Mat Blobs::Get_img_sep() const{return img_sep;}
 cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
-cv::Mat Blobs::Get_img_centers() const{return img_centers;}
 std::vector <cv::Moments> Blobs::Get_mu() const{return mu;}
 std::vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
 void Blobs::Set_img(cv::Mat image){image.copyTo(img_brute);}

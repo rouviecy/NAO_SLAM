@@ -23,7 +23,6 @@ public:
 
 	cv::Mat Get_img_sep() const;
 	cv::Mat Get_img_blobs() const;
-	cv::Mat Get_img_centers() const;
 	std::vector <cv::Moments> Get_mu() const;
 	std::vector <cv::Point2f> Get_mc() const;
 	void Set_img(cv::Mat image);
@@ -38,10 +37,9 @@ private:
 	cv::Mat img_brute;
 	cv::Mat img_sep;
 	cv::Mat img_blobs;
-	cv::Mat img_centers;
 	cv::Scalar sep_min;
 	cv::Scalar sep_max;
-	cv::Scalar rouge;
+	cv::Scalar rouge, bleu;
 
 	std::vector <std::vector <cv::Point2i> > liste_blobs;
 	std::vector <cv::Vec4i> hierarchie_blobs;

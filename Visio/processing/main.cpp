@@ -34,7 +34,6 @@ int main(){
 		// afficher le résultat
 		gui.Afficher_image("Video brute", flux.Get_cam());
 		gui.Afficher_image("Video segmentee", blobs.Get_img_blobs());
-		gui.Afficher_image("Video centres blobs", blobs.Get_img_centers());
 	}
 
 
