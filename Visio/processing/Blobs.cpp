@@ -28,11 +28,21 @@ void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
 void Blobs::Trouver_blobs(){
 	img_blobs = cv::Mat(img_sep.size(), CV_8UC3, cv::Scalar(0, 0, 0));
 	cv::findContours(img_sep, liste_blobs, hierarchie_blobs, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-	if(hierarchie_blobs.size() <= 0){return ;}
+	if(hierarchie_blobs.size() <= 0){return;}
 	for(int index = 0; index >= 0; index = hierarchie_blobs[index][0]){
 		cv::Scalar couleur(rand()&255, rand()&255, rand()&255);
 		drawContours(img_blobs, liste_blobs, index, couleur, CV_FILLED, 8, hierarchie_blobs);
 	}
+	// TODO : Nettoyer cette partie du code
+	std::vector<cv::Moments> mu(liste_blobs.size());
+	std::vector<cv::Point2f> mc(liste_blobs.size());
+	cv::Mat drawing = cv::Mat::zeros(img_sep.size(), CV_8UC3);
+	for(size_t i = 0; i < liste_blobs.size(); i++){
+		mu[i] = cv::moments(liste_blobs[i], false);
+		mc[i] = cv::Point2f(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00);
+		cv::circle(drawing, mc[i], 4, cv::Scalar(255, 0, 0), -1, 8, 0 );
+	}
+	cv::imshow("Contours", drawing);
 }
 
 // Getters et Setters
