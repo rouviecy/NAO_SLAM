@@ -19,7 +19,7 @@ Gui::~Gui(){
 // Créer des trackbars pour une séparation des couleurs en HSV
 void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
-	hsv->winname = (schar*) titre_fenetre;
+	hsv->winname = (schar*) titre_fenetre; hsv->name_seuil = (schar*) "seuil";
 	hsv->H_min = 0; hsv->H_max = 0; hsv->S_min = 0; hsv->S_max = 0; hsv->V_min = 0; hsv->V_max = 0;
 	hsv->name_H_min = (schar*) "H_min"; hsv->name_S_min = (schar*) "S_min"; hsv->name_V_min = (schar*) "V_min";
 	hsv->name_H_max = (schar*) "H_max"; hsv->name_S_max = (schar*) "S_max"; hsv->name_V_max = (schar*) "V_max";
@@ -29,6 +29,7 @@ void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::createTrackbar((char*) hsv->name_S_max, (char*) hsv->winname, &(hsv->S_max), 255, Callback_HSV, hsv);
 	cv::createTrackbar((char*) hsv->name_V_min, (char*) hsv->winname, &(hsv->V_min), 255, Callback_HSV, hsv);
 	cv::createTrackbar((char*) hsv->name_V_max, (char*) hsv->winname, &(hsv->V_max), 255, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_seuil, (char*) hsv->winname, &(hsv->seuil), 999, Callback_HSV, hsv);
 }
 
 // Callback des trackbars

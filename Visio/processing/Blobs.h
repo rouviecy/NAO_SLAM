@@ -25,11 +25,14 @@ public:
 	cv::Mat Get_img_blobs() const;
 	cv::Mat Get_img_centers() const;
 	void Set_img(cv::Mat image);
+	void Set_seuil_taille_blobs(double seuil);
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);
 	void Separer();
 	void Trouver_blobs();
 
 private:
+
+	double seuil_taille_blobs;
 
 	cv::Mat img_brute;
 	cv::Mat img_sep;

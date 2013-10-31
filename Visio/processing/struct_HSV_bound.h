@@ -22,12 +22,14 @@ typedef struct{
 	int S_max;
 	int V_min;
 	int V_max;
+	int seuil;
 	schar* name_H_min;
 	schar* name_H_max;
 	schar* name_S_min;
 	schar* name_S_max;
 	schar* name_V_min;
 	schar* name_V_max;
+	schar* name_seuil;
 	schar* winname;
 } STRUCT_HSV_BOUND;
 

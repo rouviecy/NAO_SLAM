@@ -5,6 +5,7 @@ using namespace std;
 // Constructeur
 Blobs::Blobs(){
 	rouge = cv::Scalar(0, 0, 255);
+	seuil_taille_blobs = 42;
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv->H_min = 0;
 	hsv->H_max = 30;
@@ -23,6 +24,7 @@ void Blobs::Separer(){inRange(img_brute, sep_min, sep_max, img_sep);}
 void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
 	sep_min = cv::Scalar(hsv->H_min, hsv->S_min, hsv->V_min);
 	sep_max = cv::Scalar(hsv->H_max, hsv->S_max, hsv->V_max);
+	seuil_taille_blobs = hsv->seuil;
 }
 
 // Séparer les blobs
@@ -34,6 +36,8 @@ void Blobs::Trouver_blobs(){
 	std::vector<cv::Moments> mu(liste_blobs.size());
 	std::vector<cv::Point2f> mc(liste_blobs.size());
 	for(size_t i = 0; i < liste_blobs.size(); i++){
+		double aire = cv::contourArea(liste_blobs[i], false);
+		if(aire < seuil_taille_blobs){continue;}
 		cv::Scalar couleur(rand()&255, rand()&255, rand()&255);
 		drawContours(img_blobs, liste_blobs, i, couleur, CV_FILLED, 8, hierarchie_blobs);
 		mu[i] = cv::moments(liste_blobs[i], false);
@@ -47,3 +51,4 @@ cv::Mat Blobs::Get_img_sep() const{return img_sep;}
 cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
 cv::Mat Blobs::Get_img_centers() const{return img_centers;}
 void Blobs::Set_img(cv::Mat image){image.copyTo(img_brute);}
+void Blobs::Set_seuil_taille_blobs(double seuil){this->seuil_taille_blobs = seuil;}
