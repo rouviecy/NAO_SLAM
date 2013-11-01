@@ -12,13 +12,15 @@
 #include "Gui.h"
 #include "Flux_cam.h"
 #include "Blobs.h"
+#include "Tracking.h"
 
 using namespace std;
 
 int main(){
 
-	Flux_cam flux(-1, 40, CV_RGB2HSV, 3);	// initialisation du flux webcam (/dev/video0)
+	Flux_cam flux(-1, 40, 1, 3);	// initialisation du flux webcam (/dev/video0)
 	Blobs blobs;				// séparateur de blobs
+	Tracking tracking;			// suivi de blobs
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur");
 
@@ -27,10 +29,14 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		// séparer les blobs
-		blobs.Set_img(flux.Get_next());
+		blobs.Set_img(flux.Get_prev());
 		blobs.Definir_limites_separation(gui.Get_HSV_bound());
 		blobs.Separer();
 		blobs.Trouver_blobs();
+		// suivre les blobs
+		tracking.Set_img_prev(flux.Get_prev());
+		tracking.Set_img_next(flux.Get_next());
+		tracking.Set_amers(blobs.Get_mc());
 		// afficher le résultat
 		gui.Afficher_image("Video brute", flux.Get_cam());
 		gui.Afficher_image("Video segmentee", blobs.Get_img_blobs());

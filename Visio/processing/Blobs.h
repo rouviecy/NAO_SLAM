@@ -37,6 +37,7 @@ private:
 	double seuil_taille_blobs;
 
 	cv::Mat img_brute;
+	cv::Mat img_HSV;
 	cv::Mat img_sep;
 	cv::Mat img_blobs;
 	cv::Scalar sep_min;

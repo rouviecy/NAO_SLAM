@@ -18,7 +18,7 @@ Blobs::Blobs(){
 }
 
 // Séparateur de couleurs
-void Blobs::Separer(){inRange(img_brute, sep_min, sep_max, img_sep);}
+void Blobs::Separer(){inRange(img_HSV, sep_min, sep_max, img_sep);}
 
 // Mise à jour des paramètres de segmentation HSV
 void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
@@ -51,4 +51,7 @@ cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
 std::vector <cv::Moments> Blobs::Get_mu() const{return mu;}
 std::vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
 std::vector <cv::Rect> Blobs::Get_rect() const{return rect;}
-void Blobs::Set_img(cv::Mat image){image.copyTo(img_brute);}
+void Blobs::Set_img(cv::Mat image){
+	image.copyTo(img_brute);
+	cvtColor(img_brute, img_HSV, CV_RGB2HSV, 3);
+}

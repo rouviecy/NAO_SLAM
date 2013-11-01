@@ -41,7 +41,6 @@ void Gui::Callback_HSV(int value, void *object){
 	cv::Mat img_color = cv::Mat::zeros(100, 300, CV_8UC3);
 	cv::rectangle(img_color, cv::Point(0, 0), cv::Point(150, 100), cv::Scalar(arg->H_min, arg->S_min, arg->V_min), CV_FILLED);
 	cv::rectangle(img_color, cv::Point(150, 0), cv::Point(300, 100), cv::Scalar(arg->H_max, arg->S_max, arg->V_max), CV_FILLED);
-//	cv::Mat img_color(100, 300, CV_8UC3, cv::Scalar(arg->H_min, arg->S_min, arg->V_min));
 	cvtColor(img_color, img_color, CV_HSV2RGB, 3);
 	imshow((char*) arg->winname, img_color);
 }
