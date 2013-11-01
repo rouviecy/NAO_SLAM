@@ -20,7 +20,7 @@ int main(){
 
 	Flux_cam flux(-1, 40, 1, 3);	// initialisation du flux webcam (/dev/video0)
 	Blobs blobs;				// séparateur de blobs
-	Tracking tracking;			// suivi de blobs
+	Tracking tracking(500);			// suivi de blobs
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur");
 
@@ -40,7 +40,6 @@ int main(){
 		tracking.Tracker();
 		// afficher le résultat
 		gui.Afficher_image("Video brute", flux.Get_cam());
-//		gui.Afficher_image("Video segmentee", blobs.Get_img_blobs());
 		gui.Ajouter_vecteurs("Video tracking", blobs.Get_img_blobs(), tracking.Get_amers(), tracking.Get_nv());
 
 	}

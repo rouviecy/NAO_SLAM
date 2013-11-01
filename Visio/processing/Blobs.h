@@ -46,9 +46,9 @@ private:
 
 	std::vector <std::vector <cv::Point2i> > liste_blobs;
 	std::vector <cv::Vec4i> hierarchie_blobs;
-	std::vector <cv::Moments> mu;
-	std::vector <cv::Point2f> mc;
-	std::vector <cv::Rect> rect;
+	std::vector <cv::Moments> mu, mu_;
+	std::vector <cv::Point2f> mc, mc_;
+	std::vector <cv::Rect> rect, rect_;
 
 };
 

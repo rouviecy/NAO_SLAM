@@ -13,12 +13,13 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+//#include "Utils.h"
 
 class Tracking{
 
 public:
 
-	Tracking();
+	Tracking(int vitesse_max);
 
 	void Set_img_prev(cv::Mat img_prev);			// setter image N-1
 	void Set_img_next(cv::Mat img_next);			// setter image N
@@ -31,6 +32,8 @@ public:
 
 private:
 
+	int vitesse_max;
+
 	cv::Mat img_prev;			// image N-1	HSV
 	cv::Mat img_next;			// image N	HSV
 	cv::Mat img_prev_nvg;			// image N-1	niveaux de gris
@@ -39,6 +42,8 @@ private:
 	std::vector <cv::Point2f> nv;		// points à repérer
 	std::vector <uchar> status;		// si les points ont été repérés
 	std::vector <float> err;		// erreur
+
+	int Distance_carree(int x1, int y1, int x2, int y2);
 
 };
 
