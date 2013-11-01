@@ -16,13 +16,15 @@
 #include <string.h>
 
 typedef struct{
-	int H_min;
-	int H_max;
-	int S_min;
-	int S_max;
-	int V_min;
-	int V_max;
-	int seuil;
+	int H_min;		// seuil minimum de chrominance
+	int H_max;		// seuil maximum de chrominance
+	int S_min;		// seuil minimum de saturation
+	int S_max;		// seuil maximum de saturation
+	int V_min;		// seuil minimum de luminance
+	int V_max;		// seuil maximum de luminance
+	int seuil;		// seuil minimum de taille de blob
+	schar* winname;		// nom fenêtre de la GUI
+	// noms trackbar
 	schar* name_H_min;
 	schar* name_H_max;
 	schar* name_S_min;
@@ -30,7 +32,6 @@ typedef struct{
 	schar* name_V_min;
 	schar* name_V_max;
 	schar* name_seuil;
-	schar* winname;
 } STRUCT_HSV_BOUND;
 
 #endif

@@ -21,14 +21,15 @@ public:
 
 	Blobs();
 
-	cv::Mat Get_img_sep() const;
-	cv::Mat Get_img_blobs() const;
-	std::vector <cv::Moments> Get_mu() const;
-	std::vector <cv::Point2f> Get_mc() const;
-	void Set_img(cv::Mat image);
-	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);
-	void Separer();
-	void Trouver_blobs();
+	cv::Mat Get_img_sep() const;			// Guetter sur l'image segmentée par HSV
+	cv::Mat Get_img_blobs() const;			// Guetter sur l'image des blobs et leurs centres
+	std::vector <cv::Moments> Get_mu() const;	// Guetter sur les moments de chaque blob
+	std::vector <cv::Point2f> Get_mc() const;	// Guetter sur le centre massique de chaque blob
+
+	void Set_img(cv::Mat image);				// Setter d'image à traiter (déjà en HSV)
+	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);	// Récupération des paramètres de segmentation HSV
+	void Separer();						// Séparer selon les paramètres
+	void Trouver_blobs();					// Convertir les données en liste de blobs
 
 private:
 

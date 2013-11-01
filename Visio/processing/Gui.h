@@ -22,11 +22,10 @@ class Gui{
 
 public:
 
-	Gui();
-	~Gui();
+	Gui(); ~Gui();
 
-	void Creer_trackbar_HSV_sep(const char* titre_fenetre);
-	STRUCT_HSV_BOUND *Get_HSV_bound() const;
+	void Creer_trackbar_HSV_sep(const char* titre_fenetre);	// initialisation de la fenêtre des trackbars de séparation HSV
+	STRUCT_HSV_BOUND *Get_HSV_bound() const;		// pointeur vers la structure contenant les paramètres de séparation
 
 	void Afficher_image(const std::string titre_fenetre, cv::Mat image);
 	void Pad(const std::string titre_fenetre, const float dx, const float dy, const float dx_max, const float dy_max);
