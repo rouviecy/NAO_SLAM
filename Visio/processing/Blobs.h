@@ -46,6 +46,7 @@ private:
 	std::vector <cv::Vec4i> hierarchie_blobs;
 	std::vector <cv::Moments> mu;
 	std::vector <cv::Point2f> mc;
+	std::vector <cv::Rect> rect;
 
 };
 

@@ -8,7 +8,7 @@ Blobs::Blobs(){
 	seuil_taille_blobs = 42;
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv->H_min = 0;
-	hsv->H_max = 30;
+	hsv->H_max = 42;
 	hsv->S_min = 150;
 	hsv->S_max = 255;
 	hsv->V_min = 120;
@@ -32,14 +32,16 @@ void Blobs::Trouver_blobs(){
 	img_blobs = cv::Mat::zeros(img_sep.size(), CV_8UC3);
 	cv::findContours(img_sep, liste_blobs, hierarchie_blobs, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 	if(hierarchie_blobs.size() <= 0){return;}
-	mu.clear(); mc.clear();
+	mu.clear(); mc.clear(); rect.clear();
 	for(size_t i = 0; i < liste_blobs.size(); i++){
 		mu.push_back(cv::moments(liste_blobs[i], false));
 		mc.push_back(cv::Point2f(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00));
+		rect.push_back(cv::boundingRect(liste_blobs[i]));
 		double aire = cv::contourArea(liste_blobs[i], false);
 		if(aire < seuil_taille_blobs){continue;}
 		drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
 		cv::circle(img_blobs, mc[i], 4, rouge, -1, 8, 0);
+		cv::rectangle(img_blobs, rect[i], rouge);
 	}
 }
 
