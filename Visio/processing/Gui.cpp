@@ -63,6 +63,7 @@ void Gui::Pad(const std::string titre_fenetre, const float dx, const float dy, c
 
 // Afficher une image et des vecteurs
 void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vector<cv::Point2f> pts_prev, vector<cv::Point2f> pts_next){
+	if(pts_prev.size() <= 0){return;}
 	cv::Mat img_show;
 	image.copyTo(img_show);
 	for(size_t i = 0; i < pts_prev.size(); i++){

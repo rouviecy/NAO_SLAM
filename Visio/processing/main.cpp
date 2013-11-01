@@ -37,9 +37,12 @@ int main(){
 		tracking.Set_img_prev(flux.Get_prev());
 		tracking.Set_img_next(flux.Get_next());
 		tracking.Set_amers(blobs.Get_mc());
+		tracking.Tracker();
 		// afficher le résultat
 		gui.Afficher_image("Video brute", flux.Get_cam());
-		gui.Afficher_image("Video segmentee", blobs.Get_img_blobs());
+//		gui.Afficher_image("Video segmentee", blobs.Get_img_blobs());
+		gui.Ajouter_vecteurs("Video tracking", blobs.Get_img_blobs(), tracking.Get_amers(), tracking.Get_nv());
+
 	}
 
 
