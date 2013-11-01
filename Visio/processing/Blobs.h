@@ -25,6 +25,7 @@ public:
 	cv::Mat Get_img_blobs() const;			// Guetter sur l'image des blobs et leurs centres
 	std::vector <cv::Moments> Get_mu() const;	// Guetter sur les moments de chaque blob
 	std::vector <cv::Point2f> Get_mc() const;	// Guetter sur le centre massique de chaque blob
+	std::vector <cv::Rect> Get_rect() const;	// Guetter sur les rectangles englobants des blobs
 
 	void Set_img(cv::Mat image);				// Setter d'image à traiter (déjà en HSV)
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);	// Récupération des paramètres de segmentation HSV

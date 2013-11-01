@@ -50,4 +50,5 @@ cv::Mat Blobs::Get_img_sep() const{return img_sep;}
 cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
 std::vector <cv::Moments> Blobs::Get_mu() const{return mu;}
 std::vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
+std::vector <cv::Rect> Blobs::Get_rect() const{return rect;}
 void Blobs::Set_img(cv::Mat image){image.copyTo(img_brute);}
