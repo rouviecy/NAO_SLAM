@@ -19,7 +19,7 @@ class Utils{
 public:
 
 	static char* string_index(std::string racine, int index);
-	static int Distance_carree(int x1, int y1, int x2, int y2);
+
 };
 
 #endif
