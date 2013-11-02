@@ -1,6 +1,6 @@
 import numpy as np
 import Image, cv2
-import sys, time, math
+import sys, time
 from naoqi import ALProxy
 
 #** Grab images from NAO camera : img_brute
@@ -9,9 +9,6 @@ from naoqi import ALProxy
 
 # NAO parameters
 IP, PORT = "127.0.0.1", 9559
-ALMEMORY_KEY_NAMES = ["Device/SubDeviceList/HeadYaw/Position/Sensor/Value", "Device/SubDeviceList/HeadPitch/Position/Sensor/Value"]
-
-# Detection threshold and counter parameters
 temps = 200000
 
 # Camera
