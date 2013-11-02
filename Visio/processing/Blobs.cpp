@@ -3,8 +3,10 @@
 using namespace std;
 
 // Constructeur
-Blobs::Blobs(){
+Blobs::Blobs(const int lissage){
 	rouge = cv::Scalar(0, 0, 255); bleu = cv::Scalar(255, 0, 0);
+	this->lissage = lissage;
+	if(lissage > 1){flou_kern = cv::Size(lissage, lissage);}
 	seuil_taille_blobs = 42;
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv->H_min = 0;
@@ -20,7 +22,7 @@ Blobs::Blobs(){
 // Séparateur de couleurs
 void Blobs::Separer(){
 	inRange(img_HSV, sep_min, sep_max, img_sep);
-	blur(img_sep, img_sep, cv::Size(5, 5), cv::Point(-1, -1), cv::BORDER_DEFAULT);
+	if(lissage > 1){blur(img_sep, img_sep, flou_kern, cv::Point(-1, -1), cv::BORDER_DEFAULT);}
 }
 
 // Mise à jour des paramètres de segmentation HSV

@@ -18,8 +18,8 @@ using namespace std;
 
 int main(){
 
-	Flux_cam flux(-1, 40, 1, 3);	// initialisation du flux webcam (/dev/video0)
-	Blobs blobs;				// séparateur de blobs
+	Flux_cam flux(-1, 40, 1, 3);		// initialisation du flux webcam (/dev/video0)
+	Blobs blobs(5);				// séparateur de blobs
 	Tracking tracking(500);			// suivi de blobs
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur");

@@ -29,7 +29,7 @@ void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::createTrackbar((char*) hsv->name_S_max, (char*) hsv->winname, &(hsv->S_max), 255, Callback_HSV, hsv);
 	cv::createTrackbar((char*) hsv->name_V_min, (char*) hsv->winname, &(hsv->V_min), 255, Callback_HSV, hsv);
 	cv::createTrackbar((char*) hsv->name_V_max, (char*) hsv->winname, &(hsv->V_max), 255, Callback_HSV, hsv);
-	cv::createTrackbar((char*) hsv->name_seuil, (char*) hsv->winname, &(hsv->seuil), 999, Callback_HSV, hsv);
+	cv::createTrackbar((char*) hsv->name_seuil, (char*) hsv->winname, &(hsv->seuil), 9999, Callback_HSV, hsv);
 }
 
 // Callback des trackbars
