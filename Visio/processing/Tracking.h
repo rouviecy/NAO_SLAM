@@ -13,13 +13,12 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
-//#include "Utils.h"
 
 class Tracking{
 
 public:
 
-	Tracking(int vitesse_max);
+	Tracking(const int vitesse_max);
 
 	void Set_img_prev(cv::Mat img_prev);			// setter image N-1
 	void Set_img_next(cv::Mat img_next);			// setter image N

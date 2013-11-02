@@ -3,7 +3,7 @@
 using namespace std;
 
 // Constructeurs
-Tracking::Tracking(int vitesse_max){
+Tracking::Tracking(const int vitesse_max){
 	this->vitesse_max = vitesse_max;
 }
 
@@ -13,7 +13,6 @@ void Tracking::Tracker(){
 	calcOpticalFlowPyrLK(img_prev_nvg, img_next_nvg, amers, nv, status, err);
 	for(size_t i = 0; i < amers.size();){
 		if(status[i] != 1 || Distance_carree(amers[i].x, amers[i].y, nv[i].x, nv[i].y) > vitesse_max){
-//		if(status[i] != 1){
 			amers.erase(amers.begin() + i);
 			nv.erase(nv.begin() + i);
 			status.erase(status.begin() + i);

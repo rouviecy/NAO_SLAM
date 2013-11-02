@@ -18,7 +18,7 @@ class Utils{
 
 public:
 
-	static char* string_index(std::string racine, int index);
+	static char* string_index(const std::string racine, const int index);
 
 };
 
