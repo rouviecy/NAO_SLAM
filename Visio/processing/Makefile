@@ -2,10 +2,10 @@ CC = g++
 CFLAGS = -O2 -Wall
 IMP_OPENCV = `pkg-config --cflags --libs opencv`
 
-all: main.o Utils.o Flux_cam.o Gui.o Blobs.o
-	$(CC) $(CFLAGS) main.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o -o naqahdah $(IMP_OPENCV)
+all: main.o Utils.o Flux_cam.o Gui.o Blobs.o Reco.o
+	$(CC) $(CFLAGS) main.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Reco.o -o naqahdah $(IMP_OPENCV)
 
-main.o: main.cpp Utils.o Flux_cam.o Gui.o Blobs.o Tracking.o
+main.o: main.cpp Utils.o Flux_cam.o Gui.o Blobs.o Tracking.o Reco.o
 	$(CC) $(CFLAGS) -c main.cpp -o main.o
 
 Utils.o: Utils.cpp
@@ -22,6 +22,9 @@ Blobs.o: Blobs.cpp
 
 Tracking.o: Tracking.cpp
 	$(CC) $(CFLAGS) -c Tracking.cpp -o Tracking.o
+
+Reco.o: Reco.cpp
+	$(CC) $(CFLAGS) -c Reco.cpp -o Reco.o
 
 clean:
 	rm -rf ./*.o
