@@ -15,3 +15,5 @@ Parameters are chosen and images are displayed in a GUI. It will use your camera
     * Saturation (minimum and maximum)
     * Brightness (minimum and maximum)
     * Area of blobs (minimum)
+Hold 'c' key pressed while you are changing these values to avoid the mouse from being caught !  
+Tape 'q' key to quit.
