@@ -54,6 +54,15 @@ void Blobs::Trouver_blobs(){
 	}
 }
 
+// Relier les centres de masse des blobs
+void Blobs::Relier(){
+	for(size_t i = 0 ; i < mc.size(); i++){
+		for(size_t j = 0 ; j < mc.size(); j++){
+			cv::line(img_blobs, mc[i], mc[j], rouge);
+		}
+	}
+}
+
 // Getters et Setters
 cv::Mat Blobs::Get_img_sep() const{return img_sep;}
 cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}

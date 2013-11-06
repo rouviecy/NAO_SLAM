@@ -31,6 +31,7 @@ public:
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);	// Récupération des paramètres de segmentation HSV
 	void Separer();						// Séparer selon les paramètres
 	void Trouver_blobs();					// Convertir les données en liste de blobs
+	void Relier();						// Relier les blobs
 
 private:
 
