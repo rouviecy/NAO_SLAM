@@ -10,6 +10,9 @@ Gui::Gui(){
 	dim_1 = cv::Size(1, 1);
 	pod_centre = cv::Point(TAILLE_POD / 2, TAILLE_POD / 2);
 	hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	dpy = XOpenDisplay(0);
+	root_window = XRootWindow(dpy, 0);
+	XSelectInput(dpy, root_window, KeyReleaseMask);
 }
 
 Gui::~Gui(){
@@ -59,6 +62,17 @@ void Gui::Pad(const std::string titre_fenetre, const float dx, const float dy, c
 	ellipse(img_show, pod_centre, dim_1, 0, 0, 360, rouge);
 	line(img_show, pod_centre, pod_fin, rouge);
 	Afficher_image(titre_fenetre, img_show);
+}
+
+// Prendre le contrôle de la souris
+void Gui::Controler_souris(std::vector <cv::Point2f> mc, int width, int height){
+	if(mc.size() <= 0){return;}
+	int XMouse = 1600 - (int) (mc[0].x / width * 1600);
+	int YMouse = (int) (mc[0].y / height * 900);
+	if(XMouse > 0 && XMouse < 1600 && YMouse > 0 && YMouse < 900){
+		XWarpPointer(dpy, None, root_window, 0, 0, 0, 0, XMouse, YMouse);
+		XFlush(dpy);
+	}
 }
 
 // Afficher une image et des vecteurs

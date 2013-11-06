@@ -16,6 +16,7 @@
 #include <opencv/highgui.h>
 #include <stdlib.h>
 #include <string.h>
+#include <X11/Xlib.h>
 #include "struct_HSV_bound.h"
 
 class Gui{
@@ -24,9 +25,9 @@ public:
 
 	Gui(); ~Gui();
 
-	void Creer_trackbar_HSV_sep(const char* titre_fenetre);	// initialisation de la fenêtre des trackbars de séparation HSV
-	STRUCT_HSV_BOUND *Get_HSV_bound() const;		// pointeur vers la structure contenant les paramètres de séparation
-
+	void Creer_trackbar_HSV_sep(const char* titre_fenetre);				// initialisation de la fenêtre des trackbars de séparation HSV
+	STRUCT_HSV_BOUND *Get_HSV_bound() const;					// pointeur vers la structure contenant les paramètres de séparation
+	void Controler_souris(std::vector <cv::Point2f> mc, int width, int height);	// contrôler la souris en fonction de la position du 1er blob
 	void Afficher_image(const std::string titre_fenetre, cv::Mat image);
 	void Pad(const std::string titre_fenetre, const float dx, const float dy, const float dx_max, const float dy_max);
 	void Ajouter_vecteurs(
@@ -44,6 +45,9 @@ private:
 	cv::Scalar rouge;
 	cv::Size dim_1;
 	cv::Point pod_centre;
+
+	Display *dpy;
+	Window root_window;
 
 	static void Callback_HSV(int value, void *userdata);
 

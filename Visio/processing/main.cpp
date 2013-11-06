@@ -18,6 +18,7 @@ using namespace std;
 
 int main(){
 
+	char key = 'a';				// clef de contrôle du programme
 	Flux_cam flux(-1, 40, 1, 3);		// initialisation du flux webcam (/dev/video0)
 	Blobs blobs(5);				// séparateur de blobs
 	Tracking tracking(500);			// suivi de blobs
@@ -25,7 +26,8 @@ int main(){
 	gui.Creer_trackbar_HSV_sep("Separateur");
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
-	while(flux.Get_key() != 'q'){
+	while(key != 'q'){
+		key = flux.Get_key();
 		// mettre à jour les images du flux
 		flux.Update();
 		// séparer les blobs
@@ -33,6 +35,7 @@ int main(){
 		blobs.Definir_limites_separation(gui.Get_HSV_bound());
 		blobs.Separer();
 		blobs.Trouver_blobs();
+		blobs.Relier();
 		// suivre les blobs
 		tracking.Set_img_prev(flux.Get_prev());
 		tracking.Set_img_next(flux.Get_next());
@@ -41,7 +44,8 @@ int main(){
 		// afficher le résultat
 		gui.Afficher_image("Video brute", flux.Get_cam());
 		gui.Ajouter_vecteurs("Video tracking", blobs.Get_img_blobs(), tracking.Get_amers(), tracking.Get_nv());
-
+		// contrôler la souris
+		if(key != 'c'){gui.Controler_souris(blobs.Get_mc(), blobs.Get_img_blobs().size().width, blobs.Get_img_blobs().size().height);}
 	}
 
 
