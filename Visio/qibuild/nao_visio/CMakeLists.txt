@@ -5,7 +5,7 @@ find_package(qibuild)
 
 qi_create_bin(nao_visio "main.cpp")
 
-qi_use_lib(nao_visio ALCOMMON)
+qi_use_lib(nao_visio OPENCV2_CORE OPENCV2_HIGHGUI ALCOMMON)
 
 enable_testing()
 qi_create_test(test_nao_visio "test.cpp")

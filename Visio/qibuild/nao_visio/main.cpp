@@ -6,21 +6,40 @@
 #include <iostream>
 #include <alerror/alerror.h>
 #include <alproxies/altexttospeechproxy.h>
+#include <alproxies/alvideodeviceproxy.h>
+#include <alvision/alimage.h>
+#include <alvision/alvisiondefinitions.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+using namespace std;
+using namespace AL;
 
 int main(int argc, char* argv[]){
 	if(argc != 2){
-		std::cerr << "Wrong number of arguments!" << std::endl;
-		std::cerr << "Usage: say NAO_IP" << std::endl;
+		cerr << "Wrong number of arguments!" << endl;
+		cerr << "Usage: say NAO_IP" <<endl;
 		exit(2);
 	}
 
-	  /** The desired phrase to be said. */
-	const std::string phraseToSay = "Hello world";
+	const string IP = argv[1];
+	const string phraseToSay = "Hello world";
+	ALVideoDeviceProxy camProxy;
+	string clientName;
+
 	try{
-		AL::ALTextToSpeechProxy tts(argv[1], 9559);
+		ALTextToSpeechProxy tts(IP, 9559);
 		tts.say(phraseToSay);
 	}catch(const AL::ALError& e){
-		std::cerr << "Caught exception: " << e.what() << std::endl;
+		cerr << "Caught exception: " << e.what() << endl;
+		exit(1);
+	}
+
+	try{
+		camProxy = ALVideoDeviceProxy(IP, 9559);
+		clientName = camProxy.subscribe("test", kQVGA, kBGRColorSpace, 30);
+	}catch(const AL::ALError& e){
+		cerr << "Caught exception: " << e.what() << endl;
 		exit(1);
 	}
 	exit(0);
