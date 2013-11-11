@@ -13,6 +13,7 @@
 #include "Flux_cam.h"
 #include "Blobs.h"
 #include "Tracking.h"
+#include "Transfo.h"
 
 using namespace std;
 
@@ -24,6 +25,8 @@ int main(){
 	Tracking tracking(500);			// suivi de blobs
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur");
+	gui.Creer_trackbar_transfo("Transfo");
+	Transfo transfo;
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -46,6 +49,11 @@ int main(){
 		gui.Ajouter_vecteurs("Video tracking", blobs.Get_img_blobs(), tracking.Get_amers(), tracking.Get_nv());
 		// contrôler la souris
 		if(key != 'c'){gui.Controler_souris(blobs.Get_mc(), blobs.Get_img_blobs().size().width, blobs.Get_img_blobs().size().height);}
+		// transformation
+		transfo.Set_img(flux.Get_cam());
+		transfo.Definir_parametres_transformation(gui.Get_wrap_bound());
+		transfo.Appliquer_wrap();
+		gui.Afficher_image("Transfo", transfo.Get_img_wrap());
 	}
 
 

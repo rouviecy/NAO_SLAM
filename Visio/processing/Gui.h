@@ -18,6 +18,7 @@
 #include <string.h>
 #include <X11/Xlib.h>
 #include "struct_HSV_bound.h"
+#include "struct_wrap_bound.h"
 
 class Gui{
 
@@ -26,7 +27,9 @@ public:
 	Gui(); ~Gui();
 
 	void Creer_trackbar_HSV_sep(const char* titre_fenetre);				// initialisation de la fenêtre des trackbars de séparation HSV
+	void Creer_trackbar_transfo(const char* titre_fenetre);				// initialisation de la fenêtre des trackbars de transformation
 	STRUCT_HSV_BOUND *Get_HSV_bound() const;					// pointeur vers la structure contenant les paramètres de séparation
+	STRUCT_WRAP_BOUND *Get_wrap_bound() const;					// pointeur vers la structure contenant les paramètres de transformation
 	void Controler_souris(std::vector <cv::Point2f> mc, int width, int height);	// contrôler la souris en fonction de la position du 1er blob
 	void Afficher_image(const std::string titre_fenetre, cv::Mat image);
 	void Pad(const std::string titre_fenetre, const float dx, const float dy, const float dx_max, const float dy_max);
@@ -41,6 +44,7 @@ private:
 	#define TAILLE_POD 200
 
 	STRUCT_HSV_BOUND *hsv;
+	STRUCT_WRAP_BOUND *wrap;
 
 	cv::Scalar rouge;
 	cv::Size dim_1;
@@ -50,6 +54,7 @@ private:
 	Window root_window;
 
 	static void Callback_HSV(int value, void *userdata);
+	static void Callback_wrap(int value, void *object);
 
 };
 

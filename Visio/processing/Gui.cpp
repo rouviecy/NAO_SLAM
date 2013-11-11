@@ -10,6 +10,7 @@ Gui::Gui(){
 	dim_1 = cv::Size(1, 1);
 	pod_centre = cv::Point(TAILLE_POD / 2, TAILLE_POD / 2);
 	hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	wrap = (STRUCT_WRAP_BOUND*) malloc(sizeof(STRUCT_WRAP_BOUND));
 	dpy = XOpenDisplay(0);
 	root_window = XRootWindow(dpy, 0);
 	XSelectInput(dpy, root_window, KeyReleaseMask);
@@ -35,7 +36,26 @@ void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::createTrackbar((char*) hsv->name_seuil, (char*) hsv->winname, &(hsv->seuil), 9999, Callback_HSV, hsv);
 }
 
-// Callback des trackbars
+// Créer des trackbars pour les transformations
+void Gui::Creer_trackbar_transfo(const char* titre_fenetre){
+	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
+	wrap->winname = (schar*) titre_fenetre;
+	wrap->x1 = 0; wrap->y1 = 0; wrap->x2 = 180; wrap->y2 = 0; wrap->x3 = 0; wrap->y3 = 180; wrap->x4 = 180; wrap->y4 = 180;
+	wrap->name_x1 = (schar*) "x1"; wrap->name_y1 = (schar*) "y1";
+	wrap->name_x2 = (schar*) "x2"; wrap->name_y2 = (schar*) "y2";
+	wrap->name_x3 = (schar*) "x3"; wrap->name_y3 = (schar*) "y3";
+	wrap->name_x4 = (schar*) "x4"; wrap->name_y4 = (schar*) "y4";
+	cv::createTrackbar((char*) wrap->name_x1, (char*) wrap->winname, &(wrap->x1), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_x2, (char*) wrap->winname, &(wrap->x2), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_x3, (char*) wrap->winname, &(wrap->x3), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_x4, (char*) wrap->winname, &(wrap->x4), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_y1, (char*) wrap->winname, &(wrap->y1), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_y2, (char*) wrap->winname, &(wrap->y2), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_y3, (char*) wrap->winname, &(wrap->y3), 180, Callback_wrap, wrap);
+	cv::createTrackbar((char*) wrap->name_y4, (char*) wrap->winname, &(wrap->y4), 180, Callback_wrap, wrap);
+}
+
+// Callback des trackbars HSV
 void Gui::Callback_HSV(int value, void *object){
 	STRUCT_HSV_BOUND *arg = (STRUCT_HSV_BOUND*)object;
 	if(arg->H_min > arg->H_max){cv::setTrackbarPos((char*) arg->name_H_max, (char*) arg->winname, arg->H_min);};
@@ -46,6 +66,11 @@ void Gui::Callback_HSV(int value, void *object){
 	cv::rectangle(img_color, cv::Point(150, 0), cv::Point(300, 100), cv::Scalar(arg->H_max, arg->S_max, arg->V_max), CV_FILLED);
 	cvtColor(img_color, img_color, CV_HSV2RGB, 3);
 	imshow((char*) arg->winname, img_color);
+}
+
+// Callback des trackbars de transformation
+void Gui::Callback_wrap(int value, void *object){
+	STRUCT_WRAP_BOUND *arg = (STRUCT_WRAP_BOUND*)object;
 }
 
 // Afficher une image
@@ -90,3 +115,4 @@ void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vecto
 
 // Guetters et setters
 STRUCT_HSV_BOUND *Gui::Get_HSV_bound() const{return hsv;}
+STRUCT_WRAP_BOUND *Gui::Get_wrap_bound() const{return wrap;}
