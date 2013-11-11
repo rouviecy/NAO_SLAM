@@ -27,7 +27,7 @@ public:
 	std::vector <cv::Point2f> Get_mc() const;	// Guetter sur le centre massique de chaque blob
 	std::vector <cv::Rect> Get_rect() const;	// Guetter sur les rectangles englobants des blobs
 
-	void Set_img(cv::Mat image);				// Setter d'image à traiter (déjà en HSV)
+	void Set_img(cv::Mat image);				// Setter d'image à traiter
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);	// Récupération des paramètres de segmentation HSV
 	void Separer();						// Séparer selon les paramètres
 	void Trouver_blobs();					// Convertir les données en liste de blobs
