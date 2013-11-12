@@ -13,6 +13,7 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include "Utils.h"
 
 class Tracking{
 
@@ -41,8 +42,6 @@ private:
 	std::vector <cv::Point2f> nv;		// points à repérer
 	std::vector <uchar> status;		// si les points ont été repérés
 	std::vector <float> err;		// erreur
-
-	int Distance_carree(int x1, int y1, int x2, int y2);
 
 };
 
