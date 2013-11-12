@@ -48,12 +48,14 @@ int main(){
 		gui.Afficher_image("Video brute", flux.Get_cam());
 		gui.Ajouter_vecteurs("Video tracking", blobs.Get_img_blobs(), tracking.Get_amers(), tracking.Get_nv());
 		// contrôler la souris
-		if(key != 'c'){gui.Controler_souris(blobs.Get_mc(), blobs.Get_img_blobs().size().width, blobs.Get_img_blobs().size().height);}
+//		if(key != 'c'){gui.Controler_souris(blobs.Get_mc(), blobs.Get_img_blobs().size().width, blobs.Get_img_blobs().size().height);}
 		// transformation
 		transfo.Set_img(flux.Get_cam());
-		transfo.Definir_parametres_transformation(gui.Get_wrap_bound());
+//		transfo.Definir_parametres_transformation(gui.Get_wrap_bound());
+		transfo.Set_pts_redressement(blobs.Get_mc());
 		transfo.Appliquer_wrap();
 		gui.Afficher_image("Transfo", transfo.Get_img_wrap());
+		if(key != 'c'){gui.Controler_souris(transfo.Get_center(), flux.Get_cam().size().width, flux.Get_cam().size().height);}
 	}
 
 
