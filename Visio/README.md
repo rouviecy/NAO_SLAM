@@ -7,7 +7,7 @@ Computer Vision (by Cyril)
 1. Demo :  
 Launch nao_grab_cam.py in SSH session ; NAO will track and follow red objects (JOGs, other NAOs, tomatoes, ...)
 
-2. Image processing :  
+2. Image processing : (Warning ! "main.cpp" is under construction in order to add camera calibration ...)  
 Folder "processing" contains OOP code to track blobs after HSV segmentation.  
 Run `make` to compile, and `./naqahdah` to execute. Be sure you have already installed OpenCV !  
 Parameters are chosen and images are displayed in a GUI. It will use your camera `/dev/video0`. You can choose :  
