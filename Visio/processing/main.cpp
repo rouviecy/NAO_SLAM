@@ -14,6 +14,7 @@
 #include "Blobs.h"
 #include "Tracking.h"
 #include "Transfo.h"
+#include "Calibrate.h"
 
 using namespace std;
 
@@ -27,6 +28,8 @@ int main(){
 	gui.Creer_trackbar_HSV_sep("Separateur");
 	gui.Creer_trackbar_transfo("Transfo");
 	Transfo transfo;
+	Calibrate calib(cv::Size(9, 6));
+	int nb_calib = 0;
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -34,7 +37,7 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		// séparer les blobs
-		blobs.Set_img(flux.Get_prev());
+/*		blobs.Set_img(flux.Get_prev());
 		blobs.Definir_limites_separation(gui.Get_HSV_bound());
 		blobs.Separer();
 		blobs.Trouver_blobs();
@@ -56,6 +59,15 @@ int main(){
 		transfo.Appliquer_wrap();
 		gui.Afficher_image("Transfo", transfo.Get_img_wrap());
 		if(key != 'c'){gui.Controler_souris(transfo.Get_center(), flux.Get_cam().size().width, flux.Get_cam().size().height);}
+*/		if(nb_calib < 20){nb_calib = calib.Ajouter_img_calib(flux.Get_cam());}
+		else if(nb_calib == 20){
+			calib.Calibrer(flux.Get_cam().size());
+			nb_calib++;
+		}
+		else{
+			calib.Set_img(flux.Get_cam());
+			gui.Afficher_image("Image calibrée", calib.Get_img());
+		}
 	}
 
 

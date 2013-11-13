@@ -3,9 +3,9 @@ CFLAGS = -O2 -Wall
 IMP_OPENCV = `pkg-config --cflags --libs opencv`
 
 all: main.o
-	$(CC) $(CFLAGS) main.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Reco.o Transfo.o -o naqahdah $(IMP_OPENCV)
+	$(CC) $(CFLAGS) main.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Reco.o Transfo.o Calibrate.o -o naqahdah $(IMP_OPENCV)
 
-main.o: main.cpp Utils.o Flux_cam.o Gui.o Blobs.o Tracking.o Reco.o Transfo.o
+main.o: main.cpp Utils.o Flux_cam.o Gui.o Blobs.o Tracking.o Reco.o Transfo.o Calibrate.o
 	$(CC) $(CFLAGS) -c main.cpp -o main.o
 
 Utils.o: Utils.cpp
@@ -28,6 +28,9 @@ Reco.o: Reco.cpp
 
 Transfo.o: Transfo.cpp
 	$(CC) $(CFLAGS) -c Transfo.cpp -o Transfo.o
+
+Calibrate.o: Calibrate.cpp
+	$(CC) $(CFLAGS) -c Calibrate.cpp -o Calibrate.o
 
 clean:
 	rm -rf ./*.o
