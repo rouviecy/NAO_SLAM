@@ -92,7 +92,7 @@ void Gui::Pad(const std::string titre_fenetre, const float dx, const float dy, c
 // Prendre le contrôle de la souris
 void Gui::Controler_souris(std::vector <cv::Point2f> mc, int width, int height){
 	if(mc.size() <= 0){return;}
-	int XMouse = 1600 - (int) (mc[0].x / width * 1600);
+	int XMouse = (int) (mc[0].x / width * 1600);
 	int YMouse = (int) (mc[0].y / height * 900);
 	if(XMouse > 0 && XMouse < 1600 && YMouse > 0 && YMouse < 900){
 		XWarpPointer(dpy, None, root_window, 0, 0, 0, 0, XMouse, YMouse);
