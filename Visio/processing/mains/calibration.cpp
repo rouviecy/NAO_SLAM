@@ -9,9 +9,9 @@
  *	- Calibration de caméra
  */
 
-#include "Gui.h"
-#include "Flux_cam.h"
-#include "Calibrate.h"
+#include "../Gui.h"
+#include "../Flux_cam.h"
+#include "../Calibrate.h"
 
 using namespace std;
 

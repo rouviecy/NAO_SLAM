@@ -9,10 +9,10 @@
  *	- Contrôle de la souris avec un pointeur unique
  */
 
-#include "Gui.h"
-#include "Flux_cam.h"
-#include "Blobs.h"
-#include "Tracking.h"
+#include "../Gui.h"
+#include "../Flux_cam.h"
+#include "../Blobs.h"
+#include "../Tracking.h"
 
 using namespace std;
 

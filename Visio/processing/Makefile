@@ -2,11 +2,19 @@ CC = g++
 CFLAGS = -O2 -Wall
 IMP_OPENCV = `pkg-config --cflags --libs opencv`
 
-all: main.o
-	$(CC) $(CFLAGS) main.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Reco.o Transfo.o Calibrate.o -o naqahdah $(IMP_OPENCV)
+all: calibration.o mono_control.o multi_control.o
+	$(CC) $(CFLAGS) calibration.o Utils.o Flux_cam.o Gui.o Calibrate.o -o calibration $(IMP_OPENCV)
+	$(CC) $(CFLAGS) mono_control.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o -o mono_control $(IMP_OPENCV)
+	$(CC) $(CFLAGS) multi_control.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Transfo.o -o multi_control $(IMP_OPENCV)
 
-main.o: main.cpp Utils.o Flux_cam.o Gui.o Blobs.o Tracking.o Reco.o Transfo.o Calibrate.o
-	$(CC) $(CFLAGS) -c main.cpp -o main.o
+calibration.o: mains/calibration.cpp Utils.o Flux_cam.o Gui.o Calibrate.o
+	$(CC) $(CFLAGS) -c mains/calibration.cpp -o calibration.o
+
+mono_control.o: mains/mono_control.cpp Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o
+	$(CC) $(CFLAGS) -c mains/mono_control.cpp -o mono_control.o
+
+multi_control.o: mains/multi_control.cpp Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Transfo.o
+	$(CC) $(CFLAGS) -c mains/multi_control.cpp -o multi_control.o
 
 Utils.o: Utils.cpp
 	$(CC) $(CFLAGS) -c Utils.cpp -o Utils.o

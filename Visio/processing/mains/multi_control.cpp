@@ -9,11 +9,11 @@
  *	- Contrôle de la souris via plusieurs amers
  */
 
-#include "Gui.h"
-#include "Flux_cam.h"
-#include "Blobs.h"
-#include "Tracking.h"
-#include "Transfo.h"
+#include "../Gui.h"
+#include "../Flux_cam.h"
+#include "../Blobs.h"
+#include "../Tracking.h"
+#include "../Transfo.h"
 
 using namespace std;
 
