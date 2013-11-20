@@ -15,6 +15,7 @@ Gui::Gui(){
 	dpy = XOpenDisplay(0);
 	root_window = XRootWindow(dpy, 0);
 	XSelectInput(dpy, root_window, KeyReleaseMask);
+	buttonCount = XGetPointerMapping(dpy, buttonMap, 3);
 }
 
 Gui::~Gui(){
@@ -84,7 +85,7 @@ void Gui::Callback_HSV(int value, void *object){
 
 // Callback des trackbars de transformation
 void Gui::Callback_wrap(int value, void *object){
-	STRUCT_WRAP_BOUND *arg = (STRUCT_WRAP_BOUND*)object;
+//	STRUCT_WRAP_BOUND *arg = (STRUCT_WRAP_BOUND*)object;
 }
 
 // Afficher une image
@@ -115,19 +116,7 @@ void Gui::Controler_souris(std::vector <cv::Point2f> mc, int width, int height){
 }
 
 // Cliquer si le vecteur d'entrée n'est pas vide
-void Gui::Cliquer(std::vector <cv::Point2f> mc){
-	if(mc.size() > 0){
-		unsigned char buttonMap[3];
-		const int buttonCount = XGetPointerMapping(dpy, buttonMap, 3);
-		XTestFakeButtonEvent(dpy, buttonMap[0], true, 0);
-
-	}
-	else{
-		unsigned char buttonMap[3];
-		const int buttonCount = XGetPointerMapping(dpy, buttonMap, 3);
-		XTestFakeButtonEvent(dpy, buttonMap[0], false, 0);
-	}
-}
+void Gui::Cliquer(std::vector <cv::Point2f> mc){XTestFakeButtonEvent(dpy, buttonMap[0], mc.size() > 0, 0);}
 
 
 // Afficher une image et des vecteurs

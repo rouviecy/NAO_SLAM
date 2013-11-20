@@ -57,6 +57,8 @@ private:
 
 	Display *dpy;
 	Window root_window;
+	unsigned char buttonMap[3];
+	int buttonCount;
 
 	static void Callback_HSV(int value, void *userdata);
 	static void Callback_wrap(int value, void *object);
