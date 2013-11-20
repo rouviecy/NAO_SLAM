@@ -10,6 +10,7 @@ Gui::Gui(){
 	dim_1 = cv::Size(1, 1);
 	pod_centre = cv::Point(TAILLE_POD / 2, TAILLE_POD / 2);
 	hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv2 = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	wrap = (STRUCT_WRAP_BOUND*) malloc(sizeof(STRUCT_WRAP_BOUND));
 	dpy = XOpenDisplay(0);
 	root_window = XRootWindow(dpy, 0);
@@ -35,7 +36,20 @@ void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::createTrackbar((char*) hsv->name_V_max, (char*) hsv->winname, &(hsv->V_max), 255, Callback_HSV, hsv);
 	cv::createTrackbar((char*) hsv->name_seuil, (char*) hsv->winname, &(hsv->seuil), 9999, Callback_HSV, hsv);
 }
-
+void Gui::Creer_trackbar_HSV_sep2(const char* titre_fenetre){
+	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
+	hsv2->winname = (schar*) titre_fenetre; hsv2->name_seuil = (schar*) "seuil";
+	hsv2->H_min = 0; hsv2->H_max = 0; hsv2->S_min = 0; hsv2->S_max = 0; hsv2->V_min = 0; hsv2->V_max = 0;
+	hsv2->name_H_min = (schar*) "H_min2"; hsv2->name_S_min = (schar*) "S_min2"; hsv2->name_V_min = (schar*) "V_min2";
+	hsv2->name_H_max = (schar*) "H_max2"; hsv2->name_S_max = (schar*) "S_max2"; hsv2->name_V_max = (schar*) "V_max2";
+	cv::createTrackbar((char*) hsv2->name_H_min, (char*) hsv2->winname, &(hsv2->H_min), 180, Callback_HSV, hsv2);
+	cv::createTrackbar((char*) hsv2->name_H_max, (char*) hsv2->winname, &(hsv2->H_max), 180, Callback_HSV, hsv2);
+	cv::createTrackbar((char*) hsv2->name_S_min, (char*) hsv2->winname, &(hsv2->S_min), 255, Callback_HSV, hsv2);
+	cv::createTrackbar((char*) hsv2->name_S_max, (char*) hsv2->winname, &(hsv2->S_max), 255, Callback_HSV, hsv2);
+	cv::createTrackbar((char*) hsv2->name_V_min, (char*) hsv2->winname, &(hsv2->V_min), 255, Callback_HSV, hsv2);
+	cv::createTrackbar((char*) hsv2->name_V_max, (char*) hsv2->winname, &(hsv2->V_max), 255, Callback_HSV, hsv2);
+	cv::createTrackbar((char*) hsv2->name_seuil, (char*) hsv2->winname, &(hsv2->seuil), 9999, Callback_HSV, hsv2);
+}
 // Créer des trackbars pour les transformations
 void Gui::Creer_trackbar_transfo(const char* titre_fenetre){
 	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
@@ -92,13 +106,29 @@ void Gui::Pad(const std::string titre_fenetre, const float dx, const float dy, c
 // Prendre le contrôle de la souris
 void Gui::Controler_souris(std::vector <cv::Point2f> mc, int width, int height){
 	if(mc.size() <= 0){return;}
-	int XMouse = (int) (mc[0].x / width * 1600);
+	int XMouse = (int) (1600 - (mc[0].x / width * 1600));
 	int YMouse = (int) (mc[0].y / height * 900);
 	if(XMouse > 0 && XMouse < 1600 && YMouse > 0 && YMouse < 900){
 		XWarpPointer(dpy, None, root_window, 0, 0, 0, 0, XMouse, YMouse);
 		XFlush(dpy);
 	}
 }
+
+// Cliquer si le vecteur d'entrée n'est pas vide
+void Gui::Cliquer(std::vector <cv::Point2f> mc){
+	if(mc.size() > 0){
+		unsigned char buttonMap[3];
+		const int buttonCount = XGetPointerMapping(dpy, buttonMap, 3);
+		XTestFakeButtonEvent(dpy, buttonMap[0], true, 0);
+
+	}
+	else{
+		unsigned char buttonMap[3];
+		const int buttonCount = XGetPointerMapping(dpy, buttonMap, 3);
+		XTestFakeButtonEvent(dpy, buttonMap[0], false, 0);
+	}
+}
+
 
 // Afficher une image et des vecteurs
 void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vector<cv::Point2f> pts_prev, vector<cv::Point2f> pts_next){
@@ -115,4 +145,5 @@ void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vecto
 
 // Guetters et setters
 STRUCT_HSV_BOUND *Gui::Get_HSV_bound() const{return hsv;}
+STRUCT_HSV_BOUND *Gui::Get_HSV_bound2() const{return hsv2;}
 STRUCT_WRAP_BOUND *Gui::Get_wrap_bound() const{return wrap;}

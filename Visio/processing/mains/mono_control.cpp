@@ -23,7 +23,8 @@ int main(){
 	Blobs blobs(5);				// séparateur de blobs
 	Tracking tracking(500);			// suivi de blobs
 	Gui gui;				// IHM
-	gui.Creer_trackbar_HSV_sep("Separateur");
+	gui.Creer_trackbar_HSV_sep("Separateur_mouse");
+	gui.Creer_trackbar_HSV_sep("Separateur_clic");
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
