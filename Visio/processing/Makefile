@@ -3,10 +3,11 @@ CFLAGS = -O2 -Wall
 IMP_OPENCV = `pkg-config --cflags --libs opencv`
 IMP_OPENCV_LXTST = `pkg-config --cflags --libs opencv xtst`
 
-all: calibration.o mono_control.o mono_control_click.o multi_control.o
+all: calibration.o mono_control.o mono_control_click.o biblobs.o multi_control.o
 	$(CC) $(CFLAGS) calibration.o Utils.o Flux_cam.o Gui.o Calibrate.o -o calibration $(IMP_OPENCV_LXTST)
 	$(CC) $(CFLAGS) mono_control.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o -o mono_control $(IMP_OPENCV_LXTST)
 	$(CC) $(CFLAGS) mono_control_click.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o -o mono_control_click $(IMP_OPENCV_LXTST)
+	$(CC) $(CFLAGS) biblobs.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Reco.o -o biblobs $(IMP_OPENCV_LXTST)
 	$(CC) $(CFLAGS) multi_control.o Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Transfo.o -o multi_control $(IMP_OPENCV_LXTST)
 
 calibration.o: mains/calibration.cpp Utils.o Flux_cam.o Gui.o Calibrate.o
@@ -17,6 +18,9 @@ mono_control.o: mains/mono_control.cpp Utils.o Flux_cam.o Blobs.o Gui.o Tracking
 
 mono_control_click.o: mains/mono_control_click.cpp Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o
 	$(CC) $(CFLAGS) -c mains/mono_control_click.cpp -o mono_control_click.o
+
+biblobs.o: mains/biblobs.cpp Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Reco.o
+	$(CC) $(CFLAGS) -c mains/biblobs.cpp -o biblobs.o
 
 multi_control.o: mains/multi_control.cpp Utils.o Flux_cam.o Blobs.o Gui.o Tracking.o Transfo.o
 	$(CC) $(CFLAGS) -c mains/multi_control.cpp -o multi_control.o

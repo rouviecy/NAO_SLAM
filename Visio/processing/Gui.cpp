@@ -26,7 +26,7 @@ Gui::~Gui(){
 void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
 	hsv->winname = (schar*) titre_fenetre; hsv->name_seuil = (schar*) "seuil";
-	hsv->H_min = 0; hsv->H_max = 0; hsv->S_min = 0; hsv->S_max = 0; hsv->V_min = 0; hsv->V_max = 0;
+	hsv->H_min = 0; hsv->H_max = 0; hsv->S_min = 0; hsv->S_max = 0; hsv->V_min = 0; hsv->V_max = 0; hsv->seuil = 0;
 	hsv->name_H_min = (schar*) "H_min"; hsv->name_S_min = (schar*) "S_min"; hsv->name_V_min = (schar*) "V_min";
 	hsv->name_H_max = (schar*) "H_max"; hsv->name_S_max = (schar*) "S_max"; hsv->name_V_max = (schar*) "V_max";
 	cv::createTrackbar((char*) hsv->name_H_min, (char*) hsv->winname, &(hsv->H_min), 180, Callback_HSV, hsv);
@@ -40,7 +40,7 @@ void Gui::Creer_trackbar_HSV_sep(const char* titre_fenetre){
 void Gui::Creer_trackbar_HSV_sep2(const char* titre_fenetre){
 	cv::namedWindow(titre_fenetre, CV_WINDOW_AUTOSIZE);
 	hsv2->winname = (schar*) titre_fenetre; hsv2->name_seuil = (schar*) "seuil";
-	hsv2->H_min = 0; hsv2->H_max = 0; hsv2->S_min = 0; hsv2->S_max = 0; hsv2->V_min = 0; hsv2->V_max = 0;
+	hsv2->H_min = 0; hsv2->H_max = 0; hsv2->S_min = 0; hsv2->S_max = 0; hsv2->V_min = 0; hsv2->V_max = 0; hsv2->seuil = 0;
 	hsv2->name_H_min = (schar*) "H_min2"; hsv2->name_S_min = (schar*) "S_min2"; hsv2->name_V_min = (schar*) "V_min2";
 	hsv2->name_H_max = (schar*) "H_max2"; hsv2->name_S_max = (schar*) "S_max2"; hsv2->name_V_max = (schar*) "V_max2";
 	cv::createTrackbar((char*) hsv2->name_H_min, (char*) hsv2->winname, &(hsv2->H_min), 180, Callback_HSV, hsv2);

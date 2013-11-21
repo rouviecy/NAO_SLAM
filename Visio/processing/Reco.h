@@ -13,6 +13,7 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include "Utils.h"
 
 class Reco{
 
@@ -20,16 +21,16 @@ public:
 
 	Reco();
 
-	void Set_blobs_1(std::vector <cv::Point2i> blobs_1);
-	void Set_blobs_2(std::vector <cv::Point2i> blobs_2);
+	void Set_blobs_1(std::vector <cv::Point2f> blobs_1);
+	void Set_blobs_2(std::vector <cv::Point2f> blobs_2);
 
 	std::vector <bool> Test_circle();
-	std::vector <int[2]> Test_inclusion();
+	std::vector <cv::Point2f> Test_inclusion(const int dist_max);
 
 private:
 
-	std::vector <cv::Point2i> blobs_1;
-	std::vector <cv::Point2i> blobs_2;
+	std::vector <cv::Point2f> blobs_1;
+	std::vector <cv::Point2f> blobs_2;
 
 };
 
