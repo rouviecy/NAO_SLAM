@@ -4,17 +4,19 @@ using namespace std;
 
 // Constructeur - Destructeur
 Body::Body(){
-	reco =	Reco();
+	reco = Reco();
 	hsv_jaune =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_vert =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_rouge =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_bleu =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	blobs = new Blobs[2];
 	Couleurs();
 	Membres();
 }
 
 Body::~Body(){
 	free(hsv_jaune); free(hsv_vert); free(hsv_rouge); free(hsv_bleu);
+	delete[] blobs;
 }
 
 // Paramètres colorimétriques
@@ -31,14 +33,54 @@ void Body::Couleurs(){
 
 // Couleurs des membres
 void Body::Membres(){
-	hsv1_L_hand = hsv_bleu;		hsv2_L_hand = hsv_rouge;
-	hsv1_R_hand = hsv_bleu;		hsv2_R_hand = hsv_jaune;
-	hsv1_L_foot = hsv_rouge;	hsv2_L_foot = hsv_jaune;
-	hsv1_R_foot = hsv_rouge;	hsv2_R_foot = hsv_vert;
+	hsv_L_hand[0] = hsv_bleu;	hsv_L_hand[1] = hsv_rouge;
+	hsv_R_hand[0] = hsv_bleu;	hsv_R_hand[1] = hsv_jaune;
+	hsv_L_foot[0] = hsv_rouge;	hsv_L_foot[1] = hsv_jaune;
+	hsv_R_foot[0] = hsv_rouge;	hsv_R_foot[1] = hsv_vert;
 }
 
-void Detecter_main_gauche(){
+// Mettre à jour le détecteur de blobs
+vector <cv::Point2f> Body::Update_blobs(){
+	for(int i = 0; i < 2; i++){
+		blobs[i].Set_img(img);
+		blobs[i].Separer();
+		blobs[i].Trouver_blobs();
+	}
+	reco.Set_blobs_1(blobs[0].Get_mc());
+	reco.Set_blobs_2(blobs[1].Get_mc());
+	return reco.Test_inclusion(10);
+}
 
+// Chercher la main gauche
+void Body::Detecter_main_gauche(){
+	blobs[0].Definir_limites_separation(hsv_L_hand[0]);
+	blobs[1].Definir_limites_separation(hsv_L_hand[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){L_hand = liste[0];}
+}
+
+// Chercher la main droite
+void Body::Detecter_main_droite(){
+	blobs[0].Definir_limites_separation(hsv_R_hand[0]);
+	blobs[1].Definir_limites_separation(hsv_R_hand[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){R_hand = liste[0];}
+}
+
+// Chercher le pied gauche
+void Body::Detecter_pied_gauche(){
+	blobs[0].Definir_limites_separation(hsv_L_foot[0]);
+	blobs[1].Definir_limites_separation(hsv_L_foot[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){L_foot = liste[0];}
+}
+
+// Chercher le pied droit
+void Body::Detecter_pied_droit(){
+	blobs[0].Definir_limites_separation(hsv_R_foot[0]);
+	blobs[1].Definir_limites_separation(hsv_R_foot[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){R_foot = liste[0];}
 }
 
 // Getters et Setters

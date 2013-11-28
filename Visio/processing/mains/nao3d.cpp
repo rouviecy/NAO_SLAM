@@ -28,6 +28,11 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 
+		body.Set_img(flux.Get_cam());
+		body.Detecter_main_gauche();
+		body.Detecter_main_droite();
+		body.Detecter_pied_gauche();
+		body.Detecter_pied_droit();
 		gui.Afficher_image("video", flux.Get_cam());
 		
 	}
