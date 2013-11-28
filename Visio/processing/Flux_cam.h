@@ -27,7 +27,8 @@ public:
 	Flux_cam(	const int num_device,	// /dev/video[X]
 			const int delais,	// delais entre deux images
 			const int code_couleur,	// changement espace couleurs
-			const int lissage);	// flou de force lissage
+			const int lissage,	// flou de force lissage
+			const int flip);	// miroir (0 : aucun | 1 : selon x | 2 : selon y | 3 : selon x et y)
 
 	void Update();			// mettre à jour les images
 	char Get_key() const;		// getter sur la clé
@@ -41,6 +42,7 @@ private:
 	int code_couleur;		// changement espace couleurs
 	int delais;			// temps d'attente entre deux images (en millisecondes)
 	int lissage;			// force du flou de lissage
+	int flip;			// miroir
 	cv::Size flou_kern;		// flou de force lissage
 	cv::VideoCapture capture;	// périphérique de capture d'images
 	cv::Mat img_cam;		// image webcam
@@ -49,7 +51,7 @@ private:
 	cv::Mat img_show;		// image à afficher
 
 	void Init(const int num_device, const int delais);
-	void Init(const int num_device, const int delais, const int code_couleur, const int lissage);
+	void Init(const int num_device, const int delais, const int code_couleur, const int lissage, const int flip);
 	void Attendre(const int millis);
 	void Sauvegarder();
 	void Recuperer();

@@ -18,7 +18,7 @@ using namespace std;
 int main(){
 
 	char key = 'a';				// clef de contrôle du programme
-	Flux_cam flux(-1, 40, 1, 3);		// initialisation du flux webcam (/dev/video0)
+	Flux_cam flux(-1, 40, 1, 3, 1);		// initialisation du flux webcam (/dev/video0)
 	Gui gui;				// IHM
 	Calibrate calib(cv::Size(9, 6));
 	int nb_calib = 0;

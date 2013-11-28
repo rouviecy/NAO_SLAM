@@ -19,7 +19,7 @@ using namespace std;
 int main(){
 
 	char key = 'a';				// clef de contrôle du programme
-	Flux_cam flux(-1, 40, 1, 3);		// initialisation du flux webcam (/dev/video0)
+	Flux_cam flux(-1, 40, 1, 3, 1);		// initialisation du flux webcam (/dev/video0)
 	Blobs blobs(5), blobs2(5);		// séparateur de blobs
 	Tracking tracking(500), tracking2(500);	// suivi de blobs
 	Gui gui;				// IHM
