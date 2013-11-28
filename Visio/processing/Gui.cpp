@@ -20,6 +20,7 @@ Gui::Gui(){
 
 Gui::~Gui(){
 	free(hsv);
+	free(hsv2);
 }
 
 // Créer des trackbars pour une séparation des couleurs en HSV

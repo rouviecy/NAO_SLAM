@@ -2,8 +2,12 @@
 
 using namespace std;
 
-// Constructeur
-Blobs::Blobs(const int lissage){
+// Constructeurs
+Blobs::Blobs(){Init(0);}
+Blobs::Blobs(const int lissage){Init(lissage);}
+
+// Initialisation complète
+void Blobs::Init(const int lissage){
 	rouge = cv::Scalar(0, 0, 255); bleu = cv::Scalar(255, 0, 0);
 	this->lissage = lissage;
 	if(lissage > 1){flou_kern = cv::Size(lissage, lissage);}

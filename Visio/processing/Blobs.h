@@ -19,6 +19,7 @@ class Blobs{
 
 public:
 
+	Blobs();
 	Blobs(const int lissage);
 
 	cv::Mat Get_img_sep() const;			// Guetter sur l'image segmentée par HSV
@@ -52,6 +53,8 @@ private:
 	std::vector <cv::Moments> mu, mu_;
 	std::vector <cv::Point2f> mc, mc_;
 	std::vector <cv::Rect> rect, rect_;
+
+	void Init(const int lissage);
 
 };
 
