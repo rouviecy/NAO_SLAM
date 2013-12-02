@@ -34,7 +34,14 @@ int main(){
 		body.Detecter_pied_gauche();
 		body.Detecter_pied_droit();
 		gui.Afficher_image("video", flux.Get_cam());
-		
+
+		std::vector <cv::Point2f> liste1;
+		std::vector <cv::Point2f> liste2;
+		liste1.push_back(body.Get_R_hand());
+		liste1.push_back(body.Get_L_hand());
+		liste2.push_back(body.Get_R_foot());
+		liste2.push_back(body.Get_L_foot());
+		gui.Ajouter_vecteurs("test", flux.Get_cam(), liste1, liste2);
 	}
 
 

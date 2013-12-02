@@ -29,6 +29,10 @@ public:
 	void Detecter_pied_gauche();
 	void Detecter_pied_droit();
 	void Set_img(cv::Mat img);
+	cv::Point2f Get_L_hand();
+	cv::Point2f Get_R_hand();
+	cv::Point2f Get_L_foot();
+	cv::Point2f Get_R_foot();
 
 private:
 

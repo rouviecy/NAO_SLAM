@@ -85,3 +85,7 @@ void Body::Detecter_pied_droit(){
 
 // Getters et Setters
 void Body::Set_img(cv::Mat img){this->img = img;}
+cv::Point2f Body::Get_L_hand(){return L_hand;}
+cv::Point2f Body::Get_R_hand(){return R_hand;}
+cv::Point2f Body::Get_L_foot(){return L_foot;}
+cv::Point2f Body::Get_R_foot(){return R_foot;}
