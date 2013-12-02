@@ -24,11 +24,21 @@ public:
 	Body();
 	~Body();
 
+	void Detecter_tete();
+	void Detecter_epaule_gauche();
+	void Detecter_epaule_droite();
+	void Detecter_coude_gauche();
+	void Detecter_coude_droit();
 	void Detecter_main_gauche();
 	void Detecter_main_droite();
 	void Detecter_pied_gauche();
 	void Detecter_pied_droit();
 	void Set_img(cv::Mat img);
+	cv::Point2f Get_Head();
+	cv::Point2f Get_L_shoulder();
+	cv::Point2f Get_R_shoulder();
+	cv::Point2f Get_L_elbow();
+	cv::Point2f Get_R_elbow();
 	cv::Point2f Get_L_hand();
 	cv::Point2f Get_R_hand();
 	cv::Point2f Get_L_foot();
@@ -40,7 +50,13 @@ private:
 	STRUCT_HSV_BOUND *hsv_vert;
 	STRUCT_HSV_BOUND *hsv_rouge;
 	STRUCT_HSV_BOUND *hsv_bleu;
+	STRUCT_HSV_BOUND *hsv_rose;
 
+	STRUCT_HSV_BOUND *hsv_Tete[2];
+	STRUCT_HSV_BOUND *hsv_L_shoulder[2];
+	STRUCT_HSV_BOUND *hsv_R_shoulder[2];
+	STRUCT_HSV_BOUND *hsv_L_elbow[2];
+	STRUCT_HSV_BOUND *hsv_R_elbow[2];
 	STRUCT_HSV_BOUND *hsv_L_hand[2];
 	STRUCT_HSV_BOUND *hsv_R_hand[2];
 	STRUCT_HSV_BOUND *hsv_L_foot[2];
@@ -48,7 +64,7 @@ private:
 
 	cv::Mat img;
 
-	cv::Point2f L_hand, R_hand, L_foot, R_foot;
+	cv::Point2f Tete, L_shoulder, R_shoulder, L_elbow, R_elbow, L_hand, R_hand, L_foot, R_foot;
 
 	Reco reco;
 	Blobs *blobs;

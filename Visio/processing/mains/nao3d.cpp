@@ -29,6 +29,11 @@ int main(){
 		flux.Update();
 
 		body.Set_img(flux.Get_cam());
+		body.Detecter_tete();
+		body.Detecter_epaule_gauche();
+		body.Detecter_epaule_droite();
+		body.Detecter_coude_gauche();
+		body.Detecter_coude_droit();
 		body.Detecter_main_gauche();
 		body.Detecter_main_droite();
 		body.Detecter_pied_gauche();
@@ -37,10 +42,18 @@ int main(){
 
 		std::vector <cv::Point2f> liste1;
 		std::vector <cv::Point2f> liste2;
-		liste1.push_back(body.Get_R_hand());
-		liste1.push_back(body.Get_L_hand());
-		liste2.push_back(body.Get_R_foot());
-		liste2.push_back(body.Get_L_foot());
+		liste1.push_back(body.Get_Head());
+		liste2.push_back(body.Get_L_shoulder());
+		liste1.push_back(body.Get_Head());
+		liste2.push_back(body.Get_R_shoulder());
+		liste1.push_back(body.Get_L_shoulder());
+		liste2.push_back(body.Get_L_elbow());
+		liste1.push_back(body.Get_R_shoulder());
+		liste2.push_back(body.Get_R_elbow());
+		liste1.push_back(body.Get_L_elbow());
+		liste2.push_back(body.Get_L_hand());
+		liste1.push_back(body.Get_R_elbow());
+		liste2.push_back(body.Get_R_hand());
 		gui.Ajouter_vecteurs("test", flux.Get_cam(), liste1, liste2);
 	}
 
