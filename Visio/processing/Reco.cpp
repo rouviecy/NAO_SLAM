@@ -4,8 +4,7 @@ using namespace std;
 
 // Constructeur
 Reco::Reco(){
-	mat_blobs_1 = cv::Mat(width, height, CV_8UC1);
-	mat_blobs_2 = cv::Mat(width, height, CV_8UC1);
+
 }
 
 // Tests de reconnaissance de cercle
@@ -32,10 +31,17 @@ std::vector <cv::Point2f> Reco::Test_inclusion(const int dist_max){
 
 // Mettre à jour les matrices des blobs
 void Reco::Update_mats(){
+	mat_blobs_1 = cv::Mat::zeros(width, height, CV_8UC1);
+	mat_blobs_2 = cv::Mat::zeros(width, height, CV_8UC1);
+	for(vector <cv::Point2f> ::iterator blob = blobs_1.begin(); blob != blobs_1.end(); ++blob){
 
+	}
+	for(vector <cv::Point2f> ::iterator blob = blobs_2.begin(); blob != blobs_2.end(); ++blob){
+
+	}
 }
 
 // Getters et Setters
 void Reco::Set_blobs_1(std::vector <cv::Point2f> blobs_1){this->blobs_1 = blobs_1;}
 void Reco::Set_blobs_2(std::vector <cv::Point2f> blobs_2){this->blobs_2 = blobs_2;}
-void Reco::Set_size(int width, int height){this->width = width;	this->height = height;}
+void Reco::Set_size(int width, int height){this->width = width; this->height = height;}
