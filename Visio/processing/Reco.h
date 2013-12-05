@@ -21,6 +21,7 @@ public:
 
 	Reco();
 
+	void Set_size(int width, int height);
 	void Set_blobs_1(std::vector <cv::Point2f> blobs_1);
 	void Set_blobs_2(std::vector <cv::Point2f> blobs_2);
 
@@ -31,6 +32,13 @@ private:
 
 	std::vector <cv::Point2f> blobs_1;
 	std::vector <cv::Point2f> blobs_2;
+	cv::Mat mat_blobs_1;
+	cv::Mat mat_blobs_2;
+
+	int width;
+	int height;
+
+	void Update_mats();
 
 };
 

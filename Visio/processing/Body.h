@@ -34,6 +34,7 @@ public:
 	void Detecter_pied_gauche();
 	void Detecter_pied_droit();
 	void Set_img(cv::Mat img);
+	void Set_size(int width, int height);
 	cv::Point2f Get_Head();
 	cv::Point2f Get_L_shoulder();
 	cv::Point2f Get_R_shoulder();
@@ -61,6 +62,8 @@ private:
 	STRUCT_HSV_BOUND *hsv_R_hand[2];
 	STRUCT_HSV_BOUND *hsv_L_foot[2];
 	STRUCT_HSV_BOUND *hsv_R_foot[2];
+
+	int width, height;
 
 	cv::Mat img;
 

@@ -58,3 +58,5 @@ char Flux_cam::Get_key() const{return key;}
 cv::Mat Flux_cam::Get_cam() const{return img_cam;}
 cv::Mat Flux_cam::Get_prev() const{return img_prev;}
 cv::Mat Flux_cam::Get_next() const{return img_next;}
+int Flux_cam::Get_width() const{return img_cam.size().width;}
+int Flux_cam::Get_height() const{return img_cam.size().height;}

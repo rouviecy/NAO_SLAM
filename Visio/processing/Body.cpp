@@ -4,7 +4,6 @@ using namespace std;
 
 // Constructeur - Destructeur
 Body::Body(){
-	reco = Reco();
 	hsv_jaune =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_vert =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_rouge =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
@@ -151,3 +150,8 @@ cv::Point2f Body::Get_L_hand(){return L_hand;}
 cv::Point2f Body::Get_R_hand(){return R_hand;}
 cv::Point2f Body::Get_L_foot(){return L_foot;}
 cv::Point2f Body::Get_R_foot(){return R_foot;}
+void Body::Set_size(int width, int height){
+	this->width = width;
+	this->height = height;
+	reco.Set_size(width, height);
+}

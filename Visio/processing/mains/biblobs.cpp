@@ -26,6 +26,9 @@ int main(){
 	gui.Creer_trackbar_HSV_sep("Separateur 1");
 	gui.Creer_trackbar_HSV_sep2("Separateur 2");
 	Reco reco;
+	flux.Update();
+	int width = flux.Get_width(); int height = flux.Get_height();
+	reco.Set_size(width, height);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
