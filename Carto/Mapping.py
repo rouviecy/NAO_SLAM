@@ -1,7 +1,7 @@
 import fileinput
 
-## Crée la carte, par hypothèse carré
-## CoefMap est la longueur de la carte, l'unité étant la longueur d'un pixel
+## Cree la carte, par hypothese carre
+## CoefMap est la longueur de la carte, l unite etant la longueur d'un pixel
 
 def CreateMap(CoefMap):
     
@@ -15,16 +15,17 @@ def CreateMap(CoefMap):
     f.close()
     
     
-##Dessine un obstacle sur la cate (une endroit sans obstacle est noté en tant que 0, avec un obstacle en tant que 1    
+##Dessine un obstacle sur la cate (un endroit sans obstacle est noté en tant que 0, avec un obstacle en tant que 1)    
 ##CoorObstacle de la Forme: [xDebut yDebut ; xFin yFin]    
 
 
 ef DrawObstacle(CoefMap, CoorObstacle):
    
-    
-    tmpl=[k for k in range (CoefMap)]
-
-    for line_num, line in enumerate(fileinput.input('Map',inplace=1)):  
+    if (0<=CoorObstacle[0][0]<=CoorObstacle[1][0]<=CoefMap)&(0<=CoorObstacle[0][1]<=CoorObstacle[1][1]<=CoefMap):
+        tmpl=[k for k in range (CoefMap)]
+     
+                 
+        for line_num, line in enumerate(fileinput.input('Map',inplace=1)):  
             tmp = line
             tmpl[line_num] = tmp.split()
             j = CoorObstacle[0][0]
@@ -36,7 +37,9 @@ ef DrawObstacle(CoefMap, CoorObstacle):
             new = ' '.join(tmpl[line_num])
             line = line.replace(tmp, new)
             print line
-## Exemple pour voir comment ça marche.        
+    else:
+        print "Coordonnee de l obstacle en dehors de la carte"
+## Exemple pour voir comment ca marche.        
 if __name__ == "__main__":
 
     a=100
