@@ -1,5 +1,4 @@
 import fileinput
-import sys
 
 ## Crée la carte, par hypothèse carré
 ## CoefMap est la longueur de la carte, l'unité étant la longueur d'un pixel
