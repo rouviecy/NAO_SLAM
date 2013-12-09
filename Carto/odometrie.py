@@ -10,7 +10,7 @@ def StiffnessOn(proxy):
     pTimeLists = 1.0
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
 
-
+##Le robot marche en ligne droite jusqu'a xValue metres
 def marche(xValue):
 
     # Init proxies.
@@ -45,6 +45,7 @@ def marche(xValue):
     motionProxy.stopMove()
     postureProxy.goToPosture("StandInit", 1.0)
 
+##Le robot bouge sa tete jusqu'a angle degrees
 def BougeTaTete(angle):
     # Init proxies.
     motionProxy = ALProxy("ALMotion", robotIP, 9559)
@@ -64,6 +65,7 @@ def BougeTaTete(angle):
     motionProxy.setStiffnesses("Body", 1.0)
     motionProxy.setAngles("HeadYaw", angle*math.pi/180, 0.4)
 
+##le robot tourne sur lui meme jusqu'a atteindre angle degrees
 def Virage(angle):
     # Init proxies.
     motionProxy = ALProxy("ALMotion", robotIP, 9559)
