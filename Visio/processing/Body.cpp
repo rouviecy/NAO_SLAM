@@ -64,6 +64,7 @@ vector <cv::Point2f> Body::Update_blobs(){
 	}
 	reco.Set_blobs_1(blobs[0].Get_mc());
 	reco.Set_blobs_2(blobs[1].Get_mc());
+	reco.Set_size(img.size());
 	return reco.Test_inclusion(10);
 }
 
@@ -150,8 +151,3 @@ cv::Point2f Body::Get_L_hand(){return L_hand;}
 cv::Point2f Body::Get_R_hand(){return R_hand;}
 cv::Point2f Body::Get_L_foot(){return L_foot;}
 cv::Point2f Body::Get_R_foot(){return R_foot;}
-void Body::Set_size(int width, int height){
-	this->width = width;
-	this->height = height;
-	reco.Set_size(width, height);
-}

@@ -26,9 +26,6 @@ int main(){
 	gui.Creer_trackbar_HSV_sep("Separateur 1");
 	gui.Creer_trackbar_HSV_sep2("Separateur 2");
 	Reco reco;
-	flux.Update();
-	int width = flux.Get_width(); int height = flux.Get_height();
-	reco.Set_size(width, height);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -48,6 +45,7 @@ int main(){
 		// tester l'inclusion des blobs
 		reco.Set_blobs_1(blobs.Get_mc());
 		reco.Set_blobs_2(blobs2.Get_mc());
+		reco.Set_size(flux.Get_cam().size());
 		vector <cv::Point2f> points = reco.Test_inclusion(10);
 		// afficher le résultat
 		gui.Afficher_image("Video separateur 1", blobs.Get_img_blobs());

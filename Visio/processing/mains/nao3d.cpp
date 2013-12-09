@@ -21,9 +21,6 @@ int main(){
 	Flux_cam flux(-1, 40, 1, 3, 1);		// initialisation du flux webcam (/dev/video0)
 	Gui gui;				// IHM
 	Body body;
-	flux.Update();
-	int width = flux.Get_width(); int height = flux.Get_height();
-	body.Set_size(width, height);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){

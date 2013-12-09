@@ -14,10 +14,10 @@ void Blobs::Init(const int lissage){
 	seuil_taille_blobs = 42;
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv->H_min = 0;
-	hsv->H_max = 42;
-	hsv->S_min = 150;
+	hsv->H_max = 180;
+	hsv->S_min = 0;
 	hsv->S_max = 255;
-	hsv->V_min = 120;
+	hsv->V_min = 10;
 	hsv->V_max = 255;
 	Definir_limites_separation(hsv);
 	free(hsv);
