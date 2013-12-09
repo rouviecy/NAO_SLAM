@@ -6,23 +6,26 @@ IP = "127.0.0.1"
 memoryProxy = ALProxy("ALMemory", IP, 9559)
 sonarProxy = ALProxy("ALSonar", IP, 9559)
 sensorProxy = ALProxy("ALSensors", IP, 9559)
+
+
+## Retourne l'etat de charge de la batterie
 def getBatteryCharge():
     return memoryProxy.getData("Device/SubDeviceList/Battery/Current/Sensor/Value")
 
-
+## Retourne le premier echo du sonar recu par le micro de gauche et celui de droite
 def SonarLeftRight():
     sonarProxy.subscribe("myApplication")
     leftFirstEcho  = memoryProxy.getData("Device/SubDeviceList/US/Left/Sensor/Value")
     RightFirstEcho = memoryProxy.getData("Device/SubDeviceList/US/Right/Sensor/Value")
     return (leftFirstEcho, RightFirstEcho)
 
-
+## Retourne la distance au premier objet
 def Sonar():
 
     sonarProxy.subscribe("myApplication")
     return memoryProxy.getData("Device/SubDeviceList/US/Sensor/Value")
 
-
+## Retourne le centre de gravite
 def Piezo():
     LfrontLeft = memoryProxy.getData("Device/SubDeviceList/LFoot/FSR/FrontLeft/Sensor/Value")
     LfrontRight= memoryProxy.getData("Device/SubDeviceList/LFoot/FSR/FrontRight/Sensor/Value")
@@ -37,6 +40,7 @@ def Piezo():
     Total = (Ltotal+Rtotal)/2
     return Total
 
+## Retourne la temperature en degree de tout un tas de joints
 def Temperature():
     TBatt           = memoryProxy.getData("Device/SubDeviceList/Battery/Temperature/Sensor/Value")
     THeadPitch      = memoryProxy.getData("Device/SubDeviceList/HeadPitch/Temperature/Sensor/Value")
@@ -67,11 +71,14 @@ def Temperature():
     Tmat = [TBatt, THeadPitch, THeadYaw, TChevilleGPitch, TChevilleGRoll, TCoudeGRoll, TCoudeGYaw, TMainG, THancheGRoll, THancheGPitch, TGenouGPitch, THancheGYaw, TGen$
     return Tmat
 
+## retourne si un bumper est presse
 def bumperPressed():
 
-        LeftBump = [(memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Left/Sensor/Value")==1.0),(memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Right/Sen$
-        RightBump= [(memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Left/Sensor/Value")==1.0),(memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Right/Sen$
-        BumpMat  = [LeftBump, RightBump]
+        LeftBump = [(memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Left/Sensor/Value")==1.0) , (memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Right/Sensor/Value")==1.0)]
+        RightBump= [(memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Left/Sensor/Value")==1.0) , (memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Right/Sensor/Value")==1.0)]
+        BumpMat  = (LeftBump[0] | LeftBump[1] | RightBump[0] | RightBump[1])
+
+        
         return BumpMat
 
 
