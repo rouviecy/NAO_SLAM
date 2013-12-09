@@ -35,8 +35,6 @@ public:
 	cv::Mat Get_cam() const;	// getter sur image webcam
 	cv::Mat Get_prev() const;	// getter sur image N-1
 	cv::Mat Get_next() const;	// getter sur image N
-	int Get_width() const;
-	int Get_height() const;
 
 private:
 

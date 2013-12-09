@@ -34,12 +34,8 @@ private:
 	cv::Size taille;
 	std::vector <cv::Point2f> blobs_1;
 	std::vector <cv::Point2f> blobs_2;
-	cv::Mat mat_1;
-	cv::Mat mat_2;
-	cv::Mat mat_blobs_1;
-	cv::Mat mat_blobs_2;
-	cv::Mat mat_dilate_1;
-	cv::Mat mat_dilate_2;
+	cv::Mat mat_1, mat_2;
+	cv::Mat mat_blobs_1, mat_blobs_2;
 	cv::Mat mat_compare;
 	std::vector <std::vector <cv::Point2i> > liste_blobs;
 	std::vector <cv::Vec4i> hierarchie_blobs;
