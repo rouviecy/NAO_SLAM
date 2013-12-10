@@ -23,6 +23,8 @@ typedef struct{
 	int V_min;		// seuil minimum de luminance
 	int V_max;		// seuil maximum de luminance
 	int seuil;		// seuil minimum de taille de blob
+	int nb_dilate;		// nombre de dilatations à appliquer
+	int nb_erode;		// nombre d'érosions à appliquer
 	schar* winname;		// nom fenêtre de la GUI
 	// noms trackbar
 	schar* name_H_min;
@@ -32,6 +34,8 @@ typedef struct{
 	schar* name_V_min;
 	schar* name_V_max;
 	schar* name_seuil;
+	schar* name_nb_dilate;
+	schar* name_nb_erode;
 } STRUCT_HSV_BOUND;
 
 #endif

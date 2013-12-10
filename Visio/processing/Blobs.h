@@ -39,6 +39,7 @@ private:
 	double seuil_taille_blobs;
 	int lissage;
 	cv::Size flou_kern;
+	cv::Mat morpho_kern;
 
 	cv::Mat img_brute;
 	cv::Mat img_HSV;
@@ -46,6 +47,7 @@ private:
 	cv::Mat img_blobs;
 	cv::Scalar sep_min;
 	cv::Scalar sep_max;
+	int nb_dilate, nb_erode;
 	cv::Scalar rouge, bleu;
 
 	std::vector <std::vector <cv::Point2i> > liste_blobs;

@@ -9,6 +9,7 @@ Blobs::Blobs(const int lissage){Init(lissage);}
 // Initialisation complète
 void Blobs::Init(const int lissage){
 	rouge = cv::Scalar(0, 0, 255); bleu = cv::Scalar(255, 0, 0);
+	morpho_kern = cv::Mat::ones(cv::Size(3,3), CV_8U);
 	this->lissage = lissage;
 	if(lissage > 1){flou_kern = cv::Size(lissage, lissage);}
 	seuil_taille_blobs = 42;
@@ -23,9 +24,28 @@ void Blobs::Init(const int lissage){
 	free(hsv);
 }
 
-// Séparateur de couleurs
+// Séparateur de couleurs et appliquer les filtres morphologiques
 void Blobs::Separer(){
-	inRange(img_HSV, sep_min, sep_max, img_sep);
+	if(sep_min[0] <= 180 && sep_max[0] <= 180){
+		inRange(img_HSV, sep_min, sep_max, img_sep);
+	}
+	else if (sep_min[0] > 180 && sep_max[0] > 180){
+		cv::Scalar sep_min_rectif(sep_min[0] - 180, sep_min[1], sep_min[2]);
+		cv::Scalar sep_max_rectif(sep_max[0] - 180, sep_max[1], sep_max[2]);
+		inRange(img_HSV, sep_min_rectif, sep_max_rectif, img_sep);
+	}
+	else{
+		cv::Scalar sep_180(180, sep_max[1], sep_max[2]);
+		cv::Scalar sep_0(0, sep_min[1], sep_min[2]);
+		cv::Scalar sep_min_rectif(sep_min[0] - 180, sep_min[1], sep_min[2]);
+		cv::Scalar sep_max_rectif(sep_max[0] - 180, sep_max[1], sep_max[2]);
+		cv::Mat img_low, img_high;
+		inRange(img_HSV, sep_0, sep_max_rectif, img_low);
+		inRange(img_HSV, sep_min_rectif, sep_180, img_high);
+		img_sep = img_low | img_high;
+	}
+	dilate(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_dilate);
+	erode(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_erode);
 	if(lissage > 1){blur(img_sep, img_sep, flou_kern, cv::Point(-1, -1), cv::BORDER_DEFAULT);}
 }
 
@@ -34,6 +54,7 @@ void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
 	sep_min = cv::Scalar(hsv->H_min, hsv->S_min, hsv->V_min);
 	sep_max = cv::Scalar(hsv->H_max, hsv->S_max, hsv->V_max);
 	seuil_taille_blobs = hsv->seuil;
+	nb_dilate = hsv->nb_dilate; nb_erode = hsv->nb_erode;
 }
 
 // Séparer les blobs
@@ -53,6 +74,9 @@ void Blobs::Trouver_blobs(){
 		mc.push_back(mc_[i]);
 		rect.push_back(rect_[i]);
 		drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
+// for BE :
+drawContours(img_brute, liste_blobs, i, bleu, 3, 8, hierarchie_blobs);
+imshow("BE", img_brute);
 		cv::circle(img_blobs, mc_[i], 4, rouge, -1, 8, 0);
 		cv::rectangle(img_blobs, rect_[i], rouge);
 	}
