@@ -30,16 +30,16 @@ Body::~Body(){
 
 // Paramètres colorimétriques
 void Body::Couleurs(){
-	hsv_jaune->H_min = 83;	hsv_jaune->S_min = 107;	hsv_jaune->V_min = 142;	hsv_jaune->seuil = 25;
-	hsv_jaune->H_max = 93;	hsv_jaune->S_max = 255;	hsv_jaune->V_max = 255;
-	hsv_vert->H_min = 58;	hsv_vert->S_min = 98;	hsv_vert->V_min = 84;	hsv_vert->seuil = 25;
-	hsv_vert->H_max = 69;	hsv_vert->S_max = 255;	hsv_vert->V_max = 255;
-	hsv_rouge->H_min = 114;	hsv_rouge->S_min = 63;	hsv_rouge->V_min = 39;	hsv_rouge->seuil = 25;
-	hsv_rouge->H_max = 126;	hsv_rouge->S_max = 165;	hsv_rouge->V_max = 255;
-	hsv_bleu->H_min = 2;	hsv_bleu->S_min = 36;	hsv_bleu->V_min = 46;	hsv_bleu->seuil = 25;
-	hsv_bleu->H_max = 16;	hsv_bleu->S_max = 255;	hsv_bleu->V_max = 255;
-	hsv_rose->H_min = 130;	hsv_rose->S_min = 157;	hsv_rose->V_min = 137;	hsv_rose->seuil = 25;
-	hsv_rose->H_max = 138;	hsv_rose->S_max = 255;	hsv_rose->V_max = 255;
+	hsv_jaune->H_min = 83;	hsv_jaune->S_min = 107;	hsv_jaune->V_min = 142;	hsv_jaune->nb_dilate = 0;	hsv_jaune->seuil = 25;
+	hsv_jaune->H_max = 93;	hsv_jaune->S_max = 255;	hsv_jaune->V_max = 255;	hsv_jaune->nb_erode = 0;
+	hsv_vert->H_min = 58;	hsv_vert->S_min = 98;	hsv_vert->V_min = 84;	hsv_vert->nb_dilate = 0;	hsv_vert->seuil = 25;
+	hsv_vert->H_max = 69;	hsv_vert->S_max = 255;	hsv_vert->V_max = 255;	hsv_vert->nb_erode = 0;
+	hsv_rouge->H_min = 114;	hsv_rouge->S_min = 63;	hsv_rouge->V_min = 39;	hsv_rouge->nb_dilate = 0;	hsv_rouge->seuil = 25;
+	hsv_rouge->H_max = 126;	hsv_rouge->S_max = 165;	hsv_rouge->V_max = 255;	hsv_rouge->nb_erode = 0;
+	hsv_bleu->H_min = 2;	hsv_bleu->S_min = 36;	hsv_bleu->V_min = 46;	hsv_bleu->nb_dilate = 0;	hsv_bleu->seuil = 25;
+	hsv_bleu->H_max = 16;	hsv_bleu->S_max = 255;	hsv_bleu->V_max = 255;	hsv_bleu->nb_erode = 0;
+	hsv_rose->H_min = 130;	hsv_rose->S_min = 157;	hsv_rose->V_min = 137;	hsv_rose->nb_dilate = 0;	hsv_rose->seuil = 25;
+	hsv_rose->H_max = 138;	hsv_rose->S_max = 255;	hsv_rose->V_max = 255;	hsv_rose->nb_erode = 0;
 }
 
 // Couleurs des membres

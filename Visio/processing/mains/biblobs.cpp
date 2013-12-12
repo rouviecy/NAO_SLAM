@@ -21,7 +21,7 @@ int main(){
 
 	char key = 'a';				// clef de contrôle du programme
 	Flux_cam flux(-1, 40, 1, 3, 1);		// initialisation du flux webcam (/dev/video0)
-	Blobs blobs(3), blobs2(3);		// séparateur de blobs
+	Blobs blobs, blobs2;			// séparateur de blobs
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur 1");
 	gui.Creer_trackbar_HSV_sep2("Separateur 2");

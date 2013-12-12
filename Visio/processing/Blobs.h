@@ -20,7 +20,6 @@ class Blobs{
 public:
 
 	Blobs();
-	Blobs(const int lissage);
 
 	cv::Mat Get_img_sep() const;			// Guetter sur l'image segmentée par HSV
 	cv::Mat Get_img_blobs() const;			// Guetter sur l'image des blobs et leurs centres
@@ -37,8 +36,6 @@ public:
 private:
 
 	double seuil_taille_blobs;
-	int lissage;
-	cv::Size flou_kern;
 	cv::Mat morpho_kern;
 
 	cv::Mat img_brute;

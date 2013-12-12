@@ -2,24 +2,20 @@
 
 using namespace std;
 
-// Constructeurs
-Blobs::Blobs(){Init(0);}
-Blobs::Blobs(const int lissage){Init(lissage);}
-
-// Initialisation complète
-void Blobs::Init(const int lissage){
+// Constructeur
+Blobs::Blobs(){
 	rouge = cv::Scalar(0, 0, 255); bleu = cv::Scalar(255, 0, 0);
 	morpho_kern = cv::Mat::ones(cv::Size(3,3), CV_8U);
-	this->lissage = lissage;
-	if(lissage > 1){flou_kern = cv::Size(lissage, lissage);}
 	seuil_taille_blobs = 42;
 	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv->H_min = 0;
-	hsv->H_max = 180;
-	hsv->S_min = 0;
-	hsv->S_max = 255;
-	hsv->V_min = 10;
-	hsv->V_max = 255;
+	hsv->H_min =		0;
+	hsv->H_max =		180;
+	hsv->S_min =		0;
+	hsv->S_max =		255;
+	hsv->V_min =		10;
+	hsv->V_max =		255;
+	hsv->nb_dilate =	0;
+	hsv->nb_erode =		0;
 	Definir_limites_separation(hsv);
 	free(hsv);
 }
@@ -44,9 +40,8 @@ void Blobs::Separer(){
 		inRange(img_HSV, sep_min_rectif, sep_180, img_high);
 		img_sep = img_low | img_high;
 	}
-	dilate(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_dilate);
-	erode(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_erode);
-	if(lissage > 1){blur(img_sep, img_sep, flou_kern, cv::Point(-1, -1), cv::BORDER_DEFAULT);}
+	if(nb_dilate > 0)	{dilate(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_dilate);}
+	if(nb_erode > 0)	{erode(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_erode);}
 }
 
 // Mise à jour des paramètres de segmentation HSV
@@ -75,8 +70,8 @@ void Blobs::Trouver_blobs(){
 		rect.push_back(rect_[i]);
 		drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
 // for BE :
-drawContours(img_brute, liste_blobs, i, bleu, 3, 8, hierarchie_blobs);
-imshow("BE", img_brute);
+//drawContours(img_brute, liste_blobs, i, bleu, 3, 8, hierarchie_blobs);
+//imshow("BE", img_brute);
 		cv::circle(img_blobs, mc_[i], 4, rouge, -1, 8, 0);
 		cv::rectangle(img_blobs, rect_[i], rouge);
 	}
