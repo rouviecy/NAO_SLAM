@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -O2 -Wall
 IMP_OPENCV = `pkg-config --cflags --libs opencv`
-IMP_OPENCV_LXTST = `pkg-config --cflags --libs opencv xtst`
+IMP_OPENCV_LXTST = `pkg-config --cflags --libs opencv xtst x11`
 
 all: calibration.o mono_control.o mono_control_click.o biblobs.o multi_control.o nao3d.o blobs.o
 	$(CC) $(CFLAGS) calibration.o Utils.o Flux_cam.o Gui.o Calibrate.o -o calibration $(IMP_OPENCV_LXTST)

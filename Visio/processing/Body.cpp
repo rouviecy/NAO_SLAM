@@ -6,53 +6,70 @@ using namespace std;
 Body::Body(){
 	hsv_jaune =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_vert =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_rouge =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_bleu =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	hsv_rose =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_lavande =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_turq =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_beige =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_pastis =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_mauve =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
 	blobs = new Blobs[2];
 	Couleurs();
 	Membres();
 	Tete = cv::Point2f(0, 0);
+	T_torso = cv::Point2f(0, 0);
+	B_torso = cv::Point2f(0, 0);
 	L_shoulder = cv::Point2f(0, 0);
 	R_shoulder = cv::Point2f(0, 0);
 	L_elbow = cv::Point2f(0, 0);
 	R_elbow = cv::Point2f(0, 0);
 	L_hand = cv::Point2f(0, 0);
 	R_hand = cv::Point2f(0, 0);
+	L_knee = cv::Point2f(0, 0);
+	R_knee = cv::Point2f(0, 0);
 	L_foot = cv::Point2f(0, 0);
 	R_foot = cv::Point2f(0, 0);
 }
 
 Body::~Body(){
-	free(hsv_jaune); free(hsv_vert); free(hsv_rouge); free(hsv_bleu);
+	free(hsv_jaune); free(hsv_vert); free(hsv_rose); free(hsv_lavande); free(hsv_turq); free(hsv_beige); free(hsv_pastis); free(hsv_mauve);
 	delete[] blobs;
 }
 
 // Paramètres colorimétriques
 void Body::Couleurs(){
-	hsv_jaune->H_min = 83;	hsv_jaune->S_min = 107;	hsv_jaune->V_min = 142;	hsv_jaune->nb_dilate = 0;	hsv_jaune->seuil = 25;
-	hsv_jaune->H_max = 93;	hsv_jaune->S_max = 255;	hsv_jaune->V_max = 255;	hsv_jaune->nb_erode = 0;
-	hsv_vert->H_min = 58;	hsv_vert->S_min = 98;	hsv_vert->V_min = 84;	hsv_vert->nb_dilate = 0;	hsv_vert->seuil = 25;
-	hsv_vert->H_max = 69;	hsv_vert->S_max = 255;	hsv_vert->V_max = 255;	hsv_vert->nb_erode = 0;
-	hsv_rouge->H_min = 114;	hsv_rouge->S_min = 63;	hsv_rouge->V_min = 39;	hsv_rouge->nb_dilate = 0;	hsv_rouge->seuil = 25;
-	hsv_rouge->H_max = 126;	hsv_rouge->S_max = 165;	hsv_rouge->V_max = 255;	hsv_rouge->nb_erode = 0;
-	hsv_bleu->H_min = 2;	hsv_bleu->S_min = 36;	hsv_bleu->V_min = 46;	hsv_bleu->nb_dilate = 0;	hsv_bleu->seuil = 25;
-	hsv_bleu->H_max = 16;	hsv_bleu->S_max = 255;	hsv_bleu->V_max = 255;	hsv_bleu->nb_erode = 0;
-	hsv_rose->H_min = 130;	hsv_rose->S_min = 157;	hsv_rose->V_min = 137;	hsv_rose->nb_dilate = 0;	hsv_rose->seuil = 25;
-	hsv_rose->H_max = 138;	hsv_rose->S_max = 255;	hsv_rose->V_max = 255;	hsv_rose->nb_erode = 0;
+	hsv_lavande->H_min = 0;	hsv_lavande->S_min = 42;hsv_lavande->V_min = 62;hsv_lavande->nb_dilate = 5;	hsv_lavande->seuil = 5;
+	hsv_lavande->H_max = 12;hsv_lavande->S_max = 255;hsv_lavande->V_max = 255;hsv_lavande->nb_erode = 5;
+	hsv_turq->H_min = 23;	hsv_turq->S_min = 104;	hsv_turq->V_min = 75;	hsv_turq->nb_dilate = 5;	hsv_turq->seuil = 5;
+	hsv_turq->H_max = 35;	hsv_turq->S_max = 255;	hsv_turq->V_max = 255;	hsv_turq->nb_erode = 6;
+	hsv_vert->H_min = 46;	hsv_vert->S_min = 88;	hsv_vert->V_min = 73;	hsv_vert->nb_dilate = 5;	hsv_vert->seuil = 5;
+	hsv_vert->H_max = 51;	hsv_vert->S_max = 255;	hsv_vert->V_max = 255;	hsv_vert->nb_erode = 5;
+	hsv_pastis->H_min = 68;	hsv_pastis->S_min = 143;hsv_pastis->V_min = 96;	hsv_pastis->nb_dilate = 5;	hsv_pastis->seuil = 5;
+	hsv_pastis->H_max = 83;	hsv_pastis->S_max = 255;hsv_pastis->V_max = 255;hsv_pastis->nb_erode = 5;
+	hsv_jaune->H_min = 93;	hsv_jaune->S_min = 91;	hsv_jaune->V_min = 127;	hsv_jaune->nb_dilate = 5;	hsv_jaune->seuil = 5;
+	hsv_jaune->H_max = 103;	hsv_jaune->S_max = 255;	hsv_jaune->V_max = 255;	hsv_jaune->nb_erode = 6;
+	hsv_beige->H_min = 114;	hsv_beige->S_min = 67;	hsv_beige->V_min = 75;	hsv_beige->nb_dilate = 5;	hsv_beige->seuil = 5;
+	hsv_beige->H_max = 120;	hsv_beige->S_max = 255;	hsv_beige->V_max = 255;	hsv_beige->nb_erode = 5;
+	hsv_rose->H_min = 128;	hsv_rose->S_min = 129;	hsv_rose->V_min = 122;	hsv_rose->nb_dilate = 5;	hsv_rose->seuil = 5;
+	hsv_rose->H_max = 146;	hsv_rose->S_max = 255;	hsv_rose->V_max = 255;	hsv_rose->nb_erode = 6;
+	hsv_mauve->H_min = 144;	hsv_mauve->S_min = 92;	hsv_mauve->V_min = 43;	hsv_mauve->nb_dilate = 5;	hsv_mauve->seuil = 5;
+	hsv_mauve->H_max = 159;	hsv_mauve->S_max = 255;	hsv_mauve->V_max = 255;	hsv_mauve->nb_erode = 6;
 }
 
 // Couleurs des membres
 void Body::Membres(){
-	hsv_Tete[0] =		hsv_bleu;	hsv_Tete[1] =		hsv_rouge;
-	hsv_L_shoulder[0] =	hsv_bleu;	hsv_L_shoulder[1] =	hsv_jaune;
-	hsv_R_shoulder[0] =	hsv_bleu;	hsv_R_shoulder[1] =	hsv_vert;
-	hsv_L_elbow[0] =	hsv_rouge;	hsv_L_elbow[1] =	hsv_jaune;
-	hsv_R_elbow[0] =	hsv_rouge;	hsv_R_elbow[1] =	hsv_vert;
-	hsv_L_hand[0] =		hsv_rose;	hsv_L_hand[1] =		hsv_jaune;
-	hsv_R_hand[0] =		hsv_rose;	hsv_R_hand[1] =		hsv_vert;
-	hsv_L_foot[0] =		hsv_rose;	hsv_L_foot[1] =		hsv_rouge;
-	hsv_R_foot[0] =		hsv_rose;	hsv_R_foot[1] =		hsv_bleu;
+	hsv_Tete[0] =		hsv_turq;	hsv_Tete[1] =		hsv_beige;
+	hsv_T_torso[0] =	hsv_turq;	hsv_T_torso[1] =	hsv_pastis;
+	hsv_B_torso[0] =	hsv_turq;	hsv_B_torso[1] =	hsv_rose;
+	hsv_L_shoulder[0] =	hsv_lavande;	hsv_L_shoulder[1] =	hsv_vert;
+	hsv_R_shoulder[0] =	hsv_lavande;	hsv_R_shoulder[1] =	hsv_turq;
+	hsv_L_elbow[0] =	hsv_lavande;	hsv_L_elbow[1] =	hsv_pastis;
+	hsv_R_elbow[0] =	hsv_lavande;	hsv_R_elbow[1] =	hsv_rose;
+	hsv_L_hand[0] =		hsv_lavande;	hsv_L_hand[1] =		hsv_jaune;
+	hsv_R_hand[0] =		hsv_lavande;	hsv_R_hand[1] =		hsv_mauve;
+	hsv_L_knee[0] =		hsv_beige;	hsv_L_knee[1] =		hsv_pastis;
+	hsv_R_knee[0] =		hsv_beige;	hsv_R_knee[1] =		hsv_rose;
+	hsv_L_foot[0] =		hsv_beige;	hsv_L_foot[1] =		hsv_jaune;
+	hsv_R_foot[0] =		hsv_beige;	hsv_R_foot[1] =		hsv_mauve;
 }
 
 // Mettre à jour le détecteur de blobs
@@ -65,7 +82,7 @@ vector <cv::Point2f> Body::Update_blobs(){
 	reco.Set_blobs_1(blobs[0].Get_mc());
 	reco.Set_blobs_2(blobs[1].Get_mc());
 	reco.Set_size(img.size());
-	return reco.Test_inclusion(10);
+	return reco.Test_inclusion(20);
 }
 
 // Chercher la tête
@@ -74,6 +91,22 @@ void Body::Detecter_tete(){
 	blobs[1].Definir_limites_separation(hsv_Tete[1]);
 	vector <cv::Point2f> liste = Update_blobs();
 	if(liste.size() > 0){Tete = liste[0];}
+}
+
+// Chercher le haut du torse
+void Body::Detecter_torse_haut(){
+	blobs[0].Definir_limites_separation(hsv_T_torso[0]);
+	blobs[1].Definir_limites_separation(hsv_T_torso[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){T_torso = liste[0];}
+}
+
+// Chercher le bas du torse
+void Body::Detecter_torse_bas(){
+	blobs[0].Definir_limites_separation(hsv_B_torso[0]);
+	blobs[1].Definir_limites_separation(hsv_B_torso[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){B_torso = liste[0];}
 }
 
 // Chercher l'épaule gauche
@@ -124,6 +157,22 @@ void Body::Detecter_main_droite(){
 	if(liste.size() > 0){R_hand = liste[0];}
 }
 
+// Chercher le genou gauche
+void Body::Detecter_genou_gauche(){
+	blobs[0].Definir_limites_separation(hsv_L_knee[0]);
+	blobs[1].Definir_limites_separation(hsv_L_knee[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){L_knee = liste[0];}
+}
+
+// Chercher le genou droit
+void Body::Detecter_genou_droit(){
+	blobs[0].Definir_limites_separation(hsv_R_knee[0]);
+	blobs[1].Definir_limites_separation(hsv_R_knee[1]);
+	vector <cv::Point2f> liste = Update_blobs();
+	if(liste.size() > 0){R_knee = liste[0];}
+}
+
 // Chercher le pied gauche
 void Body::Detecter_pied_gauche(){
 	blobs[0].Definir_limites_separation(hsv_L_foot[0]);
@@ -140,14 +189,25 @@ void Body::Detecter_pied_droit(){
 	if(liste.size() > 0){R_foot = liste[0];}
 }
 
+// Évaluer un angle sans transformation perspective (en radians)
+int Body::Evaluer_angle(cv::Point2f pt1, cv::Point2f pt2, cv::Point2f pt3){
+// TODO : utiliser trigo
+	return 1;
+}
+
 // Getters et Setters
 void Body::Set_img(cv::Mat img){this->img = img;}
 cv::Point2f Body::Get_Head(){return Tete;}
+cv::Point2f Body::Get_T_torso(){return T_torso;}
+cv::Point2f Body::Get_B_torso(){return B_torso;}
 cv::Point2f Body::Get_L_shoulder(){return L_shoulder;}
 cv::Point2f Body::Get_R_shoulder(){return R_shoulder;}
 cv::Point2f Body::Get_L_elbow(){return L_elbow;}
 cv::Point2f Body::Get_R_elbow(){return R_elbow;}
 cv::Point2f Body::Get_L_hand(){return L_hand;}
 cv::Point2f Body::Get_R_hand(){return R_hand;}
+cv::Point2f Body::Get_L_knee(){return L_knee;}
+cv::Point2f Body::Get_R_knee(){return R_knee;}
 cv::Point2f Body::Get_L_foot(){return L_foot;}
 cv::Point2f Body::Get_R_foot(){return R_foot;}
+int Body::Get_posture(){return posture;}
