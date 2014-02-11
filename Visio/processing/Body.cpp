@@ -16,18 +16,12 @@ Body::Body(){
 	Couleurs();
 	Membres();
 	Tete = cv::Point2f(0, 0);
-	T_torso = cv::Point2f(0, 0);
-	B_torso = cv::Point2f(0, 0);
-	L_shoulder = cv::Point2f(0, 0);
-	R_shoulder = cv::Point2f(0, 0);
-	L_elbow = cv::Point2f(0, 0);
-	R_elbow = cv::Point2f(0, 0);
-	L_hand = cv::Point2f(0, 0);
-	R_hand = cv::Point2f(0, 0);
-	L_knee = cv::Point2f(0, 0);
-	R_knee = cv::Point2f(0, 0);
-	L_foot = cv::Point2f(0, 0);
-	R_foot = cv::Point2f(0, 0);
+	T_torso = cv::Point2f(0, 0);	B_torso = cv::Point2f(0, 0);
+	L_shoulder = cv::Point2f(0, 0);	R_shoulder = cv::Point2f(0, 0);
+	L_elbow = cv::Point2f(0, 0);	R_elbow = cv::Point2f(0, 0);
+	L_hand = cv::Point2f(0, 0);	R_hand = cv::Point2f(0, 0);
+	L_knee = cv::Point2f(0, 0);	R_knee = cv::Point2f(0, 0);
+	L_foot = cv::Point2f(0, 0);	R_foot = cv::Point2f(0, 0);
 }
 
 Body::~Body(){
@@ -73,7 +67,9 @@ void Body::Membres(){
 }
 
 // Mettre à jour le détecteur de blobs
-vector <cv::Point2f> Body::Update_blobs(){
+vector <cv::Point2f> Body::Update_blobs(STRUCT_HSV_BOUND *hsv_1, STRUCT_HSV_BOUND *hsv_2){
+	blobs[0].Definir_limites_separation(hsv_1);
+	blobs[1].Definir_limites_separation(hsv_2);
 	for(int i = 0; i < 2; i++){
 		blobs[i].Set_img(img);
 		blobs[i].Separer();
@@ -87,105 +83,79 @@ vector <cv::Point2f> Body::Update_blobs(){
 
 // Chercher la tête
 void Body::Detecter_tete(){
-	blobs[0].Definir_limites_separation(hsv_Tete[0]);
-	blobs[1].Definir_limites_separation(hsv_Tete[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_Tete[0], hsv_Tete[1]);
 	if(liste.size() > 0){Tete = liste[0];}
 }
 
 // Chercher le haut du torse
 void Body::Detecter_torse_haut(){
-	blobs[0].Definir_limites_separation(hsv_T_torso[0]);
-	blobs[1].Definir_limites_separation(hsv_T_torso[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_T_torso[0], hsv_T_torso[1]);
 	if(liste.size() > 0){T_torso = liste[0];}
 }
 
 // Chercher le bas du torse
 void Body::Detecter_torse_bas(){
-	blobs[0].Definir_limites_separation(hsv_B_torso[0]);
-	blobs[1].Definir_limites_separation(hsv_B_torso[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_B_torso[0], hsv_B_torso[1]);
 	if(liste.size() > 0){B_torso = liste[0];}
 }
 
 // Chercher l'épaule gauche
 void Body::Detecter_epaule_gauche(){
-	blobs[0].Definir_limites_separation(hsv_L_shoulder[0]);
-	blobs[1].Definir_limites_separation(hsv_L_shoulder[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_L_shoulder[0], hsv_L_shoulder[1]);
 	if(liste.size() > 0){L_shoulder = liste[0];}
 }
 
 // Chercher l'épaule droite
 void Body::Detecter_epaule_droite(){
-	blobs[0].Definir_limites_separation(hsv_R_shoulder[0]);
-	blobs[1].Definir_limites_separation(hsv_R_shoulder[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_R_shoulder[0], hsv_R_shoulder[1]);
 	if(liste.size() > 0){R_shoulder = liste[0];}
 }
 
 // Chercher le coude gauche
 void Body::Detecter_coude_gauche(){
-	blobs[0].Definir_limites_separation(hsv_L_elbow[0]);
-	blobs[1].Definir_limites_separation(hsv_L_elbow[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_L_elbow[0], hsv_L_elbow[1]);
 	if(liste.size() > 0){L_elbow = liste[0];}
 }
 
 // Chercher le coude droit
 void Body::Detecter_coude_droit(){
-	blobs[0].Definir_limites_separation(hsv_R_elbow[0]);
-	blobs[1].Definir_limites_separation(hsv_R_elbow[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_R_elbow[0], hsv_R_elbow[1]);
 	if(liste.size() > 0){R_elbow = liste[0];}
 }
 
 // Chercher la main gauche
 void Body::Detecter_main_gauche(){
-	blobs[0].Definir_limites_separation(hsv_L_hand[0]);
-	blobs[1].Definir_limites_separation(hsv_L_hand[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_L_hand[0], hsv_L_hand[1]);
 	if(liste.size() > 0){L_hand = liste[0];}
 }
 
 // Chercher la main droite
 void Body::Detecter_main_droite(){
-	blobs[0].Definir_limites_separation(hsv_R_hand[0]);
-	blobs[1].Definir_limites_separation(hsv_R_hand[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_R_hand[0], hsv_R_hand[1]);
 	if(liste.size() > 0){R_hand = liste[0];}
 }
 
 // Chercher le genou gauche
 void Body::Detecter_genou_gauche(){
-	blobs[0].Definir_limites_separation(hsv_L_knee[0]);
-	blobs[1].Definir_limites_separation(hsv_L_knee[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_L_knee[0], hsv_L_knee[1]);
 	if(liste.size() > 0){L_knee = liste[0];}
 }
 
 // Chercher le genou droit
 void Body::Detecter_genou_droit(){
-	blobs[0].Definir_limites_separation(hsv_R_knee[0]);
-	blobs[1].Definir_limites_separation(hsv_R_knee[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_R_knee[0], hsv_R_knee[1]);
 	if(liste.size() > 0){R_knee = liste[0];}
 }
 
 // Chercher le pied gauche
 void Body::Detecter_pied_gauche(){
-	blobs[0].Definir_limites_separation(hsv_L_foot[0]);
-	blobs[1].Definir_limites_separation(hsv_L_foot[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_L_foot[0], hsv_L_foot[1]);
 	if(liste.size() > 0){L_foot = liste[0];}
 }
 
 // Chercher le pied droit
 void Body::Detecter_pied_droit(){
-	blobs[0].Definir_limites_separation(hsv_R_foot[0]);
-	blobs[1].Definir_limites_separation(hsv_R_foot[1]);
-	vector <cv::Point2f> liste = Update_blobs();
+	vector <cv::Point2f> liste = Update_blobs(hsv_R_foot[0], hsv_R_foot[1]);
 	if(liste.size() > 0){R_foot = liste[0];}
 }
 
@@ -196,18 +166,18 @@ int Body::Evaluer_angle(cv::Point2f pt1, cv::Point2f pt2, cv::Point2f pt3){
 }
 
 // Getters et Setters
-void Body::Set_img(cv::Mat img){this->img = img;}
-cv::Point2f Body::Get_Head(){return Tete;}
-cv::Point2f Body::Get_T_torso(){return T_torso;}
-cv::Point2f Body::Get_B_torso(){return B_torso;}
-cv::Point2f Body::Get_L_shoulder(){return L_shoulder;}
-cv::Point2f Body::Get_R_shoulder(){return R_shoulder;}
-cv::Point2f Body::Get_L_elbow(){return L_elbow;}
-cv::Point2f Body::Get_R_elbow(){return R_elbow;}
-cv::Point2f Body::Get_L_hand(){return L_hand;}
-cv::Point2f Body::Get_R_hand(){return R_hand;}
-cv::Point2f Body::Get_L_knee(){return L_knee;}
-cv::Point2f Body::Get_R_knee(){return R_knee;}
-cv::Point2f Body::Get_L_foot(){return L_foot;}
-cv::Point2f Body::Get_R_foot(){return R_foot;}
-int Body::Get_posture(){return posture;}
+void		Body::Set_img(cv::Mat img)	{this->img = img;}
+cv::Point2f	Body::Get_Head()		{return Tete;}
+cv::Point2f	Body::Get_T_torso()		{return T_torso;}
+cv::Point2f	Body::Get_B_torso()		{return B_torso;}
+cv::Point2f	Body::Get_L_shoulder()		{return L_shoulder;}
+cv::Point2f	Body::Get_R_shoulder()		{return R_shoulder;}
+cv::Point2f	Body::Get_L_elbow()		{return L_elbow;}
+cv::Point2f	Body::Get_R_elbow()		{return R_elbow;}
+cv::Point2f	Body::Get_L_hand()		{return L_hand;}
+cv::Point2f	Body::Get_R_hand()		{return R_hand;}
+cv::Point2f	Body::Get_L_knee()		{return L_knee;}
+cv::Point2f	Body::Get_R_knee()		{return R_knee;}
+cv::Point2f	Body::Get_L_foot()		{return L_foot;}
+cv::Point2f	Body::Get_R_foot()		{return R_foot;}
+int		Body::Get_posture()		{return posture;}

@@ -25,24 +25,16 @@ int main(){
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
 		key = flux.Get_key();
-		// mettre à jour les images du flux
 		flux.Update();
 
 		body.Set_img(flux.Get_cam());
 		body.Detecter_tete();
-		body.Detecter_torse_haut();
-		body.Detecter_torse_bas();
-		body.Detecter_epaule_gauche();
-		body.Detecter_epaule_droite();
-		body.Detecter_coude_gauche();
-		body.Detecter_coude_droit();
-		body.Detecter_main_gauche();
-		body.Detecter_main_droite();
-		body.Detecter_genou_gauche();
-		body.Detecter_genou_droit();
-		body.Detecter_pied_gauche();
-		body.Detecter_pied_droit();
-		gui.Afficher_image("video", flux.Get_cam());
+		body.Detecter_torse_haut();		body.Detecter_torse_bas();
+		body.Detecter_epaule_gauche();		body.Detecter_epaule_droite();
+		body.Detecter_coude_gauche();		body.Detecter_coude_droit();
+		body.Detecter_main_gauche();		body.Detecter_main_droite();
+		body.Detecter_genou_gauche();		body.Detecter_genou_droit();
+		body.Detecter_pied_gauche();		body.Detecter_pied_droit();
 
 		std::vector <cv::Point2f> liste1;
 		std::vector <cv::Point2f> liste2;
@@ -58,6 +50,8 @@ int main(){
 		liste1.push_back(body.Get_B_torso());		liste2.push_back(body.Get_R_knee());
 		liste1.push_back(body.Get_L_knee());		liste2.push_back(body.Get_L_foot());
 		liste1.push_back(body.Get_R_knee());		liste2.push_back(body.Get_R_foot());
+
+		gui.Afficher_image("video", flux.Get_cam());
 		gui.Ajouter_vecteurs("test", flux.Get_cam(), liste1, liste2);
 	}
 

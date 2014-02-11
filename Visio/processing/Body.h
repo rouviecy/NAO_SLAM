@@ -25,33 +25,21 @@ public:
 	~Body();
 
 	void Detecter_tete();
-	void Detecter_torse_haut();
-	void Detecter_torse_bas();
-	void Detecter_epaule_gauche();
-	void Detecter_epaule_droite();
-	void Detecter_coude_gauche();
-	void Detecter_coude_droit();
-	void Detecter_main_gauche();
-	void Detecter_main_droite();
-	void Detecter_genou_gauche();
-	void Detecter_genou_droit();
-	void Detecter_pied_gauche();
-	void Detecter_pied_droit();
+	void Detecter_torse_haut();	void Detecter_torse_bas();
+	void Detecter_epaule_gauche();	void Detecter_epaule_droite();
+	void Detecter_coude_gauche();	void Detecter_coude_droit();
+	void Detecter_main_gauche();	void Detecter_main_droite();
+	void Detecter_genou_gauche();	void Detecter_genou_droit();
+	void Detecter_pied_gauche();	void Detecter_pied_droit();
 	void Set_img(cv::Mat img);
 	void Tester_position();
 	cv::Point2f Get_Head();
-	cv::Point2f Get_T_torso();
-	cv::Point2f Get_B_torso();
-	cv::Point2f Get_L_shoulder();
-	cv::Point2f Get_R_shoulder();
-	cv::Point2f Get_L_elbow();
-	cv::Point2f Get_R_elbow();
-	cv::Point2f Get_L_hand();
-	cv::Point2f Get_R_hand();
-	cv::Point2f Get_L_knee();
-	cv::Point2f Get_R_knee();
-	cv::Point2f Get_L_foot();
-	cv::Point2f Get_R_foot();
+	cv::Point2f Get_T_torso();	cv::Point2f Get_B_torso();
+	cv::Point2f Get_L_shoulder();	cv::Point2f Get_R_shoulder();
+	cv::Point2f Get_L_elbow();	cv::Point2f Get_R_elbow();
+	cv::Point2f Get_L_hand();	cv::Point2f Get_R_hand();
+	cv::Point2f Get_L_knee();	cv::Point2f Get_R_knee();
+	cv::Point2f Get_L_foot();	cv::Point2f Get_R_foot();
 	int Get_posture();
 
 private:
@@ -66,18 +54,12 @@ private:
 	STRUCT_HSV_BOUND *hsv_pastis;
 
 	STRUCT_HSV_BOUND *hsv_Tete[2];
-	STRUCT_HSV_BOUND *hsv_T_torso[2];
-	STRUCT_HSV_BOUND *hsv_B_torso[2];
-	STRUCT_HSV_BOUND *hsv_L_shoulder[2];
-	STRUCT_HSV_BOUND *hsv_R_shoulder[2];
-	STRUCT_HSV_BOUND *hsv_L_elbow[2];
-	STRUCT_HSV_BOUND *hsv_R_elbow[2];
-	STRUCT_HSV_BOUND *hsv_L_hand[2];
-	STRUCT_HSV_BOUND *hsv_R_hand[2];
-	STRUCT_HSV_BOUND *hsv_L_knee[2];
-	STRUCT_HSV_BOUND *hsv_R_knee[2];
-	STRUCT_HSV_BOUND *hsv_L_foot[2];
-	STRUCT_HSV_BOUND *hsv_R_foot[2];
+	STRUCT_HSV_BOUND *hsv_T_torso[2];	STRUCT_HSV_BOUND *hsv_B_torso[2];
+	STRUCT_HSV_BOUND *hsv_L_shoulder[2];	STRUCT_HSV_BOUND *hsv_R_shoulder[2];
+	STRUCT_HSV_BOUND *hsv_L_elbow[2];	STRUCT_HSV_BOUND *hsv_R_elbow[2];
+	STRUCT_HSV_BOUND *hsv_L_hand[2];	STRUCT_HSV_BOUND *hsv_R_hand[2];
+	STRUCT_HSV_BOUND *hsv_L_knee[2];	STRUCT_HSV_BOUND *hsv_R_knee[2];
+	STRUCT_HSV_BOUND *hsv_L_foot[2];	STRUCT_HSV_BOUND *hsv_R_foot[2];
 
 	int posture; // 0 : inconnu | 1 : assis | 2 : debout
 
@@ -91,7 +73,7 @@ private:
 
 	void Couleurs();
 	void Membres();
-	std::vector <cv::Point2f> Update_blobs();
+	std::vector <cv::Point2f> Update_blobs(STRUCT_HSV_BOUND *hsv_1, STRUCT_HSV_BOUND *hsv_2);
 
 };
 
