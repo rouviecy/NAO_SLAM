@@ -10,7 +10,7 @@ def StiffnessOn(proxy):
     pTimeLists = 1.0
     proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
 
-##Le robot marche en ligne droite jusqu'a xValue metres
+
 def marche(xValue):
 
     # Init proxies.
@@ -45,27 +45,25 @@ def marche(xValue):
     motionProxy.stopMove()
     postureProxy.goToPosture("StandInit", 1.0)
 
-##Le robot bouge sa tete jusqu'a angle degrees
 def BougeTaTete(angle):
     # Init proxies.
     motionProxy = ALProxy("ALMotion", robotIP, 9559)
     postureProxy = ALProxy("ALRobotPosture", robotIP, 9559)
     memoryProxy = ALProxy("ALMemory", robotIP, 9559)
-
+    
     # Set NAO in Stiffness On
     StiffnessOn(motionProxy)
     a=postureProxy.getPostureFamily()
-    print a
+    print a    
     # Send NAO to Pose Init if necessary
     while str(a)!="Standing":
-        postureProxy.goToPosture("StandInit", 1.0)
-        a=postureProxy.getPostureFamily()
-        print a
+	postureProxy.goToPosture("StandInit", 1.0)
+	a=postureProxy.getPostureFamily()
+	print a
 
     motionProxy.setStiffnesses("Body", 1.0)
     motionProxy.setAngles("HeadYaw", angle*math.pi/180, 0.4)
 
-##le robot tourne sur lui meme jusqu'a atteindre angle degrees
 def Virage(angle):
     # Init proxies.
     motionProxy = ALProxy("ALMotion", robotIP, 9559)
@@ -85,9 +83,9 @@ def Virage(angle):
     # Wait for it to finish
     motionProxy.waitUntilMoveIsFinished()
     motionProxy.stopMove()
-    postureProxy.goToPosture("StandInit", 1.0)
+    postureProxy.goToPosture("StandInit", 1.0)    	
 
 if __name__ == "__main__":
-#       marche(0.5)
-        BougeTaTete(int(sys.argv[1]))
-#       Virage(90)
+#	marche(0.5)
+	BougeTaTete(int(sys.argv[1]))
+#	Virage(90)
