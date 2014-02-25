@@ -1,0 +1,25 @@
+*********************************************************************
+*			USER MANUAL MAPPING			    *
+*								    *
+*********************************************************************
+
+	1. import interfaceMap
+	3. Ajouter un objet interfaceMap, avec le nombre de robots
+		 entre parenthèses ( exemple : 
+	mapInterface = interfaceMap.interfaceMap(3)
+		 pour 3 robots)
+	5. Pour ajouter un obstacle faire : 
+		NomDeLObjetInterfaceMap.CreateObstacle(Coord)
+		Avec pour Coord un numpy array de la forme: 
+	np.array([xHautGauche, yHautGauche, xBasDroite, YbasDroite])
+	7. Pour changer la position d'un robot:
+		NomDeLObjetInterfaceMap.updateCoordonate(Coord, robotID)
+		Avec pour Coord un numpy array de la forme:
+	np.array([xRobot, yRobot])
+		Pour robotID, le premier robot est le n°0, le deuxième 1...
+	9. Pour changer l'orientation: 
+		NomDeLObjetInterfaceMap.updateOrientation(Orientation, robotID)
+		Orientation : un nombre de la valeur désirée
+	11. Obtenir l'orientation d'un robot:
+		NomDeLObjetInterfaceMap.getOrientation(robotID)
+

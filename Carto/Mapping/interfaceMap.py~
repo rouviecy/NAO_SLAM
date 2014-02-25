@@ -53,3 +53,27 @@ class Interface(object):
 		return self.listRobot[robotID].Orient
 
 
+
+	
+if __name__ == "__main__":
+	Inte = Interface(3)
+#	print Inte.Mamap.mapMat
+#	Inte.CreateObstacle(np.array([5,5,7,7]))
+#	print Inte.Mamap.mapMat
+#	Inte.CreateObstacle(np.array([-1,-1, 0, 0]))
+#	print Inte.Mamap.mapMat
+#	Inte.CreateObstacle(np.array([15,15, 20, 20]))
+#	print Inte.Mamap.mapMat
+#	Inte.updateRobot(np.array([9,9]), 0)
+#	print Inte.Mamap.mapMat
+#	Inte.updateRobot(np.array([-2,-2]), 1)
+#	print Inte.Mamap.mapMat
+#	Inte.updateRobot(np.array([24,24]), 2)
+#	print Inte.Mamap.mapMat
+#	Inte.updateRobot(np.array([10,10]), 0)
+#	print Inte.Mamap.mapMat
+	orient1 =Inte.getRobotOrientation(0) 
+	print orient1	
+	Inte.updateRobotOrientation(90, 0)
+	orient2= Inte.getRobotOrientation(0)		
+	print orient2
