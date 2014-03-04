@@ -14,6 +14,5 @@ Créer dans ce dossier un lien symbolique [path_to_sdk] vers la SDK
     * Y ouvrir une console
     * `cmake -DCMAKE_TOOLCHAIN_FILE=[path_to_sdk]/toolchain-[pc/atom].cmake ..`
     * `make`
-    * `sudo make install`
-    * `export LD_LIBRARY_PATH=[path_to_sdk]/lib/`
-    * Exécuter le fichier créé dans `/usr/local/bin/`
+    * le fichier généré se trouve dans `./src/[projet]/build/sdk/bin/`
+    * `export LD_LIBRARY_PATH=[path_to_sdk]/lib/` si librairies introuvables

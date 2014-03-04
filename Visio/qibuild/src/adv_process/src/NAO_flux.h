@@ -36,7 +36,7 @@ public:
 
 	NAO_flux();
 	~NAO_flux();
-	NAO_flux(const int num_device, const int delais);
+	NAO_flux(const int resolution, const int delais);
 	NAO_flux(	const int resolution,	// 0 : QQVGA (160*120) | 1 : QVGA (320*240) | 2 : VGA (640*480) | 3 : 4VGA (1280*960)
 			const int delais,	// delais entre deux images
 			const int code_couleur,	// changement espace couleurs
@@ -45,9 +45,12 @@ public:
 
 	void Update();			// mettre à jour les images
 	char Get_key() const;		// getter sur la clé
-	cv::Mat Get_cam() const;	// getter sur image webcam
-	cv::Mat Get_prev() const;	// getter sur image N-1
-	cv::Mat Get_next() const;	// getter sur image N
+	cv::Mat Get_cam_top() const;	// getter sur image caméra supérieure
+	cv::Mat Get_cam_down() const;	// getter sur image caméra inférieure
+	cv::Mat Get_prev_top() const;	// getter sur image N-1 supérieure
+	cv::Mat Get_prev_down() const;	// getter sur image N-1 inférieure
+	cv::Mat Get_next_top() const;	// getter sur image N supérieure
+	cv::Mat Get_next_down() const;	// getter sur image N inférieure
 
 private:
 
@@ -57,11 +60,12 @@ private:
 	int lissage;			// force du flou de lissage
 	int flip;			// miroir
 	cv::Size flou_kern;		// flou de force lissage
-	cv::Mat img_brute;		// image NAO
-	cv::Mat img_cam;		// image webcam
-	cv::Mat img_prev;		// image N-1
-	cv::Mat img_next;		// image N
-	cv::Mat img_show;		// image à afficher
+	cv::Mat img_cam_top;		// image caméra supérieure
+	cv::Mat img_cam_down;		// image caméra inférieure
+	cv::Mat img_prev_top;		// image N-1 supérieure
+	cv::Mat img_prev_down;		// image N-1 inférieure
+	cv::Mat img_next_top;		// image N supérieure
+	cv::Mat img_next_down;		// image N inférieure
 
 	AL::ALVideoDeviceProxy camProxy;
 	std::string clientName;
