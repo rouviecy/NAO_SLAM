@@ -37,7 +37,7 @@ public:
 	NAO_flux();
 	~NAO_flux();
 	NAO_flux(const int num_device, const int delais);
-	NAO_flux(	const int num_device,	// /dev/video[X]
+	NAO_flux(	const int resolution,	// 0 : QQVGA (160*120) | 1 : QVGA (320*240) | 2 : VGA (640*480) | 3 : 4VGA (1280*960)
 			const int delais,	// delais entre deux images
 			const int code_couleur,	// changement espace couleurs
 			const int lissage,	// flou de force lissage

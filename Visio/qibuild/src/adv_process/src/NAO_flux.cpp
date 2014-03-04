@@ -16,15 +16,41 @@ void NAO_flux::Init(const int num_device, const int delais){
 }
 
 // Initialisation complète de la classe (automatique à la construction)
-void NAO_flux::Init(const int num_device, const int delais, const int code_couleur, const int lissage, const int flip){
+void NAO_flux::Init(const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
 	this->delais =		delais;
 	this->code_couleur =	code_couleur;
 	this->lissage =		lissage;
 	this->flip =		flip;
 	if(lissage > 1){flou_kern = cv::Size(lissage, lissage);}
+	ALValue ls_cam = ALValue::array(0, 1);
+	ALValue ls_color = ALValue::array(kBGRColorSpace, kBGRColorSpace);
+	ALValue ls_resol;
+	cv::Size taille;
+	switch (resolution){
+		case 0:
+			ls_resol = ALValue::array(kQQVGA, kQQVGA);
+			taille = cv::Size(160, 120);
+			break;
+		case 1:
+			ls_resol = ALValue::array(kQVGA, kQVGA);
+			taille = cv::Size(320, 240);
+			break;
+		case 2:
+			ls_resol = ALValue::array(kVGA, kVGA);
+			taille = cv::Size(640, 480);
+			break;
+		case 3:
+			ls_resol = ALValue::array(k4VGA, k4VGA);
+			taille = cv::Size(1280, 960);
+			break;
+		default:
+			ls_resol = ALValue::array(kQVGA, kQVGA);
+			taille = cv::Size(320, 240);
+			break;		
+	}
 	camProxy = ALVideoDeviceProxy("127.0.0.1", 9559);
-	clientName = camProxy.subscribe("test", kQVGA, kBGRColorSpace, 30); // TODO : changer les paramètres en fonction des arg constructeur
-	img_brute = cv::Mat(cv::Size(320, 240), CV_8UC3);
+	clientName = camProxy.subscribeCameras("multiflux", ls_cam, ls_resol, ls_color, (int) (1000 / delais));
+	img_brute = cv::Mat(taille, CV_8UC3);
 	key = 'a';
 	Recuperer();
 }
