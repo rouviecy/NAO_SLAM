@@ -19,7 +19,7 @@ class Calibrate{
 
 public:
 
-	Calibrate(cv::Size dim_chess);
+	Calibrate(const cv::Size dim_chess);
 
 	cv::Mat Get_img();
 	void Set_img(cv::Mat img);

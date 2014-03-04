@@ -4,8 +4,8 @@ using namespace std;
 
 int main(){
 
-	char key = 'a';				// clef de contrôle du programme
-	NAO_flux flux(1, 40, 1, 3, 1);		// initialisation du flux NAO
+	char key = 'a';					// clef de contrôle du programme
+	NAO_flux flux("127.0.0.1", 1, 40, 1, 3, 1);	// initialisation du flux NAO
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){

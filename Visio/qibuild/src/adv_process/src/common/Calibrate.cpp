@@ -3,7 +3,7 @@
 using namespace std;
 
 // Constructeur
-Calibrate::Calibrate(cv::Size dim_chess){
+Calibrate::Calibrate(const cv::Size dim_chess){
 	this->dim_chess = dim_chess;
 	nb_img_calib = 0;
 	mat_cam = cv::Mat(cv::Size(3, 3), CV_32FC1);

@@ -37,7 +37,8 @@ public:
 	NAO_flux();
 	~NAO_flux();
 	NAO_flux(const int resolution, const int delais);
-	NAO_flux(	const int resolution,	// 0 : QQVGA (160*120) | 1 : QVGA (320*240) | 2 : VGA (640*480) | 3 : 4VGA (1280*960)
+	NAO_flux(	const char* ip,		// adresse IP du NAO ("127.0.0.1" pour caméras locales)
+			const int resolution,	// 0 : QQVGA (160*120) | 1 : QVGA (320*240) | 2 : VGA (640*480) | 3 : 4VGA (1280*960)
 			const int delais,	// delais entre deux images
 			const int code_couleur,	// changement espace couleurs
 			const int lissage,	// flou de force lissage
@@ -71,7 +72,7 @@ private:
 	std::string clientName;
 
 	void Init(const int num_device, const int delais);
-	void Init(const int num_device, const int delais, const int code_couleur, const int lissage, const int flip);
+	void Init(const char* ip, const int num_device, const int delais, const int code_couleur, const int lissage, const int flip);
 	void Attendre(const int millis);
 	void Sauvegarder();
 	void Recuperer();

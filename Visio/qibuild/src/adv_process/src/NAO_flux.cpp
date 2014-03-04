@@ -4,19 +4,19 @@ using namespace std;
 using namespace AL;
 
 // Constructeurs
-NAO_flux::NAO_flux(){Init(-1, 40);}
+NAO_flux::NAO_flux(){Init(1, 40);}
 NAO_flux::NAO_flux(const int resolution, const int delais){Init(resolution, delais);}
-NAO_flux::NAO_flux(const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
-	Init(resolution, delais, code_couleur, lissage, flip);
+NAO_flux::NAO_flux(const char* ip, const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
+	Init(ip, resolution, delais, code_couleur, lissage, flip);
 }
 
 // Initialisations transitoires
 void NAO_flux::Init(const int resolution, const int delais){
-	Init(resolution, delais, -1, -1, 0);
+	Init("127.0.0.1", resolution, delais, -1, -1, 0);
 }
 
 // Initialisation complète de la classe (automatique à la construction)
-void NAO_flux::Init(const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
+void NAO_flux::Init(const char* ip, const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
 	this->delais =		delais;
 	this->code_couleur =	code_couleur;
 	this->lissage =		lissage;
@@ -48,7 +48,7 @@ void NAO_flux::Init(const int resolution, const int delais, const int code_coule
 			taille = cv::Size(320, 240);
 			break;		
 	}
-	camProxy = ALVideoDeviceProxy("127.0.0.1", 9559);
+	camProxy = ALVideoDeviceProxy(ip, 9559);
 	clientName = camProxy.subscribeCameras("multiflux", ls_cam, ls_resol, ls_color, (int) (1000 / delais));
 	img_cam_top = cv::Mat(taille, CV_8UC3); img_cam_down = cv::Mat(taille, CV_8UC3);
 	key = 'a';
