@@ -55,11 +55,11 @@ void Transfo::Appliquer_wrap(){
 		pts2.push_back(pts_input[tab_index[j]]);
 	}
 	cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
-	warpPerspective(img_brute, img_wrap, M, img_brute.size());
+	cv::warpPerspective(img_brute, img_wrap, M, img_brute.size());
 	int index_centre = 10 - tab_index[0] - tab_index[1] - tab_index[2] - tab_index[3];
 	vector <cv::Point2f> tempo;
 	tempo.push_back(pts_input[index_centre]);
-	perspectiveTransform(tempo, center, M);
+	cv::perspectiveTransform(tempo, center, M);
 }
 
 // Getters et Setters

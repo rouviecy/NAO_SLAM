@@ -41,8 +41,8 @@ void Reco::Update_mats(const int rayon){
 		cv::circle(mat_2, cv::Point2i((int) floor((*blob).x), (int) floor((*blob).y)), rayon, blanc, -1, 8, 0);
 	}
 	cv::Scalar mini(42); cv::Scalar maxi(255);
-	inRange(mat_1, mini, maxi, mat_blobs_1);
-	inRange(mat_2, mini, maxi, mat_blobs_2);
+	cv::inRange(mat_1, mini, maxi, mat_blobs_1);
+	cv::inRange(mat_2, mini, maxi, mat_blobs_2);
 }
 
 // Getters et Setters

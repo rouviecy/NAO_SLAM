@@ -23,12 +23,12 @@ Blobs::Blobs(){
 // Séparateur de couleurs et appliquer les filtres morphologiques
 void Blobs::Separer(){
 	if(sep_min[0] <= 180 && sep_max[0] <= 180){
-		inRange(img_HSV, sep_min, sep_max, img_sep);
+		cv::inRange(img_HSV, sep_min, sep_max, img_sep);
 	}
 	else if (sep_min[0] > 180 && sep_max[0] > 180){
 		cv::Scalar sep_min_rectif(sep_min[0] - 180, sep_min[1], sep_min[2]);
 		cv::Scalar sep_max_rectif(sep_max[0] - 180, sep_max[1], sep_max[2]);
-		inRange(img_HSV, sep_min_rectif, sep_max_rectif, img_sep);
+		cv::inRange(img_HSV, sep_min_rectif, sep_max_rectif, img_sep);
 	}
 	else{
 		cv::Scalar sep_180(180, sep_max[1], sep_max[2]);
@@ -36,12 +36,12 @@ void Blobs::Separer(){
 		cv::Scalar sep_min_rectif(sep_min[0] - 180, sep_min[1], sep_min[2]);
 		cv::Scalar sep_max_rectif(sep_max[0] - 180, sep_max[1], sep_max[2]);
 		cv::Mat img_low, img_high;
-		inRange(img_HSV, sep_0, sep_max_rectif, img_low);
-		inRange(img_HSV, sep_min_rectif, sep_180, img_high);
+		cv::inRange(img_HSV, sep_0, sep_max_rectif, img_low);
+		cv::inRange(img_HSV, sep_min_rectif, sep_180, img_high);
 		img_sep = img_low | img_high;
 	}
-	if(nb_dilate > 0)	{dilate(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_dilate);}
-	if(nb_erode > 0)	{erode(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_erode);}
+	if(nb_dilate > 0)	{cv::dilate(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_dilate);}
+	if(nb_erode > 0)	{cv::erode(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_erode);}
 }
 
 // Mise à jour des paramètres de segmentation HSV
@@ -68,7 +68,7 @@ void Blobs::Trouver_blobs(){
 		mu.push_back(mu_[i]);
 		mc.push_back(mc_[i]);
 		rect.push_back(rect_[i]);
-		drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
+		cv::drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
 		cv::circle(img_blobs, mc_[i], 4, rouge, -1, 8, 0);
 		cv::rectangle(img_blobs, rect_[i], rouge);
 	}
@@ -86,10 +86,10 @@ void Blobs::Relier(){
 // Getters et Setters
 cv::Mat Blobs::Get_img_sep() const{return img_sep;}
 cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
-std::vector <cv::Moments> Blobs::Get_mu() const{return mu;}
-std::vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
-std::vector <cv::Rect> Blobs::Get_rect() const{return rect;}
+vector <cv::Moments> Blobs::Get_mu() const{return mu;}
+vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
+vector <cv::Rect> Blobs::Get_rect() const{return rect;}
 void Blobs::Set_img(cv::Mat image){
 	image.copyTo(img_brute);
-	cvtColor(img_brute, img_HSV, CV_RGB2HSV, 3);
+	cv::cvtColor(img_brute, img_HSV, CV_RGB2HSV, 3);
 }

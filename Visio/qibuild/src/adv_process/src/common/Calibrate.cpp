@@ -15,8 +15,8 @@ Calibrate::Calibrate(cv::Size dim_chess){
 
 // Tenter d'ajouter un vecteur à la liste de calibration
 int Calibrate::Ajouter_img_calib(cv::Mat img_input){
-	std::vector <cv::Point2f> corners;
-	bool trouve = findChessboardCorners(img_input, dim_chess, corners, CV_CALIB_CB_FAST_CHECK);
+	vector <cv::Point2f> corners;
+	bool trouve = cv::findChessboardCorners(img_input, dim_chess, corners, CV_CALIB_CB_FAST_CHECK);
 	if(!trouve){return nb_img_calib;}
 	pts_image.push_back(corners);
 	pts_objet.push_back(obj);
@@ -26,12 +26,12 @@ int Calibrate::Ajouter_img_calib(cv::Mat img_input){
 
 // Calibrer la caméra
 void Calibrate::Calibrer(cv::Size taille){
-	calibrateCamera(pts_objet, pts_image, taille, mat_cam, dist_coeffs, rvecs, tvecs);
+	cv::calibrateCamera(pts_objet, pts_image, taille, mat_cam, dist_coeffs, rvecs, tvecs);
 }
 
 // Getters et Setters
 cv::Mat Calibrate::Get_img(){
-	undistort(img, img_calib, mat_cam, dist_coeffs);
+	cv::undistort(img, img_calib, mat_cam, dist_coeffs);
 	return img_calib;
 }
 void Calibrate::Set_img(cv::Mat img){this->img = img;}
