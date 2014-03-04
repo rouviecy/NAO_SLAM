@@ -9,17 +9,24 @@ find_package(qibuild)
 
 # Créer des librairies personnalisées
 qi_create_lib(IMG_PROCESS
-	./src/NAO_flux.cpp
-	./src/NAO_flux.h
+	./src/NAO_flux.h		./src/NAO_flux.cpp
+	./src/common/Blobs.h		./src/common/Blobs.cpp
+	./src/common/Calibrate.h	./src/common/Calibrate.cpp
+	./src/common/Body.h		./src/common/Body.cpp
+	./src/common/Reco.h		./src/common/Reco.cpp
+	./src/common/Tracking.h		./src/common/Tracking.cpp
+	./src/common/Transfo.h		./src/common/Transfo.cpp
+	./src/common/Utils.h		./src/common/Utils.cpp
+	./src/common/struct_HSV_bound.h
+	./src/common/struct_wrap_bound.h
 )
 qi_stage_lib(IMG_PROCESS)
-
 
 # Définir les exécutables
 qi_create_bin(main ./src/mains/main.cpp)
 
 # Lier les librairies aux exécutables
-qi_use_lib(main IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC)
+qi_use_lib(main IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
 
 # Liste des librairies OPENCV pour NAO : (ne pas oublier les #include <opencv2/XXX/XXX.hpp>)
 # -----> OPENCV2_CORE (structures basiques)
