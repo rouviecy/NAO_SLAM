@@ -3,23 +3,6 @@
 using namespace std;
 using namespace AL;
 
-// TODO : à supprimer
-int main(){
-
-	char key = 'a';				// clef de contrôle du programme
-	NAO_flux flux(-1, 40, 1, 3, 1);		// initialisation du flux NAO
-
-	// boucle d'exécution : appuyer sur 'q' pour quitter
-	while(key != 'q'){
-		key = flux.Get_key();
-		// mettre à jour les images du flux
-		flux.Update();
-	}
-
-	return 0;
-
-}
-
 // Constructeurs
 NAO_flux::NAO_flux(){Init(-1, 40);}
 NAO_flux::NAO_flux(const int num_device, const int delais){Init(num_device, delais);}
@@ -61,14 +44,11 @@ void NAO_flux::Recuperer(){
 	else if	(flip == 2)		{cv::flip(img_cam, img_cam, 0);}
 	else if	(flip == 3)		{cv::flip(img_cam, img_cam, -1);}
 	img_cam.copyTo(img_next);
-//	if	(lissage > 1)		{blur(img_next, img_next, flou_kern, cv::Point(-1, -1), cv::BORDER_DEFAULT);} // TODO : trouver border_default include
+	if	(lissage > 1)		{cv::blur(img_next, img_next, flou_kern, cv::Point(-1, -1), cv::BORDER_DEFAULT);}
 }
 
-// Attendre et tester si le péripérique est toujours disponible
-void NAO_flux::Attendre(const int millis){
-//	key = cvWaitKey(millis); // TODO : trouver un autre moyen d'attendre
-//	if(!capture.isOpened()){key = 'q';}
-}
+// Attendre
+void NAO_flux::Attendre(const int millis){usleep(1000 * millis);}
 
 // Sauvegarder l'image précédente
 void NAO_flux::Sauvegarder(){img_next.copyTo(img_prev);}

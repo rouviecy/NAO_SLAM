@@ -23,10 +23,12 @@
 
 // Opencv includes
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 // Common includes
 #include <iostream>
 #include <string>
+#include <unistd.h>
 
 class NAO_flux{
 
