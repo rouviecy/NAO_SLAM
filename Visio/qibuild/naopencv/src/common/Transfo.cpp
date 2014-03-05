@@ -65,5 +65,5 @@ void Transfo::Appliquer_wrap(){
 // Getters et Setters
 cv::Mat Transfo::Get_img_wrap() const{return img_wrap;}
 vector <cv::Point2f> Transfo::Get_center() const{return center;}
-void Transfo::Set_img(cv::Mat image){image.copyTo(img_brute);}
-void Transfo::Set_pts_redressement(vector <cv::Point2f> pts_input){this->pts_input = pts_input;}
+void Transfo::Set_img(const cv::Mat image){image.copyTo(img_brute);}
+void Transfo::Set_pts_redressement(const vector <cv::Point2f> pts_input){this->pts_input = pts_input;}

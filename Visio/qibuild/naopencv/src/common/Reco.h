@@ -21,9 +21,9 @@ public:
 
 	Reco();
 
-	void Set_blobs_1(std::vector <cv::Point2f> blobs_1);
-	void Set_blobs_2(std::vector <cv::Point2f> blobs_2);
-	void Set_size(cv::Size taille);
+	void Set_blobs_1(const std::vector <cv::Point2f> blobs_1);
+	void Set_blobs_2(const std::vector <cv::Point2f> blobs_2);
+	void Set_size(const cv::Size taille);
 
 	std::vector <bool> Test_circle();
 	std::vector <cv::Point2f> Test_inclusion(const int dist_max);

@@ -22,9 +22,9 @@ public:
 	Calibrate(const cv::Size dim_chess);
 
 	cv::Mat Get_img();
-	void Set_img(cv::Mat img);
+	void Set_img(const cv::Mat img);
 	int Ajouter_img_calib(cv::Mat img_input);
-	void Calibrer(cv::Size taille);
+	void Calibrer(const cv::Size taille);
 
 private:
 

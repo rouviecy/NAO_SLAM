@@ -25,7 +25,7 @@ int Calibrate::Ajouter_img_calib(cv::Mat img_input){
 }
 
 // Calibrer la caméra
-void Calibrate::Calibrer(cv::Size taille){
+void Calibrate::Calibrer(const cv::Size taille){
 	cv::calibrateCamera(pts_objet, pts_image, taille, mat_cam, dist_coeffs, rvecs, tvecs);
 }
 
@@ -34,5 +34,5 @@ cv::Mat Calibrate::Get_img(){
 	cv::undistort(img, img_calib, mat_cam, dist_coeffs);
 	return img_calib;
 }
-void Calibrate::Set_img(cv::Mat img){this->img = img;}
+void Calibrate::Set_img(const cv::Mat img){this->img = img;}
 

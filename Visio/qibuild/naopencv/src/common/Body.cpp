@@ -166,7 +166,7 @@ int Body::Evaluer_angle(cv::Point2f pt1, cv::Point2f pt2, cv::Point2f pt3){
 }
 
 // Getters et Setters
-void		Body::Set_img(cv::Mat img)	{this->img = img;}
+void		Body::Set_img(const cv::Mat img){this->img = img;}
 cv::Point2f	Body::Get_Head()		{return Tete;}
 cv::Point2f	Body::Get_T_torso()		{return T_torso;}
 cv::Point2f	Body::Get_B_torso()		{return B_torso;}

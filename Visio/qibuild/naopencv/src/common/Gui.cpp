@@ -98,7 +98,7 @@ void Gui::Callback_wrap(int value, void *object){
 }
 
 // Afficher une image
-void Gui::Afficher_image(const std::string titre_fenetre, cv::Mat image){
+void Gui::Afficher_image(const std::string titre_fenetre, const cv::Mat image){
 	imshow(titre_fenetre, image);
 }
 
@@ -129,7 +129,7 @@ void Gui::Cliquer(std::vector <cv::Point2f> mc){XTestFakeButtonEvent(dpy, button
 
 
 // Afficher une image et des vecteurs
-void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vector<cv::Point2f> pts_prev, vector<cv::Point2f> pts_next){
+void Gui::Ajouter_vecteurs(const std::string titre_fenetre, const cv::Mat image, vector<cv::Point2f> pts_prev, vector<cv::Point2f> pts_next){
 	cv::Mat img_show;
 	image.copyTo(img_show);
 	for(size_t i = 0; i < pts_prev.size(); i++){

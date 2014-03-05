@@ -107,7 +107,7 @@ float Blobs::Get_best_y_rel(){
 	return (float) ((2 * Get_best_y_abs() - height) / height);
 }
 double Blobs::Get_best_area() const{return aire_best;}
-void Blobs::Set_img(cv::Mat image){
+void Blobs::Set_img(const cv::Mat image){
 	image.copyTo(img_brute);
 	cv::cvtColor(img_brute, img_HSV, CV_RGB2HSV, 3);
 }

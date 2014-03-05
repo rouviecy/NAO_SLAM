@@ -22,14 +22,14 @@ void Tracking::Tracker(){
 }
 
 // Getters et Setters
-void Tracking::Set_img_prev(cv::Mat image){
+void Tracking::Set_img_prev(const cv::Mat image){
 	image.copyTo(img_prev);
 	cv::cvtColor(img_prev, img_prev_nvg, CV_RGB2GRAY, 1);
 }
-void Tracking::Set_img_next(cv::Mat image){
+void Tracking::Set_img_next(const cv::Mat image){
 	image.copyTo(img_next);
 	cv::cvtColor(img_next, img_next_nvg, CV_RGB2GRAY, 1);
 }
-void Tracking::Set_amers(std::vector <cv::Point2f> amers){this->amers = amers;}
+void Tracking::Set_amers(const std::vector <cv::Point2f> amers){this->amers = amers;}
 vector <cv::Point2f> Tracking::Get_amers() const{return amers;}
 vector <cv::Point2f> Tracking::Get_nv() const{return nv;}

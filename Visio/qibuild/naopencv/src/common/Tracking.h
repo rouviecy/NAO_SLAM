@@ -22,9 +22,9 @@ public:
 
 	Tracking(const int vitesse_max);
 
-	void Set_img_prev(cv::Mat img_prev);			// setter image N-1
-	void Set_img_next(cv::Mat img_next);			// setter image N
-	void Set_amers(std::vector <cv::Point2f> amers);	// setter des points à tracker
+	void Set_img_prev(const cv::Mat img_prev);		// setter image N-1
+	void Set_img_next(const cv::Mat img_next);		// setter image N
+	void Set_amers(const std::vector <cv::Point2f> amers);	// setter des points à tracker
 	std::vector <cv::Point2f> Get_amers() const;		// getter des points à tracker valides
 	std::vector <cv::Point2f> Get_nv() const;		// getter des points trouvés
 

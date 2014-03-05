@@ -46,6 +46,6 @@ void Reco::Update_mats(const int rayon){
 }
 
 // Getters et Setters
-void Reco::Set_blobs_1(vector <cv::Point2f> blobs_1){this->blobs_1 = blobs_1;}
-void Reco::Set_blobs_2(vector <cv::Point2f> blobs_2){this->blobs_2 = blobs_2;}
-void Reco::Set_size(cv::Size taille){this->taille = taille;}
+void Reco::Set_blobs_1(const vector <cv::Point2f> blobs_1){this->blobs_1 = blobs_1;}
+void Reco::Set_blobs_2(const vector <cv::Point2f> blobs_2){this->blobs_2 = blobs_2;}
+void Reco::Set_size(const cv::Size taille){this->taille = taille;}

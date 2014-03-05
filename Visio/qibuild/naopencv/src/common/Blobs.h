@@ -32,7 +32,7 @@ public:
 	float Get_best_y_rel();				// Guetter sur le rapport de décalage en ordonnée du plus gros blob par rapport au centre (de -1 à +1)
 	double Get_best_area() const;			// Guetter sur l'aire du plus gros blob
 
-	void Set_img(cv::Mat image);				// Setter d'image à traiter
+	void Set_img(const cv::Mat image);			// Setter d'image à traiter
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);	// Récupération des paramètres de segmentation HSV
 	void Separer();						// Séparer selon les paramètres
 	void Trouver_blobs();					// Convertir les données en liste de blobs

@@ -30,7 +30,7 @@ public:
 	void Detecter_main_gauche();	void Detecter_main_droite();
 	void Detecter_genou_gauche();	void Detecter_genou_droit();
 	void Detecter_pied_gauche();	void Detecter_pied_droit();
-	void Set_img(cv::Mat img);
+	void Set_img(const cv::Mat img);
 	void Tester_position();
 	cv::Point2f Get_Head();
 	cv::Point2f Get_T_torso();	cv::Point2f Get_B_torso();
