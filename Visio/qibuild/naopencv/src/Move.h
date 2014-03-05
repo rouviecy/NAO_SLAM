@@ -24,6 +24,7 @@ class Move{
 public:
 
 	Move(const char* ip);
+	void Reconfigurer(const bool arms, const bool enable_move);
 	void Rigide(const bool etat);
 	void Vitesse(const float x, const float y, const float theta, const float frequency);
 	void Pose(const char* posture, float vitesse);

@@ -20,6 +20,13 @@ Move::Move(const char* ip){
 	is_rigide = false;
 }
 
+// Modifier les paramètres de marche
+void Move::Reconfigurer(const bool arms, const bool enable_move){
+	if(enable_move)	{motion_proxy.moveInit();}
+	else		{motion_proxy.stopMove();}
+	motion_proxy.setWalkArmsEnabled(arms, arms);
+}
+
 // Contrôle de stiffness
 void Move::Rigide(const bool etat){
 	if(etat){
