@@ -25,6 +25,7 @@ qi_stage_lib(IMG_PROCESS)
 qi_create_lib(MOTION
 	./src/Head.h		./src/Head.cpp
 	./src/Move.h		./src/Move.cpp
+	./src/Leds.h		./src/Leds.cpp
 )
 qi_stage_lib(MOTION)
 

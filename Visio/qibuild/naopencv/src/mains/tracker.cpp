@@ -12,6 +12,7 @@
 #include "../NAO_flux.h"
 #include "../Head.h"
 #include "../Move.h"
+#include "../Leds.h"
 #include "../common/Blobs.h"
 #include "../common/struct_HSV_bound.h"
 
@@ -37,6 +38,7 @@ int main(){
 		1);		// flip ... | 0 : aucun | 1 : selon x | 2 : selon y | 3 : selon x et y |
 	Head head(IP);		// contrôle de la tête
 	Move move(IP);		// contrôle du mouvement
+	Leds leds(IP);		// contrôle des LEDs
 	Blobs blobs;		// reconnaissance de blobs
 
 	// limites de filtrage HSV
@@ -81,6 +83,10 @@ int main(){
 			if (theta > -0.3 and theta < +0.3) {theta = 0;}
 		}
 		move.Vitesse(vitesse, 0., theta, 0.8);
+
+		// contrôler les LEDs
+		if (aire > 0)	{leds.Eye(255, 0, 0, 0, 0, 0.5);}
+		else		{leds.Eye(0, 255, 0, 0, 0, 0.5);}
 
 	}
 
