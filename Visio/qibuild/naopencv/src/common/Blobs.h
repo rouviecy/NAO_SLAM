@@ -26,7 +26,10 @@ public:
 	std::vector <cv::Moments> Get_mu() const;	// Guetter sur les moments de chaque blob
 	std::vector <cv::Point2f> Get_mc() const;	// Guetter sur le centre massique de chaque blob
 	std::vector <cv::Rect> Get_rect() const;	// Guetter sur les rectangles englobants des blobs
-	cv::Point2f Get_best() const;			// Guetter sur les coordonnées du plus gros blob
+	int Get_best_x_abs();				// Guetter sur l'abscisse du plus gros blob
+	int Get_best_y_abs();				// Guetter sur l'ordonnée du plus gros blob
+	float Get_best_x_rel();				// Guetter sur le rapport de décalage en abscisse du plus gros blob par rapport au centre (de -1 à +1)
+	float Get_best_y_rel();				// Guetter sur le rapport de décalage en ordonnée du plus gros blob par rapport au centre (de -1 à +1)
 	double Get_best_area() const;			// Guetter sur l'aire du plus gros blob
 
 	void Set_img(cv::Mat image);				// Setter d'image à traiter
@@ -41,6 +44,7 @@ private:
 	int nb_dilate, nb_erode;
 	int index_best;
 	double aire_best;
+
 	cv::Mat morpho_kern;
 	cv::Scalar sep_min;
 	cv::Scalar sep_max;

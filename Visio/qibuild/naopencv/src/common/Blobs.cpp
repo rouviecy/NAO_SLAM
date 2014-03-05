@@ -96,7 +96,16 @@ cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
 vector <cv::Moments> Blobs::Get_mu() const{return mu;}
 vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
 vector <cv::Rect> Blobs::Get_rect() const{return rect;}
-cv::Point2f Blobs::Get_best() const{return mc[index_best];}
+int Blobs::Get_best_x_abs(){return (int) mc[index_best].x;}
+int Blobs::Get_best_y_abs(){return (int) mc[index_best].y;}
+float Blobs::Get_best_x_rel(){
+	int width = img_brute.size().width;
+	return (float) ((2 * Get_best_x_abs() - width) / width);
+}
+float Blobs::Get_best_y_rel(){
+	int height = img_brute.size().height;
+	return (float) ((2 * Get_best_y_abs() - height) / height);
+}
 double Blobs::Get_best_area() const{return aire_best;}
 void Blobs::Set_img(cv::Mat image){
 	image.copyTo(img_brute);
