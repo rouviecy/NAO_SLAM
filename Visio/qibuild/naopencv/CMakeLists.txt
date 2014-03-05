@@ -26,6 +26,7 @@ qi_create_lib(MOTION
 	./src/Head.h		./src/Head.cpp
 	./src/Move.h		./src/Move.cpp
 	./src/Leds.h		./src/Leds.cpp
+	./src/Speak.h		./src/Speak.cpp
 )
 qi_stage_lib(MOTION)
 
