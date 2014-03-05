@@ -22,13 +22,20 @@ qi_create_lib(IMG_PROCESS
 )
 qi_stage_lib(IMG_PROCESS)
 
+qi_create_lib(MOTION
+	./src/Head.h		./src/Head.cpp
+)
+qi_stage_lib(MOTION)
+
 # Définir les exécutables
 qi_create_bin(test ./src/mains/test.cpp)
 qi_create_bin(nao3d ./src/mains/nao3d.cpp)
+qi_create_bin(tracker ./src/mains/tracker.cpp)
 
 # Lier les librairies aux exécutables
 qi_use_lib(test IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
 qi_use_lib(nao3d IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
+qi_use_lib(tracker IMG_PROCESS MOTION ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
 
 # Liste des librairies OPENCV pour NAO : (ne pas oublier les #include <opencv2/XXX/XXX.hpp>)
 # -----> OPENCV2_CORE (structures basiques)

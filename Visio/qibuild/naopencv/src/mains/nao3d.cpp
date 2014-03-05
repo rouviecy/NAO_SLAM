@@ -1,5 +1,5 @@
 /*
- * @(#)		main.cpp
+ * @(#)		nao3d.cpp
  * @version	2.0
  * @autor	C. Rouvière
  */
@@ -30,7 +30,7 @@ int main(){
 		key = flux.Get_key();
 		flux.Update();
 
-		body.Set_img(flux.Get_cam_top());
+		body.Set_img(flux.Get_next_top());
 		body.Detecter_tete();
 		body.Detecter_torse_haut();		body.Detecter_torse_bas();
 		body.Detecter_epaule_gauche();		body.Detecter_epaule_droite();
