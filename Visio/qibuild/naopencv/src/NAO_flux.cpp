@@ -6,19 +6,18 @@ using namespace AL;
 // Constructeurs
 NAO_flux::NAO_flux(){Init(1, 40);}
 NAO_flux::NAO_flux(const int resolution, const int delais){Init(resolution, delais);}
-NAO_flux::NAO_flux(const char* ip, const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
-	Init(ip, resolution, delais, code_couleur, lissage, flip);
+NAO_flux::NAO_flux(const char* ip, const int resolution, const int delais, const int lissage, const int flip){
+	Init(ip, resolution, delais, lissage, flip);
 }
 
 // Initialisations transitoires
 void NAO_flux::Init(const int resolution, const int delais){
-	Init("127.0.0.1", resolution, delais, -1, -1, 0);
+	Init("127.0.0.1", resolution, delais, -1, 0);
 }
 
 // Initialisation complète de la classe (automatique à la construction)
-void NAO_flux::Init(const char* ip, const int resolution, const int delais, const int code_couleur, const int lissage, const int flip){
+void NAO_flux::Init(const char* ip, const int resolution, const int delais, const int lissage, const int flip){
 	this->delais =		delais;
-	this->code_couleur =	code_couleur;
 	this->lissage =		lissage;
 	this->flip =		flip;
 	if(lissage > 1){flou_kern = cv::Size(lissage, lissage);}

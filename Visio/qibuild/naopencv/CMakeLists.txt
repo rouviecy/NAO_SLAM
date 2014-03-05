@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Aldebaran Robotics
 
 cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
-project(adv_process)
+project(naopencv)
 
 # Ajouter la framework qibuild
 find_package(qibuild)
@@ -23,10 +23,12 @@ qi_create_lib(IMG_PROCESS
 qi_stage_lib(IMG_PROCESS)
 
 # Définir les exécutables
-qi_create_bin(main ./src/mains/main.cpp)
+qi_create_bin(test ./src/mains/test.cpp)
+qi_create_bin(nao3d ./src/mains/nao3d.cpp)
 
 # Lier les librairies aux exécutables
-qi_use_lib(main IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
+qi_use_lib(test IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
+qi_use_lib(nao3d IMG_PROCESS ALCOMMON ALVISION OPENCV2_CORE OPENCV2_IMGPROC OPENCV2_CALIB3D OPENCV2_VIDEO)
 
 # Liste des librairies OPENCV pour NAO : (ne pas oublier les #include <opencv2/XXX/XXX.hpp>)
 # -----> OPENCV2_CORE (structures basiques)

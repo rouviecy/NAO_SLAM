@@ -1,6 +1,6 @@
 /*
  * @(#)		NAO_flux.h
- * @version	1.0
+ * @version	2.0
  * @autor	C. Rouvière
  */
 
@@ -38,11 +38,10 @@ public:
 	~NAO_flux();
 	NAO_flux(const int resolution, const int delais);
 	NAO_flux(	const char* ip,		// adresse IP du NAO ("127.0.0.1" pour caméras locales)
-			const int resolution,	// 0 : QQVGA (160*120) | 1 : QVGA (320*240) | 2 : VGA (640*480) | 3 : 4VGA (1280*960)
+			const int resolution,	// | 0 : QQVGA (160*120) | 1 : QVGA (320*240) | 2 : VGA (640*480) | 3 : 4VGA (1280*960) |
 			const int delais,	// delais entre deux images
-			const int code_couleur,	// changement espace couleurs
 			const int lissage,	// flou de force lissage
-			const int flip);	// miroir (0 : aucun | 1 : selon x | 2 : selon y | 3 : selon x et y)
+			const int flip);	// miroir (| 0 : aucun | 1 : selon x | 2 : selon y | 3 : selon x et y |)
 
 	void Update();			// mettre à jour les images
 	char Get_key() const;		// getter sur la clé
@@ -56,7 +55,6 @@ public:
 private:
 
 	char key;			// clé de contrôle d'exécution
-	int code_couleur;		// changement espace couleurs
 	int delais;			// temps d'attente entre deux images (en millisecondes)
 	int lissage;			// force du flou de lissage
 	int flip;			// miroir
@@ -72,7 +70,7 @@ private:
 	std::string clientName;
 
 	void Init(const int num_device, const int delais);
-	void Init(const char* ip, const int num_device, const int delais, const int code_couleur, const int lissage, const int flip);
+	void Init(const char* ip, const int num_device, const int delais, const int lissage, const int flip);
 	void Attendre(const int millis);
 	void Sauvegarder();
 	void Recuperer();
