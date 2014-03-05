@@ -54,6 +54,8 @@ void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
 
 // Séparer les blobs
 void Blobs::Trouver_blobs(){
+	int nb_blobs = 0;
+	index_best = 0; aire_best = 0;
 	img_blobs = cv::Mat::zeros(img_sep.size(), CV_8UC3);
 	cv::findContours(img_sep, liste_blobs, hierarchie_blobs, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 	if(hierarchie_blobs.size() <= 0){return;}
@@ -65,6 +67,11 @@ void Blobs::Trouver_blobs(){
 		rect_.push_back(cv::boundingRect(liste_blobs[i]));
 		double aire = cv::contourArea(liste_blobs[i], false);
 		if(aire < seuil_taille_blobs){continue;}
+		if(aire > aire_best){
+			aire_best = aire;
+			index_best = nb_blobs;
+		}
+		nb_blobs++;
 		mu.push_back(mu_[i]);
 		mc.push_back(mc_[i]);
 		rect.push_back(rect_[i]);
@@ -89,6 +96,8 @@ cv::Mat Blobs::Get_img_blobs() const{return img_blobs;}
 vector <cv::Moments> Blobs::Get_mu() const{return mu;}
 vector <cv::Point2f> Blobs::Get_mc() const{return mc;}
 vector <cv::Rect> Blobs::Get_rect() const{return rect;}
+cv::Point2f Blobs::Get_best() const{return mc[index_best];}
+double Blobs::Get_best_area() const{return aire_best;}
 void Blobs::Set_img(cv::Mat image){
 	image.copyTo(img_brute);
 	cv::cvtColor(img_brute, img_HSV, CV_RGB2HSV, 3);

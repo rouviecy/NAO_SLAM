@@ -26,6 +26,8 @@ public:
 	std::vector <cv::Moments> Get_mu() const;	// Guetter sur les moments de chaque blob
 	std::vector <cv::Point2f> Get_mc() const;	// Guetter sur le centre massique de chaque blob
 	std::vector <cv::Rect> Get_rect() const;	// Guetter sur les rectangles englobants des blobs
+	cv::Point2f Get_best() const;			// Guetter sur les coordonnées du plus gros blob
+	double Get_best_area() const;			// Guetter sur l'aire du plus gros blob
 
 	void Set_img(cv::Mat image);				// Setter d'image à traiter
 	void Definir_limites_separation(STRUCT_HSV_BOUND *hsv);	// Récupération des paramètres de segmentation HSV
@@ -36,16 +38,18 @@ public:
 private:
 
 	double seuil_taille_blobs;
+	int nb_dilate, nb_erode;
+	int index_best;
+	double aire_best;
 	cv::Mat morpho_kern;
+	cv::Scalar sep_min;
+	cv::Scalar sep_max;
+	cv::Scalar rouge, bleu;
 
 	cv::Mat img_brute;
 	cv::Mat img_HSV;
 	cv::Mat img_sep;
 	cv::Mat img_blobs;
-	cv::Scalar sep_min;
-	cv::Scalar sep_max;
-	int nb_dilate, nb_erode;
-	cv::Scalar rouge, bleu;
 
 	std::vector <std::vector <cv::Point2i> > liste_blobs;
 	std::vector <cv::Vec4i> hierarchie_blobs;
