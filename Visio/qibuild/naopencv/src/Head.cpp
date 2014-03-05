@@ -9,7 +9,7 @@ Head::Head(const char* ip){
 	tete_y = "HeadPitch";
 	try{
 		proxy = ALMotionProxy(ip, 9559);
-	}catch(const AL::ALError& e){
+	}catch(const ALError& e){
 		std::cerr << "Caught exception: " << e.what() << std::endl;
 		exit(1);
 	}
