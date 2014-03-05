@@ -17,41 +17,19 @@ Leds::Leds(const char* ip){
 // Liste des LEDs
 void Leds::Liste(){
 
-	name_eye[0][0] = "FaceLeds";
-	name_eye[0][1] = "FaceLed1";
-	name_eye[0][2] = "FaceLed2";
-	name_eye[0][3] = "FaceLed3";
-	name_eye[0][4] = "FaceLed4";
-	name_eye[0][5] = "FaceLed5";
-	name_eye[0][6] = "FaceLed6";
-	name_eye[0][7] = "FaceLed7";
-	name_eye[0][8] = "FaceLed8";
-	name_eye[1][0] = "LeftFaceLeds";
-	name_eye[1][1] = "LeftFaceLed1";
-	name_eye[1][2] = "LeftFaceLed2";
-	name_eye[1][3] = "LeftFaceLed3";
-	name_eye[1][4] = "LeftFaceLed4";
-	name_eye[1][5] = "LeftFaceLed5";
-	name_eye[1][6] = "LeftFaceLed6";
-	name_eye[1][7] = "LeftFaceLed7";
-	name_eye[1][8] = "LeftFaceLed8";
-	name_eye[2][0] = "RightFaceLeds";
-	name_eye[2][1] = "RightFaceLed1";
-	name_eye[2][2] = "RightFaceLed2";
-	name_eye[2][3] = "RightFaceLed3";
-	name_eye[2][4] = "RightFaceLed4";
-	name_eye[2][5] = "RightFaceLed5";
-	name_eye[2][6] = "RightFaceLed6";
-	name_eye[2][7] = "RightFaceLed7";
-	name_eye[2][8] = "RightFaceLed8";
+	name_eye[0][0] = "FaceLeds";	name_eye[1][0] = "LeftFaceLeds";	name_eye[2][0] = "RightFaceLeds";
+	name_eye[0][1] = "FaceLed1";	name_eye[1][1] = "LeftFaceLed1";	name_eye[2][1] = "RightFaceLed1";
+	name_eye[0][2] = "FaceLed2";	name_eye[1][2] = "LeftFaceLed2";	name_eye[2][2] = "RightFaceLed2";
+	name_eye[0][3] = "FaceLed3";	name_eye[1][3] = "LeftFaceLed3";	name_eye[2][3] = "RightFaceLed3";
+	name_eye[0][4] = "FaceLed4";	name_eye[1][4] = "LeftFaceLed4";	name_eye[2][4] = "RightFaceLed4";
+	name_eye[0][5] = "FaceLed5";	name_eye[1][5] = "LeftFaceLed5";	name_eye[2][5] = "RightFaceLed5";
+	name_eye[0][6] = "FaceLed6";	name_eye[1][6] = "LeftFaceLed6";	name_eye[2][6] = "RightFaceLed6";
+	name_eye[0][7] = "FaceLed7";	name_eye[1][7] = "LeftFaceLed7";	name_eye[2][7] = "RightFaceLed7";
+	name_eye[0][8] = "FaceLed8";	name_eye[1][8] = "LeftFaceLed8";	name_eye[2][8] = "RightFaceLed8";
 
-	name_ear[0] = "EarLeds";
-	name_ear[1] = "LeftEarLeds";
-	name_ear[2] = "RightEarLeds";
+	name_ear[0] = "EarLeds";	name_ear[1] = "LeftEarLeds";		name_ear[2] = "RightEarLeds";
 
-	name_brain[0] = "BrainLeds";
-	name_brain[1] = "BrainLedsLeft";
-	name_brain[2] = "BrainLedsRight";
+	name_brain[0] = "BrainLeds";	name_brain[1] = "BrainLedsLeft";	name_brain[2] = "BrainLedsRight";
 
 }
 
