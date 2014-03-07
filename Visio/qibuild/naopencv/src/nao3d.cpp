@@ -9,8 +9,8 @@
  *	- Reconstitution 3D du corps d'un NAO
  */
 
-#include "../NAO_flux.h"
-#include "../common/Body.h"
+#include "NAO/NAO_flux.h"
+#include "images/Body.h"
 
 using namespace std;
 

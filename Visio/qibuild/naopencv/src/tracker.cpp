@@ -9,12 +9,12 @@
  *	- Suivi d'un objet par segmentation de couleurs
  */
 
-#include "../NAO_flux.h"
-#include "../Head.h"
-#include "../Move.h"
-#include "../Leds.h"
-#include "../common/Blobs.h"
-#include "../common/struct_HSV_bound.h"
+#include "NAO/NAO_flux.h"
+#include "NAO/Head.h"
+#include "NAO/Move.h"
+#include "NAO/Leds.h"
+#include "images/Blobs.h"
+#include "images/struct_HSV_bound.h"
 
 #define	IP	"127.0.0.1"
 

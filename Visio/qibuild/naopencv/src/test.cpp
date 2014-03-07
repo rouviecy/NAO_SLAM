@@ -1,4 +1,4 @@
-#include "../NAO_flux.h"
+#include "NAO/NAO_flux.h"
 
 using namespace std;
 
