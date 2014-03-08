@@ -1,6 +1,6 @@
 /*
  * @(#)		Tracking.h
- * @version	1.3
+ * @version	1.4
  * @autor	C. Rouvière
  */
 
@@ -27,12 +27,14 @@ public:
 	std::vector <cv::Point2f> Get_amers() const;		// getter des points à tracker valides
 	std::vector <cv::Point2f> Get_nv() const;		// getter des points trouvés
 
-	void Tracker();						// trouver les points à tracker dans l'image suivante
+	void GoodFeatures(const int nb_max_amers);		// générer des amers intéressants
+	bool Tracker();						// trouver les points à tracker dans l'image suivante
 
 
 private:
 
 	int vitesse_max;
+	cv::TermCriteria critere;
 
 	cv::Mat img_prev;			// image N-1	HSV
 	cv::Mat img_next;			// image N	HSV

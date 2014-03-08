@@ -12,7 +12,6 @@
 #include "../Gui.h"
 #include "../Flux_cam.h"
 #include "../Blobs.h"
-#include "../Tracking.h"
 #include "../Reco.h"
 
 using namespace std;
