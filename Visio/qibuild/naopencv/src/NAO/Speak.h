@@ -22,8 +22,11 @@ class Speak{
 
 public:
 
-	Speak(const char* ip, const bool english);
-	void Say(const char* text);
+	Speak(				// Constructeur
+		const char* ip,		// IP du robot concerné
+		const bool english);	// | true : anglais | false : français |
+
+	void Say(const char* text);	// Dire un texte
 
 private:
 

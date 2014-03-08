@@ -17,6 +17,12 @@ Move::Move(const char* ip){
 		std::cerr << "Caught exception: " << e.what() << std::endl;
 		exit(1);
 	}
+	try{
+		pose_proxy = ALRobotPoseProxy(ip, 9559);
+	}catch(const AL::ALError& e){
+		std::cerr << "Caught exception: " << e.what() << std::endl;
+		exit(1);
+	}
 	is_rigide = false;
 }
 
@@ -51,3 +57,6 @@ void Move::Pose(const char* posture, float vitesse){
 	if(!is_rigide){Rigide(true);}
 	posture_proxy.goToPosture(posture, vitesse);
 }
+
+// Getter sur la posture
+string Move::Get_pose() {return pose_proxy.getActualPoseAndTime()[0];}

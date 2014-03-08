@@ -22,7 +22,8 @@ class Leds{
 
 public:
 
-	Leds(const char* ip);
+	Leds(const char* ip);		// constructeur ave IP du robot concerné
+
 	void All(			// contrôle de toutes les LEDs
 		const int R,		// composante rouge (0 à 255)
 		const int G,		// composante verte (0 à 255)

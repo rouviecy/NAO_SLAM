@@ -22,8 +22,9 @@ class Head{
 
 public:
 
-	Head(const char* ip);
-	void Rigide(bool etat);
+	Head(const char* ip);				// Constructeur avec IP du robot concerné
+
+	void Rigide(bool etat);				// Modifier la stiffness
 	void Target_x_abs(float x_rad, float duree);	// Atteindre la position en abscisse pour la tête (radians)
 	void Target_y_abs(float y_rad, float duree);	// Atteindre la position en ordonnée pour la tête (radians)
 	void Target_dx_rel(float dx_rad, float duree);	// Déplacer la tête en abscisse (delta radians)
