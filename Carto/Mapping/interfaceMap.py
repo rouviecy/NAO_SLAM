@@ -52,11 +52,11 @@ class Interface(object):
 	def getRobotOrientation(self, robotID):
 		return self.listRobot[robotID].Orient
 	def saveMap(self):
-		f = ('MapSaved', 'w')
+		f = open('MapSaved', 'w')
 		for i in range(self.Mamap.lines):
 			for j in range(self.Mamap.rows):
-				f.write(self.Mamap.mapMat[i,j])
+				f.write(str(self.Mamap.mapMat[i,j]))
 				f.write(' ')
 			f.write('\n')
 		f.close
-
+		print("Carte sauvegardee')
