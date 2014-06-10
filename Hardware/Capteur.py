@@ -74,12 +74,30 @@ def Temperature():
 ## retourne si un bumper est presse
 def bumperPressed():
 
-        LeftBump = [(memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Left/Sensor/Value")==1.0) , (memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Right/Sensor/Value")==1.0)]
-        RightBump= [(memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Left/Sensor/Value")==1.0) , (memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Right/Sensor/Value")==1.0)]
-        BumpMat  = (LeftBump[0] | LeftBump[1] | RightBump[0] | RightBump[1])
+    LeftBump = [(memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Left/Sensor/Value")==1.0) , (memoryProxy.getData("Device/SubDeviceList/LFoot/Bumper/Right/Sensor/Value")==1.0)]
+    RightBump= [(memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Left/Sensor/Value")==1.0) , (memoryProxy.getData("Device/SubDeviceList/RFoot/Bumper/Right/Sensor/Value")==1.0)]
+    BumpMat  = (LeftBump[0] | LeftBump[1] | RightBump[0] | RightBump[1])
 
-        
-        return BumpMat
+    
+    return BumpMat
+
+# retourne si les boutons tactiles de la tete sont touches
+def headTouched():
+	frontButton = (memoryProxy.getData("Device/SubDeviceList/Head/Touch/Front")
+	middleButton = (memoryProxy.getData("Device/SubDeviceList/Head/Touch/Middle")
+	rearButton = (memoryProxy.getData("Device/SubDeviceList/Head/Touch/Rear")
+	headMat = (frontButton | middleButton | rearButton)
+	
+	return headMat
+#retourne les valeurs de la centrale inertielle
+def getInertialData():
+	accelerometers = [memoryProxy.getData("Device/SubDeviceList/InertialSensor/AccX/Sensor/Value"), memoryProxy.getData("Device/SubDeviceList/InertialSensor/AccY/Sensor/Value"), memoryProxy.getData("Device/SubDeviceList/InertialSensor/AccZ/Sensor/Value")]
+	gyrometers = [memoryProxy.getData("Device/SubDeviceList/InertialSensor/GyrRef/Sensor/Value"),memoryProxy.getData("Device/SubDeviceList/InertialSensor/GyrX/Sensor/Value"),memoryProxy.getData("Device/SubDeviceList/InertialSensor/GyrY/Sensor/Value")]
+	angles = [memoryProxy.getData("Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value"), memoryProxy.getData("Device/SubDeviceList/InertialSensor/AngleY/Sensor/Value"), 0]
+
+	inertialMat = [ accelerometers | gyrometers | angles ]
+	
+	return inertialMat
 
 
 if __name__ == "__main__":
@@ -89,3 +107,5 @@ if __name__ == "__main__":
         print(Temperature())
         print(bumperPressed())
         print(piezo())
+    	print(headTouched())
+    	print(getInertialData())
