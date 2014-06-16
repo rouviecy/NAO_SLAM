@@ -88,8 +88,8 @@ bstart = Button(window, text = 'START', command = start, fg = 'white', bg = 'bla
 bstart.place(x = 10, y = hauteur + 20)
 
 # creation du bouton d'arret du programme
-bstart = Button(window, text = 'STOP', command = stop, fg = 'white', bg = 'black')
-bstart.place(x = 100, y = hauteur + 20)
+bstop = Button(window, text = 'STOP', command = stop, fg = 'white', bg = 'black')
+bstop.place(x = 100, y = hauteur + 20)
 
 while(1):
 	window.minsize(1000,660)
