@@ -25,6 +25,9 @@ def start() :
 def stop() :
 	showinfo('Arrêt', 'Le programme a été arrêté')
 
+def tete() :
+	showerror('Bouge ta tête !', 'Non, je ne bougerai pas ma tête.')
+
 # fonction de mise a jour des donnees de NAO
 jaugeBatterie = 100
 def update() :
@@ -78,8 +81,13 @@ bstart = Button(window, text = 'START', command = start, fg = 'white', bg = 'bla
 bstart.place(x = 10, y = hauteur + 20)
 
 # creation du bouton d'arret du programme
-bstart = Button(window, text = 'STOP', command = stop, fg = 'white', bg = 'black')
-bstart.place(x = 100, y = hauteur + 20)
+bstop = Button(window, text = 'STOP', command = stop, fg = 'white', bg = 'black')
+bstop.place(x = 100, y = hauteur + 20)
+
+# creation du bouton de rotation capitale
+bstop = Button(window, text = 'BOUGE TA TÊTE !', command = tete, fg = 'white', bg = 'black')
+bstop.place(x = 190, y = hauteur + 20)
+
 
 while(1):
 	window.minsize(900,660)
