@@ -85,8 +85,8 @@ bstop = Button(window, text = 'STOP', command = stop, fg = 'white', bg = 'black'
 bstop.place(x = 100, y = hauteur + 20)
 
 # creation du bouton de rotation capitale
-bstop = Button(window, text = 'BOUGE TA TÊTE !', command = tete, fg = 'white', bg = 'black')
-bstop.place(x = 190, y = hauteur + 20)
+bTaTete = Button(window, text = 'BOUGE TA TÊTE !', command = tete, fg = 'white', bg = 'black')
+bTaTete.place(x = 190, y = hauteur + 20)
 
 
 while(1):
