@@ -30,8 +30,8 @@ void Transfo::Appliquer_wrap2(){
 	cv::Mat M = cv::getPerspectiveTransform(pts_in, pts_out);
 	cv::warpPerspective(img_brute, img_wrap, M, img_brute.size());
 }
-//void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie = cv::Size(0, 0)){
-void Transfo::Appliquer_wrap(size_t NB){
+
+void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie){
 	center.clear();
 	if(deja == false){img_brute.copyTo(img_wrap); deja = true;}
 	if(pts_input.size() != NB){return;}
@@ -57,14 +57,15 @@ void Transfo::Appliquer_wrap(size_t NB){
 		pts1.push_back(cv::Point2f(tab_position_bords[j][0], tab_position_bords[j][1]));
 		pts2.push_back(pts_input[tab_index[j]]);
 	}
-/*	if(taille_sortie != cv::Size(0, 0)){
+	if(taille_sortie != cv::Size(0, 0)){
 		pts1[1].x = taille_sortie.width;
 		pts1[3].x = taille_sortie.width;
 		pts1[2].y = taille_sortie.height;
 		pts1[3].y = taille_sortie.height;
 	}
-*/	cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
-	cv::warpPerspective(img_brute, img_wrap, M, img_brute.size());
+	else{taille_sortie = img_brute.size();}
+	cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
+	cv::warpPerspective(img_brute, img_wrap, M, taille_sortie);
 	int index_centre = 10 - tab_index[0] - tab_index[1] - tab_index[2] - tab_index[3];
 	vector <cv::Point2f> tempo;
 	tempo.push_back(pts_input[index_centre]);

@@ -55,7 +55,7 @@ flux.Get_cam().copyTo(flou);
 				// transformation
 				transfo.Set_img(flux.Get_cam());
 				transfo.Set_pts_redressement(quadrille);
-				transfo.Appliquer_wrap(4);
+				transfo.Appliquer_wrap(4, cv::Size(50, 50));
 				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", transfo.Get_img_wrap());
 			}
 			key = 'a';
