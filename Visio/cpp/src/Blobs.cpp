@@ -33,7 +33,7 @@ void Blobs::Separer(){
 	else{
 		cv::Scalar sep_180(180, sep_max[1], sep_max[2]);
 		cv::Scalar sep_0(0, sep_min[1], sep_min[2]);
-		cv::Scalar sep_min_rectif(sep_min[0] - 180, sep_min[1], sep_min[2]);
+		cv::Scalar sep_min_rectif(sep_min[0], sep_min[1], sep_min[2]);
 		cv::Scalar sep_max_rectif(sep_max[0] - 180, sep_max[1], sep_max[2]);
 		cv::Mat img_low, img_high;
 		inRange(img_HSV, sep_0, sep_max_rectif, img_low);
