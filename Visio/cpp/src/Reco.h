@@ -53,7 +53,7 @@ private:
 	cv::Point2f Intersection(cv::Vec4i a, cv::Vec4i b, int coeff) const;
 	bool Confondus(cv::Vec4i a, cv::Vec4i b) const;
 	void Update_mats(const int rayon);
-	std::vector <int> Liste_edges_int(cv::Subdiv2D s, std::vector <cv::Point2f> vertexes);
+	std::vector <int> Liste_edges_int(cv::Subdiv2D s, int max_x, int max_y, cv::Mat image);
 
 };
 

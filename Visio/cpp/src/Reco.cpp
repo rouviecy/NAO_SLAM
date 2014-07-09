@@ -1,4 +1,5 @@
 #include "Reco.h"
+#include <iostream>
 
 using namespace std;
 
@@ -107,7 +108,7 @@ void Reco::Detecter_quadrillage(){
 
 	// Triangulation de Delaunay
 	subdiv.insert(coins);
-	vector <int> edges = Liste_edges_int(subdiv, coins);
+	vector <int> edges = Liste_edges_int(subdiv, max_x, max_y, image_quadrillage);
 	for(size_t i = 0; i < edges.size(); i++){
 		int e = edges[i];
 		cv::Point2f B, D;
@@ -132,6 +133,13 @@ void Reco::Detecter_quadrillage(){
 			ok = false;
 			for(size_t k = 0; k < lignes.size(); k++){
 				if(Confondus(lignes[k], segment[j])){ok = true; break;}
+			}
+		}
+		if(!ok){continue;}
+		cv::Point2f sommets[4] = {A, B, C, D};
+		for(int j = 0; j < 4; j++){
+			for(int k = j + 1; k < 4; k++){
+				if(Utils::Distance_carree(sommets[j].x, sommets[j].y, sommets[k].x, sommets[k].y) < 2000){ok = false;}
 			}
 		}
 		if(ok){
@@ -184,17 +192,25 @@ cv::Point2f Reco::Intersection(cv::Vec4i a, cv::Vec4i b, int coeff) const{
 }
 
 // Extraire d'une subdivision la liste des index des edges
-vector <int> Reco::Liste_edges_int(cv::Subdiv2D s, vector <cv::Point2f> vertexes){
+vector <int> Reco::Liste_edges_int(cv::Subdiv2D s, int max_x, int max_y, cv::Mat image){
 	std::set <int> resultat_set;
-	for(size_t i = 0; i < vertexes.size(); i++){
+	vector <cv::Vec6f> triangles;
+	s.getTriangleList(triangles);
+	for(size_t i = 0; i < triangles.size(); i++){
+		cv::Point2f pt1(triangles[i][0], triangles[i][1]);
+		cv::Point2f pt2(triangles[i][2], triangles[i][3]);
+		cv::Point2f pt3(triangles[i][4], triangles[i][5]);
+		cv::Point2f bary = (1./3) * (pt1 + pt2 + pt3);
+		if(!Utils::In_img(bary, max_x, max_y)){continue;}
 		int e0 = 0, vertex = 0;
-		if(s.locate(vertexes[i], e0, vertex) != CV_PTLOC_VERTEX){continue;}
-		s.getVertex(vertex, &e0);
+		s.locate(bary, e0, vertex);
+		resultat_set.insert(e0);
 		int e = e0;
 		do{
+			e = s.getEdge(e, cv::Subdiv2D::NEXT_AROUND_RIGHT);
 			resultat_set.insert(e);
-			e = s.getEdge(e, cv::Subdiv2D::NEXT_AROUND_LEFT);
 		}while(e != e0);
+
 	}
 	vector <int> resultat_vector;
 	for(std::set<int>::iterator it = resultat_set.begin(); it != resultat_set.end(); ++it){
