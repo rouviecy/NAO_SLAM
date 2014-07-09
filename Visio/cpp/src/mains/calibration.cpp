@@ -1,5 +1,5 @@
 /*
- * @(#)		main.cpp
+ * @(#)		calibration.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */

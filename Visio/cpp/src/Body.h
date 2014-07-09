@@ -1,11 +1,15 @@
 /*
  * @(#)		Body.h
- * @version	1.3
+ * @version	1.4
  * @autor	C. Rouvière
  */
 
 /**
  * Classe de reconstruction de corps
+ * 	Utilisation :
+ * 		- passer l'image input via "Set_img"
+ * 		- détecter les membres voulus via les "Detecter_*"
+ * 		- récupérer les coordonnées des membres via les guetters
  */
 
 #ifndef BODY
@@ -31,7 +35,6 @@ public:
 	void Detecter_genou_gauche();	void Detecter_genou_droit();
 	void Detecter_pied_gauche();	void Detecter_pied_droit();
 	void Set_img(cv::Mat img);
-	void Tester_position();
 	cv::Point2f Get_Head();
 	cv::Point2f Get_T_torso();	cv::Point2f Get_B_torso();
 	cv::Point2f Get_L_shoulder();	cv::Point2f Get_R_shoulder();
@@ -39,7 +42,6 @@ public:
 	cv::Point2f Get_L_hand();	cv::Point2f Get_R_hand();
 	cv::Point2f Get_L_knee();	cv::Point2f Get_R_knee();
 	cv::Point2f Get_L_foot();	cv::Point2f Get_R_foot();
-	int Get_posture();
 
 private:
 
@@ -59,10 +61,6 @@ private:
 	STRUCT_HSV_BOUND *hsv_L_hand[2];	STRUCT_HSV_BOUND *hsv_R_hand[2];
 	STRUCT_HSV_BOUND *hsv_L_knee[2];	STRUCT_HSV_BOUND *hsv_R_knee[2];
 	STRUCT_HSV_BOUND *hsv_L_foot[2];	STRUCT_HSV_BOUND *hsv_R_foot[2];
-
-	int posture; // 0 : inconnu | 1 : assis | 2 : debout
-
-	int Evaluer_angle(cv::Point2f pt1, cv::Point2f pt2, cv::Point2f pt3);
 
 	cv::Mat img;
 	cv::Point2f Tete, T_torso, B_torso, L_shoulder, R_shoulder, L_elbow, R_elbow, L_hand, R_hand, L_knee, R_knee, L_foot, R_foot;

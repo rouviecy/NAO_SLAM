@@ -1,5 +1,5 @@
 /*
- * @(#)		main.cpp
+ * @(#)		flot_optique.cpp
  * @version	1.0
  * @autor	C. Rouvière
  */

@@ -159,12 +159,6 @@ void Body::Detecter_pied_droit(){
 	if(liste.size() > 0){R_foot = liste[0];}
 }
 
-// Évaluer un angle sans transformation perspective (en radians)
-int Body::Evaluer_angle(cv::Point2f pt1, cv::Point2f pt2, cv::Point2f pt3){
-// TODO : utiliser trigo
-	return 1;
-}
-
 // Getters et Setters
 void		Body::Set_img(cv::Mat img)	{this->img = img;}
 cv::Point2f	Body::Get_Head()		{return Tete;}

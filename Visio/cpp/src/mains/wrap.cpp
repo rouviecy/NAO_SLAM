@@ -1,12 +1,12 @@
 /*
- * @(#)		main.cpp
+ * @(#)		wrap.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Contrôle de la souris via plusieurs amers
+ *	- Appliquer une transformation perspective selon des paramètres sélectionnés par trackbars
  */
 
 #include "../Gui.h"

@@ -1,12 +1,13 @@
 /*
- * @(#)		main.cpp
+ * @(#)		nao_pseudo3d_and_tracking.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Détection et reliage de blobs
+ *	- Voir nao_pseudo3d
+ * 	- Ajout de la séparation des NAOs selon ce qui est statique et ce qui est dynamique
  */
 
 #include <opencv/cv.h>

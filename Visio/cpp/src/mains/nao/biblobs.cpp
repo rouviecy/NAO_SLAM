@@ -1,5 +1,5 @@
 /*
- * @(#)		main.cpp
+ * @(#)		biblobs.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */

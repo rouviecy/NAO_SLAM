@@ -1,5 +1,5 @@
 /*
- * @(#)		main.cpp
+ * @(#)		multi_control.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */

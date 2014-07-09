@@ -1,6 +1,6 @@
 /*
  * @(#)		struct_HSV_bound.h
- * @version	1.3
+ * @version	1.4
  * @autor	C. Rouvière
  */
 
@@ -8,7 +8,6 @@
  * Structure représentant des limites de filtrage HSV
  */
 
-// On charge ce header qu'une seule fois
 #ifndef DEF_HSV_BOUND
 #define DEF_HSV_BOUND
 

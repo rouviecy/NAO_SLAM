@@ -6,7 +6,7 @@
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Contrôle de la souris avec un pointeur unique
+ *	- Simple séparateur HSV (passer en argument le numéro de caméra dans /dev/video[X]
  */
 
 #include "../../Gui.h"
@@ -18,11 +18,11 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
-	char key = 'a';				// clef de contrôle du programme
-	Flux_cam flux(atoi(argv[1]), 40, 1, 3, 1);		// initialisation du flux webcam (/dev/video0)
-	Blobs blobs;				// séparateur de blobs
-	Tracking tracking(500);			// suivi de blobs
-	Gui gui;				// IHM
+	char key = 'a';					// clef de contrôle du programme
+	Flux_cam flux(atoi(argv[1]), 40, 1, 3, 1);	// initialisation du flux webcam (/dev/video0)
+	Blobs blobs;					// séparateur de blobs
+	Tracking tracking(500);				// suivi de blobs
+	Gui gui;					// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur_mouse");
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter

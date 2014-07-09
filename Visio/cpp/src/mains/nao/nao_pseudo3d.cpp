@@ -1,12 +1,12 @@
 /*
- * @(#)		main.cpp
+ * @(#)		nao_pseudo3d.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Détection et reliage de blobs
+ *	- Détection et reliage de blobs : détection d'un nao avec une seule couleur
  */
 
 #include <opencv/cv.h>

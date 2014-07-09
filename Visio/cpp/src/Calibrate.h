@@ -1,11 +1,16 @@
 /*
  * @(#)		Calibrate.h
- * @version	1.3
+ * @version	1.4
  * @autor	C. Rouvière
  */
 
 /**
  * Classe permettant de calibrer une caméra
+ * 	Utilisation :
+ * 		- instancier en envoyant les dimensions de l'échiquier à détecter
+ * 		- envoyer un certain nombre d'images de la caméra non-calibrée via "Ajouter_img_calib"
+ * 		- lancer le calcul de calibration via "Calibrer" en envoyant la taille des imagesà obtenir
+ * 		- passer des images non-calibrées en input via "Set_img", puis récupérer les versions calibrées via "Get_img"
  */
 
 #ifndef CALIBRATE
@@ -37,7 +42,6 @@ private:
 	cv::Mat img, img_calib;
 	cv::Mat mat_cam;
 	cv::Mat dist_coeffs;
-
 
 };
 

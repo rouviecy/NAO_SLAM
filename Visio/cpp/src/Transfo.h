@@ -1,6 +1,6 @@
 /*
  * @(#)		Transfo.h
- * @version	1.3
+ * @version	1.4
  * @autor	C. Rouvière
  */
 
@@ -28,7 +28,6 @@ public:
 
 	void Definir_parametres_transformation(STRUCT_WRAP_BOUND *wrap);
 	void Appliquer_wrap(size_t NB);
-//	void Appliquer_wrap(size_t NB, cv::Size taille_sortie);		// Appliquer une transformation perspective sur les NB points
 	void Appliquer_wrap2();
 
 

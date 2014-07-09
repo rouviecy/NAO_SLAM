@@ -1,12 +1,13 @@
 /*
- * @(#)		main.cpp
+ * @(#)		nao_pseudo3d_equi.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Détection et reliage de blobs
+ *	- Voir nao_pseudo3d
+ * 	- Visualisation des blobs uniquement par leur taille et leur position (pas leur forme)
  */
 
 #include <opencv/cv.h>

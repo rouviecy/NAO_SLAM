@@ -1,12 +1,12 @@
 /*
- * @(#)		main.cpp
+ * @(#)		mono_control_click.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Contrôle de la souris avec un pointeur unique et clic
+ *	- Contrôle de la souris avec un pointeur unique et clic, avec deux blobs de couleurs différentes
  */
 
 #include "../../Gui.h"

@@ -1,12 +1,12 @@
 /*
- * @(#)		main.cpp
+ * @(#)		nao3d.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Reconstitution 3D du corps d'un NAO
+ *	- Reconstitution 3D du corps d'un NAO, à partir des patchs bicolores
  */
 
 #include "../../Gui.h"

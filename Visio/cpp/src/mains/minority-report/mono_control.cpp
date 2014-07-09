@@ -1,12 +1,12 @@
 /*
- * @(#)		main.cpp
+ * @(#)		mono_control.cpp
  * @version	1.4
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Contrôle de la souris avec un pointeur unique
+ *	- Contrôle de la souris avec un pointeur unique, et un seul blob
  */
 
 #include "../../Gui.h"

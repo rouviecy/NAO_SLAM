@@ -1,6 +1,6 @@
 /*
  * @(#)		struct_wrap_bound.h
- * @version	1.3
+ * @version	1.4
  * @autor	C. Rouvière
  */
 
@@ -8,7 +8,6 @@
  * Structure représentant les transformations perspective
  */
 
-// On charge ce header qu'une seule fois
 #ifndef DEF_WRAP_BOUND
 #define DEF_WRAP_BOUND
 
