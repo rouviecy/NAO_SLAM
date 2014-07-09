@@ -174,4 +174,3 @@ cv::Point2f	Body::Get_L_knee()		{return L_knee;}
 cv::Point2f	Body::Get_R_knee()		{return R_knee;}
 cv::Point2f	Body::Get_L_foot()		{return L_foot;}
 cv::Point2f	Body::Get_R_foot()		{return R_foot;}
-int		Body::Get_posture()		{return posture;}
