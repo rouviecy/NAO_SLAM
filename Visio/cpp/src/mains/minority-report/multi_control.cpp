@@ -7,6 +7,7 @@
  /**
  * Programme d'exploitation des images par OpenCV
  *	- Contrôle de la souris via plusieurs amers
+ * 	- Appuyer sur 'c' pour activer/désactiver le contrôle de souris
  */
 
 #include "../../Gui.h"
@@ -26,6 +27,7 @@ int main(){
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur");
 	Transfo transfo;
+	bool controle = false;			// autorisation de contrôler la souris
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -51,7 +53,8 @@ int main(){
 		transfo.Set_pts_redressement(blobs.Get_mc());
 		transfo.Appliquer_wrap(5);
 		gui.Afficher_image("Transfo", transfo.Get_img_wrap());
-		if(key != 'c'){gui.Controler_souris(transfo.Get_center(), flux.Get_cam().size().width, flux.Get_cam().size().height);}	}
+		if(key == 'c'){controle = !controle;}
+		if(controle){gui.Controler_souris(transfo.Get_center(), flux.Get_cam().size().width, flux.Get_cam().size().height);}	}
 
 	return 0;
 

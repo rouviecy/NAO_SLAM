@@ -7,6 +7,7 @@
  /**
  * Programme d'exploitation des images par OpenCV
  *	- Contrôle de la souris avec un pointeur unique et clic, avec deux blobs de couleurs différentes
+ * 	- Appuyer sur 'c' pour activer/désactiver le contrôle de souris
  */
 
 #include "../../Gui.h"
@@ -25,6 +26,7 @@ int main(){
 	Gui gui;				// IHM
 	gui.Creer_trackbar_HSV_sep("Separateur_mouse");
 	gui.Creer_trackbar_HSV_sep2("Separateur_clic");
+	bool controle = false;			// autorisation de contrôler la souris
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -56,7 +58,8 @@ int main(){
 		gui.Ajouter_vecteurs("Video tracking mouse", blobs.Get_img_blobs(), tracking.Get_amers(), tracking.Get_nv());
 		gui.Ajouter_vecteurs("Video tracking clic", blobs2.Get_img_blobs(), tracking2.Get_amers(), tracking2.Get_nv());
 		// contrôler la souris
-		if(key != 'c'){
+		if(key == 'c'){controle = !controle;}
+		if(controle){
 			gui.Controler_souris(blobs.Get_mc(), blobs.Get_img_blobs().size().width, blobs.Get_img_blobs().size().height);
 			gui.Cliquer(blobs2.Get_mc());
 		}
