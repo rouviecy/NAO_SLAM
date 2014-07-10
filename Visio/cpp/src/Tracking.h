@@ -28,6 +28,7 @@ public:
 
 	void GoodFeatures(const int nb_max_amers);		// générer des amers intéressants
 	bool Tracker();						// trouver les points à tracker dans l'image suivante
+	bool Try_match();					// vérifier si deux images sont similaires
 
 
 private:

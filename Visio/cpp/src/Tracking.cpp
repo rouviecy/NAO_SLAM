@@ -10,6 +10,7 @@ Tracking::Tracking(const int vitesse_max){
 
 // Trouver les points à tracker dans l'image suivante
 bool Tracking::Tracker(){
+	nv.clear();
 	if(amers.size() <= 0){return false;}
 	calcOpticalFlowPyrLK(img_prev_nvg, img_next_nvg, amers, nv, status, err);
 	for(size_t i = 0; i < amers.size();){
@@ -26,7 +27,16 @@ bool Tracking::Tracker(){
 // Générer des amers intéressants
 void Tracking::GoodFeatures(const int nb_max_amers){
 	cv::goodFeaturesToTrack(img_prev_nvg, amers, nb_max_amers, 0.01, 10);
+	if(amers.size() <= 0){return;}
 	cv::cornerSubPix(img_prev_nvg, amers, cv::Size(5, 5), cv::Size(-1, -1), critere);
+}
+
+// Vérifier si les deux images dans le buffer sont similaires
+bool Tracking::Try_match(){
+	GoodFeatures(10);
+	if(amers.size() < 10){cout << "error" << endl;}
+	Tracker();
+	return Get_nv().size() > 5;
 }
 
 // Getters et Setters

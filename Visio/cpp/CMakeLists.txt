@@ -34,12 +34,14 @@ add_library(MYLIBS
 	src/Flux_cam.h		src/Flux_cam.cpp
 	src/Gui.h		src/Gui.cpp
 	src/Instruments.h	src/Instruments.cpp
+	src/IO_file.h		src/IO_file.cpp
 	src/Reco.h		src/Reco.cpp
 	src/Tracking.h		src/Tracking.cpp
 	src/Transfo.h		src/Transfo.cpp
 	src/Utils.h		src/Utils.cpp
 	src/struct_HSV_bound.h
 	src/struct_wrap_bound.h
+	src/struct_nom.h
 )
 
 # Projet Minority-Report
