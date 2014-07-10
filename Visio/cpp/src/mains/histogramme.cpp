@@ -29,7 +29,7 @@ int main(){
 		flux.Update();
 		// récupérer l'histogramme
 		instrum.Set_img(flux.Get_cam());
-		instrum.Calculer_hist_H(16);
+		instrum.Calculer_hist_H(64);
 		// afficher le résultat
 		gui.Afficher_image("Video brute", flux.Get_cam());
 		gui.Afficher_image("Histogramme H", instrum.Get_hist_H());

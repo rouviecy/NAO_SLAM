@@ -6,6 +6,14 @@ using namespace std;
 Instruments::Instruments(int hist_width, int hist_height){
 	this->hist_width = hist_width;
 	this->hist_height = hist_height;
+	this->img_degrade = cv::Mat(hist_width, hist_height, CV_8UC3, cv::Scalar(0, 0, 0));
+	for(int i = 0; i < hist_height; i++){
+		int couleur = (180 * i) / hist_height;
+		cv::Scalar pixel(couleur, 255, 255);
+		img_degrade.col(i) += pixel;
+	}
+	cv::cvtColor(img_degrade, img_degrade, CV_HSV2RGB, 3);
+	this->noir = cv::Scalar(0, 0, 0);
 }
 
 // Calculer l'histogramme en H
@@ -30,7 +38,7 @@ void Instruments::Calculer_hist_H(int nb_elems){
 		cv::line(img_hist_H,
 			cv::Point(bin_w*(i-1),	hist_height - round(hist_H.at<float>(i-1))),
 			cv::Point(bin_w*(i),	hist_height - round(hist_H.at<float>(i))),
-			cv::Scalar(255, 0, 0),
+			noir,
 			2, 8, 0
 		);
 	}
@@ -38,7 +46,7 @@ void Instruments::Calculer_hist_H(int nb_elems){
 }
 
 void Instruments::Colorier(){
-	img_hist_H = cv::Mat(hist_height, hist_width, CV_8UC3, cv::Scalar(0,0,0));
+	img_degrade.copyTo(img_hist_H);
 }
 
 // Guetters et setters

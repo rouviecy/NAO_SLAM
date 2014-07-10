@@ -26,10 +26,12 @@ public:
 
 private:
 
+	cv::Mat img_degrade;
 	cv::Mat img_brute;
 	cv::Mat hist_H, img_hist_H;
 	int hist_width, hist_height;
 	void Colorier();
+	cv::Scalar noir;
 
 };
 
