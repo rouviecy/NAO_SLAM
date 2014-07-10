@@ -34,14 +34,15 @@ void Instruments::Calculer_hist_H(int nb_elems){
 	Colorier();
 	cv::normalize(hist_H, hist_H, 0, img_hist_H.rows, cv::NORM_MINMAX, -1, cv::Mat());
 
-	for(int i = 1; i < nb_elems; i++){
-		cv::line(img_hist_H,
-			cv::Point(bin_w*(i-1),	hist_height - round(hist_H.at<float>(i-1))),
-			cv::Point(bin_w*(i),	hist_height - round(hist_H.at<float>(i))),
-			noir,
-			2, 8, 0
-		);
+	cv::Point sommets_polygone[1][nb_elems + 2];
+	sommets_polygone[0][nb_elems] = cv::Point(hist_width, 0);
+	sommets_polygone[0][nb_elems + 1] = cv::Point(0, 0);
+	for(int i = 0; i < nb_elems; i++){
+		sommets_polygone[0][i] = cv::Point(bin_w*(i), hist_height - round(hist_H.at<float>(i)));
 	}
+	const cv::Point* ppt[1] = {sommets_polygone[0]};
+	int npt[] = {nb_elems + 2};
+	cv::fillPoly(img_hist_H, ppt, npt, 1, noir, 8);
 
 }
 
