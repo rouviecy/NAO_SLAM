@@ -33,6 +33,7 @@ add_library(MYLIBS
 	src/Calibrate.h		src/Calibrate.cpp
 	src/Flux_cam.h		src/Flux_cam.cpp
 	src/Gui.h		src/Gui.cpp
+	src/Instruments.h	src/Instruments.cpp
 	src/Reco.h		src/Reco.cpp
 	src/Tracking.h		src/Tracking.cpp
 	src/Transfo.h		src/Transfo.cpp
@@ -70,9 +71,11 @@ target_link_libraries(redressement ${OpenCV_LIBS} MYLIBS)
 # Autres
 add_executable(calibration src/mains/calibration.cpp)
 add_executable(flot_optique src/mains/flot_optique.cpp)
+add_executable(histogramme src/mains/histogramme.cpp)
 add_executable(inertia src/mains/inertia.cpp)
 add_executable(wrap src/mains/wrap.cpp)
 target_link_libraries(calibration ${OpenCV_LIBS} MYLIBS)
 target_link_libraries(flot_optique ${OpenCV_LIBS} MYLIBS)
+target_link_libraries(histogramme ${OpenCV_LIBS} MYLIBS)
 target_link_libraries(inertia ${OpenCV_LIBS} MYLIBS)
 target_link_libraries(wrap ${OpenCV_LIBS} MYLIBS)
