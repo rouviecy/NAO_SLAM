@@ -42,8 +42,8 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		cv::Mat flou;
-cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
-//flux.Get_cam().copyTo(flou);
+//cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
+flux.Get_cam().copyTo(flou);
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();
@@ -60,7 +60,7 @@ cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
 				// transformation
 				transfo.Set_img(flux.Get_cam());
 				transfo.Set_pts_redressement(quadrille);
-				transfo.Appliquer_wrap(4, cv::Size(200, 200));
+				transfo.Appliquer_wrap(4, cv::Size(200, 200), cv::Size(10, 10));
 				liste_vignettes.push_back(transfo.Get_img_wrap());
 				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", liste_vignettes[i]);
 			}

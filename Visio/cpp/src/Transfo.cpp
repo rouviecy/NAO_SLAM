@@ -31,7 +31,7 @@ void Transfo::Appliquer_wrap2(){
 	cv::warpPerspective(img_brute, img_wrap, M, img_brute.size());
 }
 
-void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie){
+void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie, cv::Size retrait_bords){
 	center.clear();
 	if(deja == false){img_brute.copyTo(img_wrap); deja = true;}
 	if(pts_input.size() != NB){return;}
@@ -62,6 +62,14 @@ void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie){
 		pts1[3].x = taille_sortie.width;
 		pts1[2].y = taille_sortie.height;
 		pts1[3].y = taille_sortie.height;
+		pts1[0].x -= retrait_bords.width;
+		pts1[0].y -= retrait_bords.height;
+		pts1[1].x += retrait_bords.width;
+		pts1[1].y -= retrait_bords.height;
+		pts1[2].x -= retrait_bords.width;
+		pts1[2].y += retrait_bords.height;
+		pts1[3].x += retrait_bords.width;
+		pts1[3].y += retrait_bords.height;
 	}
 	else{taille_sortie = img_brute.size();}
 	cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
