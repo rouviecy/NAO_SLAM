@@ -27,8 +27,8 @@ public:
 	void Set_pts_redressement(std::vector <cv::Point2f> pts_input);
 
 	void Definir_parametres_transformation(STRUCT_WRAP_BOUND *wrap);
-	void Appliquer_wrap(size_t NB, cv::Size taille_sortie = cv::Size(0, 0), cv::Size retrait_bords = cv::Size(0, 0));
-	void Appliquer_wrap2();
+	void Appliquer_wrap_from_pts_input(size_t NB, cv::Size taille_sortie = cv::Size(0, 0), cv::Size retrait_bords = cv::Size(0, 0));
+	void Appliquer_wrap_from_structure();
 
 
 private:

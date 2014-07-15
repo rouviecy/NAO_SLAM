@@ -51,7 +51,7 @@ int main(){
 		// transformation
 		transfo.Set_img(flux.Get_cam());
 		transfo.Set_pts_redressement(blobs.Get_mc());
-		transfo.Appliquer_wrap(5);
+		transfo.Appliquer_wrap_from_pts_input(5);
 		gui.Afficher_image("Transfo", transfo.Get_img_wrap());
 		if(key == 'c'){controle = !controle;}
 		if(controle){gui.Controler_souris(transfo.Get_center(), flux.Get_cam().size().width, flux.Get_cam().size().height);}	}

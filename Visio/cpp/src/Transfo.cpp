@@ -17,7 +17,7 @@ void Transfo::Definir_parametres_transformation(STRUCT_WRAP_BOUND *wrap){
 }
 
 // Perspective
-void Transfo::Appliquer_wrap2(){
+void Transfo::Appliquer_wrap_from_structure(){
 	vector <cv::Point2f> pts_in, pts_out;
 	pts_in.push_back(cv::Point2f(0, 0));
 	pts_in.push_back(cv::Point2f(180, 0));
@@ -31,8 +31,57 @@ void Transfo::Appliquer_wrap2(){
 	cv::warpPerspective(img_brute, img_wrap, M, img_brute.size());
 }
 
-void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie, cv::Size retrait_bords){
-	center.clear();
+void Transfo::Appliquer_wrap_from_pts_input(size_t NB, cv::Size taille_sortie, cv::Size retrait_bords){
+	vector <cv::Point2f> pts1, pts2;
+	if(taille_sortie == cv::Size(0, 0)){
+		center.clear();
+		if(deja == false){img_brute.copyTo(img_wrap); deja = true;}
+		if(pts_input.size() != NB){return;}
+		int tab_index[4];
+		int tab_position_bords[4][2];
+		tab_position_bords[0][0] = 0;				tab_position_bords[0][1] = 0;
+		tab_position_bords[1][0] = img_brute.size().width;	tab_position_bords[1][1] = 0;
+		tab_position_bords[2][0] = 0;				tab_position_bords[2][1] = img_brute.size().height;
+		tab_position_bords[3][0] = img_brute.size().width;	tab_position_bords[3][1] = img_brute.size().height;
+		int dist_diag = img_brute.size().width * img_brute.size().width + img_brute.size().height * img_brute.size().height;
+		for(int j = 0; j < 4; j++){
+			int dist_min = dist_diag;
+			for(size_t i = 0; i < NB; i++){
+				int dist = Utils::Distance_carree(pts_input[i].x, pts_input[i].y, tab_position_bords[j][0], tab_position_bords[j][1]);
+				if(dist < dist_min){
+					dist_min = dist;
+					tab_index[j] = i;
+				}
+			}
+		}
+		for(int j = 0; j < 4; j++){
+			pts1.push_back(cv::Point2f(tab_position_bords[j][0], tab_position_bords[j][1]));
+			pts2.push_back(pts_input[tab_index[j]]);
+		}
+		taille_sortie = img_brute.size();
+		cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
+		cv::warpPerspective(img_brute, img_wrap, M, taille_sortie);
+		int index_centre = 10 - tab_index[0] - tab_index[1] - tab_index[2] - tab_index[3];
+		vector <cv::Point2f> tempo;
+		tempo.push_back(pts_input[index_centre]);
+		cv::perspectiveTransform(tempo, center, M);
+	}
+	else{
+		pts1.push_back(cv::Point2f(	- retrait_bords.width,				- retrait_bords.height));
+		pts2.push_back(pts_input[0]);
+		pts1.push_back(cv::Point2f(	- retrait_bords.width,				+ retrait_bords.height + taille_sortie.height));
+		pts2.push_back(pts_input[1]);
+		pts1.push_back(cv::Point2f(	+ retrait_bords.width + taille_sortie.width,	+ retrait_bords.height + taille_sortie.height));
+		pts2.push_back(pts_input[2]);
+		pts1.push_back(cv::Point2f(	+ retrait_bords.width + taille_sortie.width,	- retrait_bords.height));
+		pts2.push_back(pts_input[3]);
+		cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
+		cv::warpPerspective(img_brute, img_wrap, M, taille_sortie);
+	}
+
+
+
+/*	center.clear();
 	if(deja == false){img_brute.copyTo(img_wrap); deja = true;}
 	if(pts_input.size() != NB){return;}
 	int tab_index[4];
@@ -78,7 +127,7 @@ void Transfo::Appliquer_wrap(size_t NB, cv::Size taille_sortie, cv::Size retrait
 	vector <cv::Point2f> tempo;
 	tempo.push_back(pts_input[index_centre]);
 	cv::perspectiveTransform(tempo, center, M);
-}
+*/}
 
 // Getters et Setters
 cv::Mat Transfo::Get_img_wrap() const{return img_wrap;}

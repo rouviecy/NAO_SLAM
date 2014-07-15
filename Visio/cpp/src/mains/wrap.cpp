@@ -33,7 +33,7 @@ int main(){
 		// transformation
 		transfo.Set_img(flux.Get_cam());
 		transfo.Definir_parametres_transformation(gui.Get_wrap_bound());
-		transfo.Appliquer_wrap2();
+		transfo.Appliquer_wrap_from_structure();
 		gui.Afficher_image("Transfo", transfo.Get_img_wrap());
 	}
 	return 0;
