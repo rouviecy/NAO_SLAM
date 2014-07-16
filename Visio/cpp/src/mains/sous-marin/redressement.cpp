@@ -33,7 +33,7 @@ int main(){
 	Transfo transfo;
 	Reco reco;
 	IO_file io;
-	Tracking tracking(10);
+	Tracking tracking(40);
 	int compteur = 0;
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
@@ -42,8 +42,8 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		cv::Mat flou;
-//cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
-flux.Get_cam().copyTo(flou);
+cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
+//flux.Get_cam().copyTo(flou);
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();
@@ -61,7 +61,9 @@ flux.Get_cam().copyTo(flou);
 				transfo.Set_img(flux.Get_cam());
 				transfo.Set_pts_redressement(quadrille);
 				transfo.Appliquer_wrap_from_pts_input(4, cv::Size(200, 200), cv::Size(10, 10));
-				liste_vignettes.push_back(transfo.Get_img_wrap());
+				cv::Mat img_redressee;
+				transfo.Get_img_wrap().copyTo(img_redressee);
+				liste_vignettes.push_back(img_redressee);
 				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", liste_vignettes[i]);
 			}
 			for(int k = 0; k < compteur; k++){
@@ -72,7 +74,8 @@ flux.Get_cam().copyTo(flou);
 					for(size_t i = 0; i < liste_vignettes.size() ; i++){
 						tracking.Set_img_prev(old_img);
 						tracking.Set_img_next(liste_vignettes[i]);
-						if(tracking.Try_match()){cout << "ok avec " << i << " avec orientation " << 90*tracking.Get_orientation() << "°" << endl;}
+						if(tracking.Try_match()){cout << "\tok avec " << k+1 << "-" << i << " avec orientation " << 90*tracking.Get_orientation() << "°" << endl;}
+
 					}
 				}
 			}
