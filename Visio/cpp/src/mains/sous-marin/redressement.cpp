@@ -42,8 +42,8 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		cv::Mat flou;
-//cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
-flux.Get_cam().copyTo(flou);
+cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
+//flux.Get_cam().copyTo(flou);
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();
