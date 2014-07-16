@@ -1,6 +1,6 @@
 /*
  * @(#)		Transfo.h
- * @version	1.4
+ * @version	1.5
  * @autor	C. Rouvière
  */
 

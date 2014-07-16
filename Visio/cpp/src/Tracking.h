@@ -25,11 +25,11 @@ public:
 	void Set_amers(std::vector <cv::Point2f> amers);	// setter des points à tracker
 	std::vector <cv::Point2f> Get_amers() const;		// getter des points à tracker valides
 	std::vector <cv::Point2f> Get_nv() const;		// getter des points trouvés
+	int Get_orientation() const;				// getter de l'orientation pour Try_match()
 
 	void GoodFeatures(const int nb_max_amers);		// générer des amers intéressants
 	bool Tracker();						// trouver les points à tracker dans l'image suivante
-	bool Try_match();					// vérifier si deux images sont similaires
-
+	bool Try_match();					// Vérifier si les deux images dans le buffer sont similaires, avec les 4 rotations possibles
 
 private:
 
@@ -44,6 +44,8 @@ private:
 	std::vector <cv::Point2f> nv;		// points à repérer
 	std::vector <uchar> status;		// si les points ont été repérés
 	std::vector <float> err;		// erreur
+
+	int orientation;			// rotation nécessaire pour le Try_match() ( -1 : no_match | 0 : 0° | 1 : 90° | 2 : 180° | 3 : 270° )
 
 };
 

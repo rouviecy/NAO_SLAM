@@ -31,12 +31,21 @@ void Tracking::GoodFeatures(const int nb_max_amers){
 	cv::cornerSubPix(img_prev_nvg, amers, cv::Size(5, 5), cv::Size(-1, -1), critere);
 }
 
-// Vérifier si les deux images dans le buffer sont similaires
+// Vérifier si les deux images dans le buffer sont similaires, avec les 4 rotations possibles
 bool Tracking::Try_match(){
 	GoodFeatures(10);
 	if(amers.size() < 10){cout << "error" << endl;}
-	Tracker();
-	return Get_nv().size() > 5;
+	orientation = -1;
+	cv::Mat rot_90 = cv::getRotationMatrix2D(cv::Point2f(img_next.size().width / 2, img_next.size().height / 2), 90, 1);
+	for(int i = 0; i < 4; i++){
+		Tracker();
+		if(Get_nv().size() > 5){
+			orientation = i;
+			return true;
+		}
+		cv::warpAffine(img_next, img_next, rot_90, img_next.size());
+	}
+	return false;
 }
 
 // Getters et Setters
@@ -51,3 +60,4 @@ void Tracking::Set_img_next(cv::Mat image){
 void Tracking::Set_amers(std::vector <cv::Point2f> amers){this->amers = amers;}
 std::vector <cv::Point2f> Tracking::Get_amers() const{return amers;}
 std::vector <cv::Point2f> Tracking::Get_nv() const{return nv;}
+int Tracking::Get_orientation() const{return orientation;}

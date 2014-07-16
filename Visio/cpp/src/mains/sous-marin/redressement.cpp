@@ -42,8 +42,8 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		cv::Mat flou;
-cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
-//flux.Get_cam().copyTo(flou);
+//cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
+flux.Get_cam().copyTo(flou);
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();
@@ -72,7 +72,7 @@ cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
 					for(size_t i = 0; i < liste_vignettes.size() ; i++){
 						tracking.Set_img_prev(old_img);
 						tracking.Set_img_next(liste_vignettes[i]);
-						if(tracking.Try_match()){cout << "ok avec " << i << endl;}
+						if(tracking.Try_match()){cout << "ok avec " << i << " avec orientation " << 90*tracking.Get_orientation() << "°" << endl;}
 					}
 				}
 			}
