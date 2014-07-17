@@ -1,12 +1,13 @@
 /*
- * @(#)		redressement.cpp
- * @version	1.5
+ * @(#)		metadonnees.cpp
+ * @version	1.0
  * @autor	C. Rouvière
  */
 
  /**
  * Programme d'exploitation des images par OpenCV
- *	- Détecte un quadrillage, et enregistre les vignettes pour les reconnaître plus tard
+ *	- Détecte un quadrillage, et enregistre les vignettes
+ * 	- Gestion des métadonnées des vignettes
  */
 
 #include "../../Gui.h"
@@ -25,7 +26,7 @@
 
 using namespace std;
 
-int main(){
+int main(int argc, char *argv[]){
 
 	char key = 'a';				// clef de contrôle du programme
 	Flux_cam flux(-1, 40, 1, 3, 0);		// initialisation du flux webcam (/dev/video0)
@@ -35,6 +36,8 @@ int main(){
 	IO_file io;
 	Tracking tracking(40);
 	int compteur = 0;
+	int force_blur = atoi(argv[1]);
+	cv::Size kernel_blur(force_blur, force_blur);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -42,8 +45,8 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		cv::Mat flou;
-cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
-//flux.Get_cam().copyTo(flou);
+		if(force_blur > 0){cv::blur(flux.Get_cam(), flou, kernel_blur);}
+		else{flux.Get_cam().copyTo(flou);}
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();
@@ -65,18 +68,6 @@ cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
 				transfo.Get_img_wrap().copyTo(img_redressee);
 				liste_vignettes.push_back(img_redressee);
 				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", liste_vignettes[i]);
-			}
-			for(int k = 0; k < compteur; k++){
-				vector <STRUCT_NOM> liste = io.Lister_fichiers("./output/" + to_string(k), "png");
-				for(size_t j = 0; j < liste.size(); j++){
-					cout << liste[j].nom_complet << endl;
-					cv::Mat old_img = cv::imread(liste[j].nom_complet);
-					for(size_t i = 0; i < liste_vignettes.size() ; i++){
-						tracking.Set_img_prev(old_img);
-						tracking.Set_img_next(liste_vignettes[i]);
-						if(tracking.Try_match()){cout << "\tok avec " << k+1 << "-" << i << " avec orientation " << 90*tracking.Get_orientation() << "°" << endl;}
-					}
-				}
 			}
 			key = 'a';
 			compteur++;

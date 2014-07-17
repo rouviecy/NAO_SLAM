@@ -68,7 +68,9 @@ target_link_libraries(test_HSV ${OpenCV_LIBS} MYLIBS)
 
 # Projet Sous-Marin
 add_executable(redressement src/mains/sous-marin/redressement.cpp)
+add_executable(metadonnees src/mains/sous-marin/metadonnees.cpp)
 target_link_libraries(redressement ${OpenCV_LIBS} MYLIBS)
+target_link_libraries(metadonnees ${OpenCV_LIBS} MYLIBS)
 
 # Autres
 add_executable(calibration src/mains/calibration.cpp)
