@@ -7,6 +7,7 @@
  /**
  * Programme d'exploitation des images par OpenCV
  *	- Détecte un quadrillage, et enregistre les vignettes pour les reconnaître plus tard
+ * 	- Passer en argument la force du flou à appliquer au préalable
  */
 
 #include "../../Gui.h"
@@ -25,7 +26,7 @@
 
 using namespace std;
 
-int main(){
+int main(int argc, char *argv[]){
 
 	char key = 'a';				// clef de contrôle du programme
 	Flux_cam flux(-1, 40, 1, 3, 0);		// initialisation du flux webcam (/dev/video0)
@@ -35,6 +36,8 @@ int main(){
 	IO_file io;
 	Tracking tracking(40);
 	int compteur = 0;
+	int force_blur = atoi(argv[1]);
+	cv::Size kernel_blur(force_blur, force_blur);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -42,8 +45,8 @@ int main(){
 		// mettre à jour les images du flux
 		flux.Update();
 		cv::Mat flou;
-cv::blur(flux.Get_cam(), flou, cv::Size(9, 9));
-//flux.Get_cam().copyTo(flou);
+		if(force_blur > 0){cv::blur(flux.Get_cam(), flou, kernel_blur);}
+		else{flux.Get_cam().copyTo(flou);}
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();

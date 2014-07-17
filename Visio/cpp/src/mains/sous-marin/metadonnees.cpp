@@ -8,6 +8,7 @@
  * Programme d'exploitation des images par OpenCV
  *	- Détecte un quadrillage, et enregistre les vignettes
  * 	- Gestion des métadonnées des vignettes
+ * 	- Passer en argument la force du flou à appliquer au préalable
  */
 
 #include "../../Gui.h"
