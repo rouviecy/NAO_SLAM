@@ -31,6 +31,7 @@ add_library(MYLIBS
 	src/Blobs.h		src/Blobs.cpp
 	src/Body.h		src/Body.cpp
 	src/Calibrate.h		src/Calibrate.cpp
+	src/Carte.h		src/Carte.cpp
 	src/Flux_cam.h		src/Flux_cam.cpp
 	src/Gui.h		src/Gui.cpp
 	src/Instruments.h	src/Instruments.cpp
@@ -42,6 +43,7 @@ add_library(MYLIBS
 	src/struct_HSV_bound.h
 	src/struct_wrap_bound.h
 	src/struct_nom.h
+	src/struct_vignette.h
 )
 
 # Projet Minority-Report
