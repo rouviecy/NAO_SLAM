@@ -52,17 +52,12 @@ int main(int argc, char *argv[]){
 		reco.Detecter_quadrillage();
 		if(key == 's'){
 			mkdir(("./output/" + to_string(compteur)).c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
-			vector <cv::Vec8i> liste_quad = reco.Get_quadrillage();
 			vector <cv::Mat> liste_vignettes;
-			for(size_t i = 0; i < liste_quad.size(); i++){
-				vector <cv::Point2f> quadrille;
-				quadrille.push_back(cv::Point2f(liste_quad[i][0], liste_quad[i][1]));
-				quadrille.push_back(cv::Point2f(liste_quad[i][2], liste_quad[i][3]));
-				quadrille.push_back(cv::Point2f(liste_quad[i][4], liste_quad[i][5]));
-				quadrille.push_back(cv::Point2f(liste_quad[i][6], liste_quad[i][7]));
+			vector < vector <cv::Point2f> > liste_quadrillage = reco.Get_quadrillage();
+			for(int i = 0; i < liste_quadrillage.size(); i++){
 				// transformation
 				transfo.Set_img(flux.Get_cam());
-				transfo.Set_pts_redressement(quadrille);
+				transfo.Set_pts_redressement(liste_quadrillage[i]);
 				transfo.Appliquer_wrap_from_pts_input(4, cv::Size(200, 200), cv::Size(10, 10));
 				cv::Mat img_redressee;
 				transfo.Get_img_wrap().copyTo(img_redressee);

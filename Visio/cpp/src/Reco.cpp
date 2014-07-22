@@ -146,7 +146,9 @@ void Reco::Detecter_quadrillage(){
 			cv::line(image_quadrillage, B, C, jaune);
 			cv::line(image_quadrillage, C, D, jaune);
 			cv::line(image_quadrillage, D, A, jaune);
-			liste_quadrillage.push_back(cv::Vec8i(round(A.x), round(A.y), round(B.x), round(B.y), round(C.x), round(C.y), round(D.x), round(D.y)));
+			vector <cv::Point2f> quadrillage;
+			quadrillage.push_back(A); quadrillage.push_back(B); quadrillage.push_back(C); quadrillage.push_back(D); 
+			liste_quadrillage.push_back(quadrillage);
 		}
 
 	}
@@ -220,7 +222,7 @@ vector <int> Reco::Liste_edges_int(cv::Subdiv2D s, int max_x, int max_y, cv::Mat
 
 // Getters et Setters
 cv::Mat Reco::Get_img_quadrillage() const{return this->image_quadrillage;}
-vector <cv::Vec8i> Reco::Get_quadrillage() const{return this->liste_quadrillage;}
+vector < vector <cv::Point2f> > Reco::Get_quadrillage() const{return this->liste_quadrillage;}
 void Reco::Set_img(cv::Mat image){image.copyTo(this->image);}
 void Reco::Set_blobs_1(vector <cv::Point2f> blobs_1){this->blobs_1 = blobs_1;}
 void Reco::Set_blobs_2(vector <cv::Point2f> blobs_2){this->blobs_2 = blobs_2;}

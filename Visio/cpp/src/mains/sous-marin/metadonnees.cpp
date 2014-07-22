@@ -17,6 +17,7 @@
 #include "../../Tracking.h"
 #include "../../Reco.h"
 #include "../../IO_file.h"
+#include "../../Carte.h"
 #include "../../struct_vignette.h"
 
 #include <opencv2/opencv.hpp>
@@ -36,6 +37,7 @@ int main(int argc, char *argv[]){
 	Transfo transfo;
 	Reco reco;
 	IO_file io;
+	Carte carte;
 	Tracking tracking(40);
 	int compteur = 0;
 	int force_blur = atoi(argv[1]);
@@ -56,28 +58,16 @@ int main(int argc, char *argv[]){
 		reco.Detecter_quadrillage();
 		if(key == 's'){
 			mkdir(("./output/" + to_string(compteur)).c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
-			vector <cv::Vec8i> liste_quad = reco.Get_quadrillage();
-			for(size_t i = 0; i < liste_quad.size(); i++){
-				STRUCT_VIGNETTE vignette;
-				vector <cv::Point2f> quadrille;
-				vignette.A = cv::Point2f(liste_quad[i][0], liste_quad[i][1]);	quadrille.push_back(vignette.A);
-				vignette.B = cv::Point2f(liste_quad[i][2], liste_quad[i][3]);	quadrille.push_back(vignette.B);
-				vignette.C = cv::Point2f(liste_quad[i][4], liste_quad[i][5]);	quadrille.push_back(vignette.C);
-				vignette.D = cv::Point2f(liste_quad[i][6], liste_quad[i][7]);	quadrille.push_back(vignette.D);
+			vector < vector <cv::Point2f> > liste_quadrillage = reco.Get_quadrillage();
+			for(int i = 0; i < liste_quadrillage.size(); i++){
 				// transformation
+				cv::Mat img_redressee;
 				transfo.Set_img(flux.Get_cam());
-				transfo.Set_pts_redressement(quadrille);
+				transfo.Set_pts_redressement(liste_quadrillage[i]);
 				transfo.Appliquer_wrap_from_pts_input(4, cv::Size(200, 200), cv::Size(10, 10));
-				transfo.Get_img_wrap().copyTo(vignette.image);
-				liste_vignettes.push_back(vignette);
-				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", vignette.image);
+				transfo.Get_img_wrap().copyTo(img_redressee);
+				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", img_redressee);
 			}
-
-/*			liste_vignettes[0].index = 0;
-			liste_vignettes[0].x = 0;
-			liste_vignettes[0].y = 0;
-			liste_vignettes[0].orientation = 0;
-*/
 			key = 'a';
 			compteur++;
 		}

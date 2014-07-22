@@ -28,7 +28,7 @@ public:
 	void Set_size(cv::Size taille);
 
 	cv::Mat Get_img_quadrillage() const;
-	std::vector <cv::Vec8i> Get_quadrillage() const;
+	std::vector < std::vector <cv::Point2f> > Get_quadrillage() const;
 	void Detecter_quadrillage();
 	std::vector <bool> Test_circle();
 	std::vector <cv::Point2f> Test_inclusion(const int dist_max);
@@ -48,7 +48,7 @@ private:
 	std::vector <cv::Vec4i> hierarchie_blobs;
 	std::vector <cv::Moments> mu;
 	std::vector <cv::Point2f> mc;
-	std::vector <cv::Vec8i> liste_quadrillage;
+	std::vector < std::vector <cv::Point2f> > liste_quadrillage;
 
 	cv::Point2f Intersection(cv::Vec4i a, cv::Vec4i b, int coeff) const;
 	bool Confondus(cv::Vec4i a, cv::Vec4i b) const;
