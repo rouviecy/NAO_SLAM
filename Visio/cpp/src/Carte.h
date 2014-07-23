@@ -33,6 +33,7 @@ private:
 	std::vector <std::vector <cv::Point2i> > buffer_quad;
 
 	STRUCT_VIGNETTE New_vignette(cv::Mat image, std::vector <cv::Point2i> quad);
+	void Lier_vignettes(int id_fixe, cv::Mat image, int rotation, int dx, int dy, std::vector <cv::Point2i> quad);
 
 };
 

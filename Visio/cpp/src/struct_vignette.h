@@ -21,10 +21,10 @@ typedef struct{
 	int x;			// abscisse
 	int y;			// ordonnée
 	int orientation;	// orientation dans le sens trigonométrique (0 : 0° | 1 : 90° | 2 : 180° | 3 : 270°)
-	int ouest;		// nid du voisin à l'Ouest
-	int est;		// nid du voisin à l'Est
 	int nord;		// nid du voisin au Nord
 	int sud;		// nid du voisin au Sud
+	int ouest;		// nid du voisin à l'Ouest
+	int est;		// nid du voisin à l'Est
 	cv::Point2f A;		// coin Nord-Ouest
 	cv::Point2f B;		// coin Nord-Est
 	cv::Point2f C;		// coin Sud-Est
