@@ -18,7 +18,6 @@
 #include "../../Reco.h"
 #include "../../IO_file.h"
 #include "../../Carte.h"
-#include "../../struct_vignette.h"
 
 #include <opencv2/opencv.hpp>
 
@@ -43,8 +42,6 @@ int main(int argc, char *argv[]){
 	int force_blur = atoi(argv[1]);
 	cv::Size kernel_blur(force_blur, force_blur);
 
-	vector <STRUCT_VIGNETTE> liste_vignettes;
-
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
 		key = flux.Get_key();
@@ -67,7 +64,9 @@ int main(int argc, char *argv[]){
 				transfo.Appliquer_wrap_from_pts_input(4, cv::Size(200, 200), cv::Size(10, 10));
 				transfo.Get_img_wrap().copyTo(img_redressee);
 				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", img_redressee);
+				carte.Remplir_buffer(img_redressee, liste_quadrillage[i]);
 			}
+			carte.Traiter_buffer();
 			key = 'a';
 			compteur++;
 		}
