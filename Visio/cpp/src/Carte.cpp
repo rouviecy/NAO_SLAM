@@ -15,6 +15,7 @@ void Carte::Remplir_buffer(cv::Mat image, vector <cv::Point2i> quad){
 void Carte::Traiter_buffer(){
 	if(is_empty){
 		root = New_vignette(buffer_img.back(), buffer_quad.back());
+		liste.push_back(root);
 		buffer_img.pop_back();
 		buffer_quad.pop_back();
 	}
@@ -167,7 +168,7 @@ void Carte::Traiter_buffer(){
 					}
 				}
 			}
-			if(casser){break;}
+			if(casser){cout << "yo" << endl;break;}
 		}
 	}
 }
