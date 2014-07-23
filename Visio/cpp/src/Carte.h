@@ -20,7 +20,7 @@ public:
 
 	Carte();
 
-	void Remplir_buffer(cv::Mat image, std::vector <cv::Point2f> quadrillage);
+	void Remplir_buffer(cv::Mat image, std::vector <cv::Point2i> quad);
 	void Traiter_buffer();
 	void Clear();
 
@@ -30,7 +30,9 @@ private:
 	bool is_empty;
 	std::vector <STRUCT_VIGNETTE> liste;
 	std::vector <cv::Mat> buffer_img;
-	std::vector <std::vector <cv::Point2f> > buffer_quad;
+	std::vector <std::vector <cv::Point2i> > buffer_quad;
+
+	STRUCT_VIGNETTE New_vignette(cv::Mat image, std::vector <cv::Point2i> quad);
 
 };
 

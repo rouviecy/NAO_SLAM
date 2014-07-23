@@ -114,10 +114,10 @@ void Gui::Pad(const std::string titre_fenetre, const float dx, const float dy, c
 }
 
 // Prendre le contrôle de la souris
-void Gui::Controler_souris(std::vector <cv::Point2f> mc, int width, int height){
+void Gui::Controler_souris(std::vector <cv::Point2i> mc, int width, int height){
 	if(mc.size() <= 0){return;}
-	int XMouse = (int) (mc[0].x / width * 1600);
-	int YMouse = (int) (mc[0].y / height * 900);
+	int XMouse = (int) ((float) mc[0].x / width * 1600);
+	int YMouse = (int) ((float) mc[0].y / height * 900);
 	if(XMouse > 0 && XMouse < 1600 && YMouse > 0 && YMouse < 900){
 		XWarpPointer(dpy, None, root_window, 0, 0, 0, 0, XMouse, YMouse);
 		XFlush(dpy);
@@ -125,16 +125,16 @@ void Gui::Controler_souris(std::vector <cv::Point2f> mc, int width, int height){
 }
 
 // Cliquer si le vecteur d'entrée n'est pas vide
-void Gui::Cliquer(std::vector <cv::Point2f> mc){XTestFakeButtonEvent(dpy, buttonMap[0], mc.size() > 0, 0);}
+void Gui::Cliquer(std::vector <cv::Point2i> mc){XTestFakeButtonEvent(dpy, buttonMap[0], mc.size() > 0, 0);}
 
 
 // Afficher une image et des vecteurs
-void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vector<cv::Point2f> pts_prev, vector<cv::Point2f> pts_next){
+void Gui::Ajouter_vecteurs(const std::string titre_fenetre, cv::Mat image, vector<cv::Point2i> pts_prev, vector<cv::Point2i> pts_next){
 	cv::Mat img_show;
 	image.copyTo(img_show);
 	for(size_t i = 0; i < pts_prev.size(); i++){
-		cv::Point2f p1 = pts_prev[i];
-		cv::Point2f p2 = pts_next[i];
+		cv::Point2i p1 = pts_prev[i];
+		cv::Point2i p2 = pts_next[i];
 		ellipse(img_show, p1, dim_1, 0, 0, 360, rouge);
 		line(img_show, p1, p2, rouge);
 	}

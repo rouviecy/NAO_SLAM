@@ -62,7 +62,7 @@ void Transfo::Appliquer_wrap_from_pts_input(size_t NB, cv::Size taille_sortie, c
 		cv::Mat M = cv::getPerspectiveTransform(pts2, pts1);
 		cv::warpPerspective(img_brute, img_wrap, M, taille_sortie);
 		int index_centre = 10 - tab_index[0] - tab_index[1] - tab_index[2] - tab_index[3];
-		vector <cv::Point2f> tempo;
+		vector <cv::Point2i> tempo;
 		tempo.push_back(pts_input[index_centre]);
 		cv::perspectiveTransform(tempo, center, M);
 	}
@@ -82,6 +82,11 @@ void Transfo::Appliquer_wrap_from_pts_input(size_t NB, cv::Size taille_sortie, c
 
 // Getters et Setters
 cv::Mat Transfo::Get_img_wrap() const{return img_wrap;}
-vector <cv::Point2f> Transfo::Get_center() const{return center;}
+vector <cv::Point2i> Transfo::Get_center() const{return center;}
 void Transfo::Set_img(cv::Mat image){image.copyTo(img_brute);}
-void Transfo::Set_pts_redressement(vector <cv::Point2f> pts_input){this->pts_input = pts_input;}
+void Transfo::Set_pts_redressement(vector <cv::Point2i> pts_input){
+	this->pts_input.clear();
+	for(int i = 0; i < pts_input.size(); i++){
+		this->pts_input.push_back(cv::Point2f(pts_input[i].x, pts_input[i].y));
+	}
+}

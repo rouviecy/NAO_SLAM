@@ -45,7 +45,7 @@ int main(){
 		reco.Set_blobs_1(blobs.Get_mc());
 		reco.Set_blobs_2(blobs2.Get_mc());
 		reco.Set_size(flux.Get_cam().size());
-		vector <cv::Point2f> points = reco.Test_inclusion(10);
+		vector <cv::Point2i> points = reco.Test_inclusion(10);
 		// afficher le résultat
 		gui.Afficher_image("Video separateur 1", blobs.Get_img_blobs());
 		gui.Afficher_image("Video separateur 2", blobs2.Get_img_blobs());

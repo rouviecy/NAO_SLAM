@@ -36,8 +36,8 @@ int main(){
 		body.Detecter_genou_gauche();		body.Detecter_genou_droit();
 		body.Detecter_pied_gauche();		body.Detecter_pied_droit();
 
-		std::vector <cv::Point2f> liste1;
-		std::vector <cv::Point2f> liste2;
+		std::vector <cv::Point2i> liste1;
+		std::vector <cv::Point2i> liste2;
 		liste1.push_back(body.Get_Head());		liste2.push_back(body.Get_T_torso());
 		liste1.push_back(body.Get_T_torso());		liste2.push_back(body.Get_L_shoulder());
 		liste1.push_back(body.Get_T_torso());		liste2.push_back(body.Get_R_shoulder());

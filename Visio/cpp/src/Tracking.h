@@ -22,9 +22,9 @@ public:
 
 	void Set_img_prev(cv::Mat img_prev);			// setter image N-1
 	void Set_img_next(cv::Mat img_next);			// setter image N
-	void Set_amers(std::vector <cv::Point2f> amers);	// setter des points à tracker
-	std::vector <cv::Point2f> Get_amers() const;		// getter des points à tracker valides
-	std::vector <cv::Point2f> Get_nv() const;		// getter des points trouvés
+	void Set_amers(std::vector <cv::Point2i> amers);	// setter des points à tracker
+	std::vector <cv::Point2i> Get_amers();			// getter des points à tracker valides
+	std::vector <cv::Point2i> Get_nv();			// getter des points trouvés
 	int Get_orientation() const;				// getter de l'orientation pour Try_match()
 
 	void GoodFeatures(const int nb_max_amers);		// générer des amers intéressants

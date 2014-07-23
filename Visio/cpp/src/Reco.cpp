@@ -16,14 +16,14 @@ Reco::Reco(){
 // Tests de reconnaissance de cercle
 std::vector <bool> Reco::Test_circle(){
 	vector <bool> result;
-	for(vector <cv::Point2f> ::iterator blob = blobs_1.begin(); blob != blobs_1.end(); ++blob){
+	for(vector <cv::Point2i> ::iterator blob = blobs_1.begin(); blob != blobs_1.end(); ++blob){
 		// TODO : travailler avec blob
 	}
 	return result;
 }
 
 // Test de reconnaissance de blob dans un blob
-std::vector <cv::Point2f> Reco::Test_inclusion(const int dist_max){
+std::vector <cv::Point2i> Reco::Test_inclusion(const int dist_max){
 	mu.clear(), mc.clear();
 	Update_mats((int) dist_max / 2);
 	mat_compare = mat_blobs_1 & mat_blobs_2;
@@ -31,7 +31,7 @@ std::vector <cv::Point2f> Reco::Test_inclusion(const int dist_max){
 	if(hierarchie_blobs.size() <= 0){return mc;}
 	for(size_t i = 0; i < liste_blobs.size(); i++){
 		mu.push_back(cv::moments(liste_blobs[i], false));
-		mc.push_back(cv::Point2f(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00));
+		mc.push_back(cv::Point2i(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00));
 	}
 	return mc;
 }
@@ -40,10 +40,10 @@ std::vector <cv::Point2f> Reco::Test_inclusion(const int dist_max){
 void Reco::Update_mats(const int rayon){
 	mat_1 = cv::Mat::zeros(taille, CV_8U);
 	mat_2 = cv::Mat::zeros(taille, CV_8U);
-	for(vector <cv::Point2f> ::iterator blob = blobs_1.begin(); blob != blobs_1.end(); ++blob){
+	for(vector <cv::Point2i> ::iterator blob = blobs_1.begin(); blob != blobs_1.end(); ++blob){
 		cv::circle(mat_1, cv::Point2i((int) floor((*blob).x), (int) floor((*blob).y)), rayon, blanc, -1, 8, 0);
 	}
-	for(vector <cv::Point2f> ::iterator blob = blobs_2.begin(); blob != blobs_2.end(); ++blob){
+	for(vector <cv::Point2i> ::iterator blob = blobs_2.begin(); blob != blobs_2.end(); ++blob){
 		cv::circle(mat_2, cv::Point2i((int) floor((*blob).x), (int) floor((*blob).y)), rayon, blanc, -1, 8, 0);
 	}
 	cv::Scalar mini(42); cv::Scalar maxi(255);
@@ -146,8 +146,11 @@ void Reco::Detecter_quadrillage(){
 			cv::line(image_quadrillage, B, C, jaune);
 			cv::line(image_quadrillage, C, D, jaune);
 			cv::line(image_quadrillage, D, A, jaune);
-			vector <cv::Point2f> quadrillage;
-			quadrillage.push_back(A); quadrillage.push_back(B); quadrillage.push_back(C); quadrillage.push_back(D); 
+			vector <cv::Point2i> quadrillage;
+			quadrillage.push_back(cv::Point2i(A.x, A.y));
+			quadrillage.push_back(cv::Point2i(B.x, B.y));
+			quadrillage.push_back(cv::Point2i(C.x, C.y));
+			quadrillage.push_back(cv::Point2i(D.x, D.y)); 
 			liste_quadrillage.push_back(quadrillage);
 		}
 
@@ -222,8 +225,8 @@ vector <int> Reco::Liste_edges_int(cv::Subdiv2D s, int max_x, int max_y, cv::Mat
 
 // Getters et Setters
 cv::Mat Reco::Get_img_quadrillage() const{return this->image_quadrillage;}
-vector < vector <cv::Point2f> > Reco::Get_quadrillage() const{return this->liste_quadrillage;}
+vector < vector <cv::Point2i> > Reco::Get_quadrillage() const{return this->liste_quadrillage;}
 void Reco::Set_img(cv::Mat image){image.copyTo(this->image);}
-void Reco::Set_blobs_1(vector <cv::Point2f> blobs_1){this->blobs_1 = blobs_1;}
-void Reco::Set_blobs_2(vector <cv::Point2f> blobs_2){this->blobs_2 = blobs_2;}
+void Reco::Set_blobs_1(vector <cv::Point2i> blobs_1){this->blobs_1 = blobs_1;}
+void Reco::Set_blobs_2(vector <cv::Point2i> blobs_2){this->blobs_2 = blobs_2;}
 void Reco::Set_size(cv::Size taille){this->taille = taille;}

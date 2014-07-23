@@ -35,13 +35,13 @@ public:
 	void Detecter_genou_gauche();	void Detecter_genou_droit();
 	void Detecter_pied_gauche();	void Detecter_pied_droit();
 	void Set_img(cv::Mat img);
-	cv::Point2f Get_Head();
-	cv::Point2f Get_T_torso();	cv::Point2f Get_B_torso();
-	cv::Point2f Get_L_shoulder();	cv::Point2f Get_R_shoulder();
-	cv::Point2f Get_L_elbow();	cv::Point2f Get_R_elbow();
-	cv::Point2f Get_L_hand();	cv::Point2f Get_R_hand();
-	cv::Point2f Get_L_knee();	cv::Point2f Get_R_knee();
-	cv::Point2f Get_L_foot();	cv::Point2f Get_R_foot();
+	cv::Point2i Get_Head();
+	cv::Point2i Get_T_torso();	cv::Point2i Get_B_torso();
+	cv::Point2i Get_L_shoulder();	cv::Point2i Get_R_shoulder();
+	cv::Point2i Get_L_elbow();	cv::Point2i Get_R_elbow();
+	cv::Point2i Get_L_hand();	cv::Point2i Get_R_hand();
+	cv::Point2i Get_L_knee();	cv::Point2i Get_R_knee();
+	cv::Point2i Get_L_foot();	cv::Point2i Get_R_foot();
 
 private:
 
@@ -63,14 +63,14 @@ private:
 	STRUCT_HSV_BOUND *hsv_L_foot[2];	STRUCT_HSV_BOUND *hsv_R_foot[2];
 
 	cv::Mat img;
-	cv::Point2f Tete, T_torso, B_torso, L_shoulder, R_shoulder, L_elbow, R_elbow, L_hand, R_hand, L_knee, R_knee, L_foot, R_foot;
+	cv::Point2i Tete, T_torso, B_torso, L_shoulder, R_shoulder, L_elbow, R_elbow, L_hand, R_hand, L_knee, R_knee, L_foot, R_foot;
 
 	Reco reco;
 	Blobs *blobs;
 
 	void Couleurs();
 	void Membres();
-	std::vector <cv::Point2f> Update_blobs(STRUCT_HSV_BOUND *hsv_1, STRUCT_HSV_BOUND *hsv_2);
+	std::vector <cv::Point2i> Update_blobs(STRUCT_HSV_BOUND *hsv_1, STRUCT_HSV_BOUND *hsv_2);
 
 };
 

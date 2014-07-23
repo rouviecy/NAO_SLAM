@@ -46,7 +46,7 @@ int main(){
 		tracking.Set_img_next(flux.Get_next());
 		tracking.Set_amers(blobs.Get_mc());
 		tracking.Tracker();
-		std::vector <cv::Point2f> pts_amers, pts_nv, pts_fixe, pts_dyn;
+		std::vector <cv::Point2i> pts_amers, pts_nv, pts_fixe, pts_dyn;
 		pts_amers = tracking.Get_amers();
 		pts_nv = tracking.Get_nv();
 		for(size_t i = 0; i < pts_amers.size(); i++){
@@ -60,7 +60,7 @@ int main(){
 		}
 
 		// relier les points
-		std::vector <cv::Point2f> pts1, pts2;
+		std::vector <cv::Point2i> pts1, pts2;
 		for(size_t i = 0; i < pts_fixe.size(); i++){
 			for(size_t j = 0; j < pts_fixe.size(); j++){
 				if(i != j){

@@ -30,7 +30,7 @@ public:
 	cv::Mat Get_img_sep() const;			// Guetter sur l'image segmentée par HSV
 	cv::Mat Get_img_blobs() const;			// Guetter sur l'image des blobs et leurs centres
 	std::vector <cv::Moments> Get_mu() const;	// Guetter sur les moments de chaque blob
-	std::vector <cv::Point2f> Get_mc() const;	// Guetter sur le centre massique de chaque blob
+	std::vector <cv::Point2i> Get_mc() const;	// Guetter sur le centre massique de chaque blob
 	std::vector <cv::Rect> Get_rect() const;	// Guetter sur les rectangles englobants des blobs
 	std::vector <double> Get_size() const;		// Guetter sur les tailles des blobs
 
@@ -57,7 +57,7 @@ private:
 	std::vector <std::vector <cv::Point2i> > liste_blobs;	// liste des blobs
 	std::vector <cv::Vec4i> hierarchie_blobs;		// hiérarchie de ces blobs
 	std::vector <cv::Moments> mu, mu_;			// moments des blobs
-	std::vector <cv::Point2f> mc, mc_;			// centres de masse des blobs
+	std::vector <cv::Point2i> mc, mc_;			// centres de masse des blobs
 	std::vector <cv::Rect> rect, rect_;			// rectangles englobants des blobs
 	std::vector <double> taille;				// aires des blobs
 

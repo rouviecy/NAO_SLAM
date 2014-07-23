@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
 		if(key == 's'){
 			mkdir(("./output/" + to_string(compteur)).c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
 			vector <cv::Mat> liste_vignettes;
-			vector < vector <cv::Point2f> > liste_quadrillage = reco.Get_quadrillage();
+			vector < vector <cv::Point2i> > liste_quadrillage = reco.Get_quadrillage();
 			for(int i = 0; i < liste_quadrillage.size(); i++){
 				// transformation
 				transfo.Set_img(flux.Get_cam());

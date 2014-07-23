@@ -41,8 +41,8 @@ int main(){
 		blobs.Trouver_blobs();
 		// relier les points
 		image_equi = cv::Mat::zeros(flux.Get_prev().size(), flux.Get_prev().type());
-		std::vector <cv::Point2f> points = blobs.Get_mc();
-		std::vector <cv::Point2f> pts1, pts2;
+		std::vector <cv::Point2i> points = blobs.Get_mc();
+		std::vector <cv::Point2i> pts1, pts2;
 		std::vector <double> aires = blobs.Get_size();
 		for(size_t i = 0; i < points.size(); i++){
 			cv::circle(image_equi, points[i], sqrt(aires[i]) / 3, bleu, -1, 8, 0);

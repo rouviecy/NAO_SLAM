@@ -36,8 +36,8 @@ int main(){
 		blobs.Separer();
 		blobs.Trouver_blobs();
 		// relier les points
-		std::vector <cv::Point2f> points = blobs.Get_mc();
-		std::vector <cv::Point2f> pts1, pts2;
+		std::vector <cv::Point2i> points = blobs.Get_mc();
+		std::vector <cv::Point2i> pts1, pts2;
 		for(size_t i = 0; i < points.size(); i++){
 			for(size_t j = 0; j < points.size(); j++){
 				if(i != j){

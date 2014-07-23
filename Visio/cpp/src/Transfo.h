@@ -22,9 +22,9 @@ public:
 	Transfo();
 
 	cv::Mat Get_img_wrap() const;					// Guetter sur l'image transformée par perspective
-	std::vector <cv::Point2f> Get_center() const;
+	std::vector <cv::Point2i> Get_center() const;
 	void Set_img(cv::Mat image);					// Setter d'image à traiter
-	void Set_pts_redressement(std::vector <cv::Point2f> pts_input);
+	void Set_pts_redressement(std::vector <cv::Point2i> pts_input);
 
 	void Definir_parametres_transformation(STRUCT_WRAP_BOUND *wrap);
 	void Appliquer_wrap_from_pts_input(size_t NB, cv::Size taille_sortie = cv::Size(0, 0), cv::Size retrait_bords = cv::Size(0, 0));
@@ -39,8 +39,8 @@ private:
 	cv::Mat img_brute;
 	cv::Mat img_wrap;
 
-	std::vector <cv::Point2f> pts_input;
-	std::vector <cv::Point2f> center;
+	std::vector <cv::Point2i> pts_input;
+	std::vector <cv::Point2i> center;
 
 };
 

@@ -37,7 +37,7 @@ bool Tracking::Try_match(){
 	GoodFeatures(NB);
 	if(amers.size() < NB){cout << "error" << endl;}
 	orientation = -1;
-	cv::Mat rot_90 = cv::getRotationMatrix2D(cv::Point2f(img_next.size().width / 2, img_next.size().height / 2), 90, 1);
+	cv::Mat rot_90 = cv::getRotationMatrix2D(cv::Point2i(img_next.size().width / 2, img_next.size().height / 2), 90, 1);
 	for(int i = 0; i < 4; i++){
 		Tracker();
 		if(Get_nv().size() > NB/2){
@@ -58,7 +58,24 @@ void Tracking::Set_img_next(cv::Mat image){
 	image.copyTo(img_next);
 	cv::cvtColor(img_next, img_next_nvg, CV_RGB2GRAY, 1);
 }
-void Tracking::Set_amers(std::vector <cv::Point2f> amers){this->amers = amers;}
-std::vector <cv::Point2f> Tracking::Get_amers() const{return amers;}
-std::vector <cv::Point2f> Tracking::Get_nv() const{return nv;}
+void Tracking::Set_amers(std::vector <cv::Point2i> amers){
+	this->amers.clear();
+	for(int i = 0; i < amers.size(); i++){
+		this->amers.push_back(cv::Point2f(amers[i].x, amers[i].y));
+	}
+}
+vector <cv::Point2i> Tracking::Get_amers(){
+	vector <cv::Point2i> resultat;
+	for(int i = 0; i < amers.size(); i++){
+		resultat.push_back(cv::Point2i(amers[i].x, amers[i].y));
+	}
+	return resultat;
+}
+vector <cv::Point2i> Tracking::Get_nv(){
+	vector <cv::Point2i> resultat;
+	for(int i = 0; i < nv.size(); i++){
+		resultat.push_back(cv::Point2i(nv[i].x, nv[i].y));
+	}
+	return resultat;
+}
 int Tracking::Get_orientation() const{return orientation;}
