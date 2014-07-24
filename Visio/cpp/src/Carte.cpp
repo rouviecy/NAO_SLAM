@@ -177,8 +177,24 @@ void Carte::Traiter_buffer(){
 void Carte::Lier_vignettes(int id_fixe, cv::Mat image, int rotation, int dx, int dy, vector <cv::Point2i> quad){
 	STRUCT_VIGNETTE nouveau = New_vignette(image, quad);
 	nouveau.orientation =	(liste[id_fixe].orientation + rotation) % 4;
-	nouveau.x =		liste[id_fixe].x + dx;
-	nouveau.y =		liste[id_fixe].y + dy;
+	switch(liste[id_fixe].orientation){
+		case 0:
+			nouveau.x = liste[id_fixe].x + dx;
+			nouveau.y = liste[id_fixe].y + dy;
+			break;
+		case 1:
+			nouveau.x = liste[id_fixe].x - dy;
+			nouveau.y = liste[id_fixe].y + dx;
+			break;
+		case 2:
+			nouveau.x = liste[id_fixe].x - dx;
+			nouveau.y = liste[id_fixe].y - dy;
+			break;
+		case 3:
+			nouveau.x = liste[id_fixe].x + dy;
+			nouveau.y = liste[id_fixe].y - dx;
+			break;
+	}
 	nouveau.A =		quad[0];
 	nouveau.B =		quad[1];
 	nouveau.C =		quad[2];

@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
 				cv::Mat img_redressee;
 				transfo.Set_img(flux.Get_cam());
 				transfo.Set_pts_redressement(liste_quadrillage[i]);
-				transfo.Appliquer_wrap_from_pts_input(4, cv::Size(200, 200), cv::Size(10, 10));
+				transfo.Appliquer_wrap_from_pts_input(4, cv::Size(201, 201), cv::Size(10, 10));
 				transfo.Get_img_wrap().copyTo(img_redressee);
 				imwrite("./output/" + to_string(compteur) + "/img_" + to_string(i) + ".png", img_redressee);
 				carte.Remplir_buffer(img_redressee, liste_quadrillage[i]);
