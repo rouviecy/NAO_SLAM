@@ -67,6 +67,7 @@ int main(int argc, char *argv[]){
 				carte.Remplir_buffer(img_redressee, liste_quadrillage[i]);
 			}
 			carte.Traiter_buffer();
+			carte.Print();
 			key = 'a';
 			compteur++;
 		}

@@ -23,6 +23,7 @@ public:
 	void Remplir_buffer(cv::Mat image, std::vector <cv::Point2i> quad);
 	void Traiter_buffer();
 	void Clear();
+	void Print();
 
 private:
 

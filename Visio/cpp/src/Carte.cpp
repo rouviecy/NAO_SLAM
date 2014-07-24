@@ -168,8 +168,9 @@ void Carte::Traiter_buffer(){
 					}
 				}
 			}
-			if(casser){cout << "yo" << endl;break;}
+			if(casser){break;}
 		}
+		if(!casser){break;}
 	}
 }
 
@@ -227,6 +228,16 @@ void Carte::Clear(){
 	buffer_img.clear();
 	buffer_quad.clear();
 	is_empty = true;
+}
+
+void Carte::Print(){
+	int min_x = 0, max_x = 0, min_y = 0, max_y = 0;
+	for(size_t i = 0; i < liste.size(); i++){
+		if(liste[i].x < min_x){min_x = liste[i].x;}
+		if(liste[i].x > max_x){max_x = liste[i].x;}
+		if(liste[i].y < min_y){min_y = liste[i].y;}
+		if(liste[i].y > max_y){max_y = liste[i].y;}
+	}
 }
 
 STRUCT_VIGNETTE Carte::New_vignette(cv::Mat image, vector <cv::Point2i> quad){
