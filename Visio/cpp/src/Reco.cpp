@@ -150,10 +150,45 @@ void Reco::Detecter_quadrillage(){
 			quadrillage.push_back(cv::Point2i(A.x, A.y));
 			quadrillage.push_back(cv::Point2i(B.x, B.y));
 			quadrillage.push_back(cv::Point2i(C.x, C.y));
-			quadrillage.push_back(cv::Point2i(D.x, D.y)); 
-			liste_quadrillage.push_back(quadrillage);
+			quadrillage.push_back(cv::Point2i(D.x, D.y));
+			// Supprimer les doublons
+			bool unique = true;
+			for(size_t j = 0; j < liste_quadrillage.size(); j++){
+				if(
+				liste_quadrillage[j][0] == quadrillage[0] &&
+				liste_quadrillage[j][1] == quadrillage[1] &&
+				liste_quadrillage[j][2] == quadrillage[2] &&
+				liste_quadrillage[j][3] == quadrillage[3]){
+					unique = false;
+					break;
+				}
+				if(
+				liste_quadrillage[j][0] == quadrillage[1] &&
+				liste_quadrillage[j][1] == quadrillage[2] &&
+				liste_quadrillage[j][2] == quadrillage[3] &&
+				liste_quadrillage[j][3] == quadrillage[0]){
+					unique = false;
+					break;
+				}
+				if(
+				liste_quadrillage[j][0] == quadrillage[2] &&
+				liste_quadrillage[j][1] == quadrillage[3] &&
+				liste_quadrillage[j][2] == quadrillage[0] &&
+				liste_quadrillage[j][3] == quadrillage[1]){
+					unique = false;
+					break;
+				}
+				if(
+				liste_quadrillage[j][0] == quadrillage[3] &&
+				liste_quadrillage[j][1] == quadrillage[0] &&
+				liste_quadrillage[j][2] == quadrillage[1] &&
+				liste_quadrillage[j][3] == quadrillage[2]){
+					unique = false;
+					break;
+				}
+			}
+			if(unique){liste_quadrillage.push_back(quadrillage);}
 		}
-
 	}
 
 }
