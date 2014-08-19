@@ -34,136 +34,104 @@ void Carte::Traiter_buffer(){
 				if(Aj == Ai){
 					if(Dj == Bi){
 						Lier_vignettes(j, buffer_img[i], 3, -1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Di){
 						Lier_vignettes(j, buffer_img[i], 1, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Aj == Bi){
 					if(Dj == Ci){
 						Lier_vignettes(j, buffer_img[i], 0, -1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Ai){
 						Lier_vignettes(j, buffer_img[i], 2, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Aj == Ci){
 					if(Dj == Di){
 						Lier_vignettes(j, buffer_img[i], 1, -1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Bi){
 						Lier_vignettes(j, buffer_img[i], 3, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Aj == Di){
 					if(Dj == Ai){
 						Lier_vignettes(j, buffer_img[i], 2, -1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Ci){
 						Lier_vignettes(j, buffer_img[i], 0, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Ai){
 					if(Cj == Di){
 						Lier_vignettes(j, buffer_img[i], 0, +1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Bi){
 					if(Cj == Ai){
 						Lier_vignettes(j, buffer_img[i], 1, +1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Ci){
 					if(Cj == Bi){
 						Lier_vignettes(j, buffer_img[i], 2, +1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Di){
 					if(Cj == Ci){
 						Lier_vignettes(j, buffer_img[i], 3, +1, +0, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Ai){
 					if(Dj == Di){
 						Lier_vignettes(j, buffer_img[i], 3, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Bi){
 					if(Dj == Ai){
 						Lier_vignettes(j, buffer_img[i], 0, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Ci){
 					if(Dj == Bi){
 						Lier_vignettes(j, buffer_img[i], 1, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Di){
 					if(Dj == Ci){
 						Lier_vignettes(j, buffer_img[i], 2, +0, +1, buffer_quad[i]);
-						buffer_img.erase(buffer_img.begin() + i);
-						buffer_quad.erase(buffer_quad.begin() + i);
-						casser = true;
+						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
@@ -290,4 +258,10 @@ STRUCT_VIGNETTE Carte::New_vignette(cv::Mat image, vector <cv::Point2i> quad){
 	vignette.C =		quad[2];
 	vignette.D =		quad[3];
 	return vignette;
+}
+
+bool Carte::Enlever_element_buffer(int i){
+	buffer_img.erase(buffer_img.begin() + i);
+	buffer_quad.erase(buffer_quad.begin() + i);
+	return true;
 }
