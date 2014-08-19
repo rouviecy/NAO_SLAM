@@ -109,28 +109,28 @@ void Carte::Traiter_buffer(){
 				}
 				if(Cj == Ai){
 					if(Dj == Di){
-						Lier_vignettes(j, buffer_img[i], 3, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 3, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Bi){
 					if(Dj == Ai){
-						Lier_vignettes(j, buffer_img[i], 0, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 0, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Ci){
 					if(Dj == Bi){
-						Lier_vignettes(j, buffer_img[i], 1, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 1, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Di){
 					if(Dj == Ci){
-						Lier_vignettes(j, buffer_img[i], 2, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 2, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
@@ -237,7 +237,6 @@ cv::Mat Carte::Print(){
 		cv::Rect roi(cv::Point(pos_x, pos_y), taille);
 		cv::Mat destinationROI = map(roi);
 		vignette_rot.copyTo(destinationROI);
-	}
 Clear();
 	return map;
 }
