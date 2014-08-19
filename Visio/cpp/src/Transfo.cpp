@@ -39,9 +39,9 @@ void Transfo::Appliquer_wrap_from_pts_input(size_t NB, cv::Size taille_sortie, c
 		if(pts_input.size() != NB){return;}
 		int tab_index[4];
 		int tab_position_bords[4][2];
-		tab_position_bords[0][0] = 0;				tab_position_bords[0][1] = 0;
+		tab_position_bords[0][0] = 0;						tab_position_bords[0][1] = 0;
 		tab_position_bords[1][0] = img_brute.size().width;	tab_position_bords[1][1] = 0;
-		tab_position_bords[2][0] = 0;				tab_position_bords[2][1] = img_brute.size().height;
+		tab_position_bords[2][0] = 0;						tab_position_bords[2][1] = img_brute.size().height;
 		tab_position_bords[3][0] = img_brute.size().width;	tab_position_bords[3][1] = img_brute.size().height;
 		int dist_diag = img_brute.size().width * img_brute.size().width + img_brute.size().height * img_brute.size().height;
 		for(int j = 0; j < 4; j++){

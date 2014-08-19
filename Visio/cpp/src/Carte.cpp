@@ -169,42 +169,21 @@ void Carte::Lier_vignettes(int id_fixe, cv::Mat image, int rotation, int dx, int
 	nouveau.D =		quad[3];
 	if(dx == +0 && dy == +1){
 		liste[id_fixe].nord = liste.size();
-		switch(rotation){
-			case 0:	nouveau.sud = id_fixe;	break;
-			case 1:	nouveau.ouest = id_fixe;break;
-			case 2:	nouveau.nord = id_fixe;	break;
-			case 3:	nouveau.est = id_fixe;	break;
-		}
+		Nouveaux_cardinaux(&nouveau, rotation + 0, id_fixe);
 	}
 	if(dx == +0 && dy == -1){
 		liste[id_fixe].sud = liste.size();
-		switch(rotation){
-			case 0:	nouveau.nord = id_fixe;	break;
-			case 1:	nouveau.est = id_fixe;	break;
-			case 2:	nouveau.sud = id_fixe;	break;
-			case 3:	nouveau.ouest = id_fixe;break;
-		}
+		Nouveaux_cardinaux(&nouveau, rotation + 2, id_fixe);
 	}
 	if(dx == -1 && dy == +0){
 		liste[id_fixe].ouest = liste.size();
-		switch(rotation){
-			case 0:	nouveau.est = id_fixe;	break;
-			case 1:	nouveau.sud = id_fixe;	break;
-			case 2:	nouveau.ouest = id_fixe;break;
-			case 3:	nouveau.nord = id_fixe;	break;
-		}
+		Nouveaux_cardinaux(&nouveau, rotation + 1, id_fixe);
 	}
 	if(dx == +1 && dy == +0){
 		liste[id_fixe].est = liste.size();
-		switch(rotation){
-			case 0:	nouveau.ouest = id_fixe;break;
-			case 1:	nouveau.nord = id_fixe;	break;
-			case 2:	nouveau.est = id_fixe;	break;
-			case 3:	nouveau.sud = id_fixe;	break;
-		}
+		Nouveaux_cardinaux(&nouveau, rotation + 3, id_fixe);
 	}
 	liste.push_back(nouveau);
-	
 }
 
 void Carte::Clear(){
@@ -237,6 +216,7 @@ cv::Mat Carte::Print(){
 		cv::Rect roi(cv::Point(pos_x, pos_y), taille);
 		cv::Mat destinationROI = map(roi);
 		vignette_rot.copyTo(destinationROI);
+	}
 Clear();
 	return map;
 }
@@ -263,4 +243,13 @@ bool Carte::Enlever_element_buffer(int i){
 	buffer_img.erase(buffer_img.begin() + i);
 	buffer_quad.erase(buffer_quad.begin() + i);
 	return true;
+}
+
+void Carte::Nouveaux_cardinaux(STRUCT_VIGNETTE *nouveau, int somme, int id_fixe){
+	switch(somme % 4){
+		case 0:	nouveau->sud = id_fixe;		break;
+		case 1:	nouveau->ouest = id_fixe;	break;
+		case 2:	nouveau->nord = id_fixe;	break;
+		case 3:	nouveau->est = id_fixe;		break;
+	}
 }
