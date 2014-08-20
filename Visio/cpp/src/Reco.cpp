@@ -195,7 +195,37 @@ void Reco::Detecter_quadrillage(){
 
 // Mettre les cases du quadrillage dans la même orientation
 void Reco::Orienter_quadrillage(){
-	
+	if(liste_quadrillage.size() < 2){return;}
+//	cv::Point2i A0 = liste_quadrillage[0][0];
+//	cv::Point2i B0 = liste_quadrillage[0][1];
+cv::Point2i A0 = cv::Point2i(0, 0);
+cv::Point2i B0 = cv::Point2i(0, 100);
+	cv::Point2i u0 = B0 - A0;
+	for(size_t i = 1; i < liste_quadrillage.size(); i++){
+		int index_max = 0;
+		int polarisation_max = 0;
+		for(int j = 0; j < 4; j++){
+			cv::Point2i Aij = liste_quadrillage[i][j % 4];
+			cv::Point2i Bij = liste_quadrillage[i][(j + 1) % 4];
+			cv::Point2i uj = Bij - Aij;
+			int polarisation = u0.x * uj.x + u0.y * uj.y;
+			if(polarisation > polarisation_max){
+				polarisation_max = polarisation;
+				index_max = j;
+			}
+		}
+		if(index_max == 0){continue;}
+		cv::Point2i old_Ai = liste_quadrillage[i][0];
+		cv::Point2i old_Bi = liste_quadrillage[i][1];
+		cv::Point2i old_Ci = liste_quadrillage[i][2];
+		cv::Point2i old_Di = liste_quadrillage[i][3];
+		for(int j = 0; j < 4; j++){
+			liste_quadrillage[i][(j + index_max + 0) % 4] = old_Ai;
+			liste_quadrillage[i][(j + index_max + 1) % 4] = old_Bi;
+			liste_quadrillage[i][(j + index_max + 2) % 4] = old_Ci;
+			liste_quadrillage[i][(j + index_max + 3) % 4] = old_Di;
+		}
+	}
 }
 
 // Si deux droites sont (quasi-)confondues
