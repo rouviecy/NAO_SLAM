@@ -193,6 +193,11 @@ void Reco::Detecter_quadrillage(){
 
 }
 
+// Mettre les cases du quadrillage dans la même orientation
+void Reco::Orienter_quadrillage(){
+	
+}
+
 // Si deux droites sont (quasi-)confondues
 bool Reco::Confondus(cv::Vec4i a, cv::Vec4i b) const{
 	int xA = a[0], yA = a[1], xB = a[2], yB = a[3];

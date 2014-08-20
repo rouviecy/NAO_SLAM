@@ -30,6 +30,7 @@ public:
 	cv::Mat Get_img_quadrillage() const;
 	std::vector < std::vector <cv::Point2i> > Get_quadrillage() const;
 	void Detecter_quadrillage();
+	void Orienter_quadrillage();
 	std::vector <bool> Test_circle();
 	std::vector <cv::Point2i> Test_inclusion(const int dist_max);
 

@@ -54,6 +54,7 @@ int main(int argc, char *argv[]){
 		// détecter le quadrillage
 		reco.Set_img(flou);
 		reco.Detecter_quadrillage();
+		reco.Orienter_quadrillage();
 		if(key == 's'){
 			mkdir(("./output/" + to_string(compteur)).c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
 			vector < vector <cv::Point2i> > liste_quadrillage = reco.Get_quadrillage();
