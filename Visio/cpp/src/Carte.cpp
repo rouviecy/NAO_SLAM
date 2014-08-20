@@ -33,104 +33,104 @@ void Carte::Traiter_buffer(){
 				cv::Point2i Dj = liste[j].D;
 				if(Aj == Ai){
 					if(Dj == Bi){
-						Lier_vignettes(j, buffer_img[i], 3, -1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 3, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Di){
-						Lier_vignettes(j, buffer_img[i], 1, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 1, -1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Aj == Bi){
 					if(Dj == Ci){
-						Lier_vignettes(j, buffer_img[i], 0, -1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 0, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Ai){
-						Lier_vignettes(j, buffer_img[i], 2, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 2, -1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Aj == Ci){
 					if(Dj == Di){
-						Lier_vignettes(j, buffer_img[i], 1, -1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 1, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Bi){
-						Lier_vignettes(j, buffer_img[i], 3, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 3, -1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Aj == Di){
 					if(Dj == Ai){
-						Lier_vignettes(j, buffer_img[i], 2, -1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 2, +0, -1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 					if(Bj == Ci){
-						Lier_vignettes(j, buffer_img[i], 0, +0, +1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 0, -1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Ai){
 					if(Cj == Di){
-						Lier_vignettes(j, buffer_img[i], 0, +1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 0, +0, +1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Bi){
 					if(Cj == Ai){
-						Lier_vignettes(j, buffer_img[i], 1, +1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 1, +0, +1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Ci){
 					if(Cj == Bi){
-						Lier_vignettes(j, buffer_img[i], 2, +1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 2, +0, +1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Bj == Di){
 					if(Cj == Ci){
-						Lier_vignettes(j, buffer_img[i], 3, +1, +0, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 3, +0, +1, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Ai){
 					if(Dj == Di){
-						Lier_vignettes(j, buffer_img[i], 3, +0, -1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 3, +1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Bi){
 					if(Dj == Ai){
-						Lier_vignettes(j, buffer_img[i], 0, +0, -1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 0, +1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Ci){
 					if(Dj == Bi){
-						Lier_vignettes(j, buffer_img[i], 1, +0, -1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 1, +1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
 				}
 				if(Cj == Di){
 					if(Dj == Ci){
-						Lier_vignettes(j, buffer_img[i], 2, +0, -1, buffer_quad[i]);
+						Lier_vignettes(j, buffer_img[i], 2, +1, +0, buffer_quad[i]);
 						casser = Enlever_element_buffer(i);
 						break;
 					}
@@ -167,19 +167,19 @@ void Carte::Lier_vignettes(int id_fixe, cv::Mat image, int rotation, int dx, int
 	nouveau.B =		quad[1];
 	nouveau.C =		quad[2];
 	nouveau.D =		quad[3];
-	if(dx == +0 && dy == +1){
+	if(dx == -1 && dy == +0){
 		liste[id_fixe].nord = liste.size();
 		Nouveaux_cardinaux(&nouveau, rotation + 0, id_fixe);
 	}
-	if(dx == +0 && dy == -1){
+	if(dx == +1 && dy == +0){
 		liste[id_fixe].sud = liste.size();
 		Nouveaux_cardinaux(&nouveau, rotation + 2, id_fixe);
 	}
-	if(dx == -1 && dy == +0){
+	if(dx == +0 && dy == -1){
 		liste[id_fixe].ouest = liste.size();
 		Nouveaux_cardinaux(&nouveau, rotation + 1, id_fixe);
 	}
-	if(dx == +1 && dy == +0){
+	if(dx == +0 && dy == +1){
 		liste[id_fixe].est = liste.size();
 		Nouveaux_cardinaux(&nouveau, rotation + 3, id_fixe);
 	}
