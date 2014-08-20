@@ -195,13 +195,19 @@ void Reco::Detecter_quadrillage(){
 
 // Mettre les cases du quadrillage dans la même orientation
 void Reco::Orienter_quadrillage(){
-	if(liste_quadrillage.size() < 2){return;}
-//	cv::Point2i A0 = liste_quadrillage[0][0];
-//	cv::Point2i B0 = liste_quadrillage[0][1];
-cv::Point2i A0 = cv::Point2i(0, 0);
-cv::Point2i B0 = cv::Point2i(0, 100);
-	cv::Point2i u0 = B0 - A0;
-	for(size_t i = 1; i < liste_quadrillage.size(); i++){
+	if(liste_quadrillage.size() == 0){return;}
+	cv::Point2i u0(0, 100);
+	for(size_t i = 0; i < liste_quadrillage.size(); i++){
+		cv::Point2i old_Ai = liste_quadrillage[i][0];
+		cv::Point2i old_Bi = liste_quadrillage[i][1];
+		cv::Point2i old_Ci = liste_quadrillage[i][2];
+		cv::Point2i old_Di = liste_quadrillage[i][3];
+		cv::Point2i uj0 = old_Bi - old_Ai;
+		cv::Point2i uj1 = old_Ci - old_Bi;
+		if(uj0.x * uj1.y - uj1.x * uj0.y > 0){
+			liste_quadrillage[i][1] = old_Di;
+			liste_quadrillage[i][3] = old_Bi;
+		}
 		int index_max = 0;
 		int polarisation_max = 0;
 		for(int j = 0; j < 4; j++){
@@ -215,10 +221,10 @@ cv::Point2i B0 = cv::Point2i(0, 100);
 			}
 		}
 		if(index_max == 0){continue;}
-		cv::Point2i old_Ai = liste_quadrillage[i][0];
-		cv::Point2i old_Bi = liste_quadrillage[i][1];
-		cv::Point2i old_Ci = liste_quadrillage[i][2];
-		cv::Point2i old_Di = liste_quadrillage[i][3];
+		old_Ai = liste_quadrillage[i][0];
+		old_Bi = liste_quadrillage[i][1];
+		old_Ci = liste_quadrillage[i][2];
+		old_Di = liste_quadrillage[i][3];
 		for(int j = 0; j < 4; j++){
 			liste_quadrillage[i][(j + index_max + 0) % 4] = old_Ai;
 			liste_quadrillage[i][(j + index_max + 1) % 4] = old_Bi;
