@@ -22,6 +22,7 @@ public:
 	Arbre();
 	
 	void Add_cases(std::vector <STRUCT_VIGNETTE> new_liste);
+	cv::Mat Print(bool numeros);
 
 
 private:

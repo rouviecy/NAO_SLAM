@@ -72,7 +72,7 @@ int main(int argc, char *argv[]){
 			}
 			carte.Traiter_buffer();
 			arbre.Add_cases(carte.Get_cases());
-			cv::imshow("map", carte.Print(true));
+			cv::imshow("map", arbre.Print(true));
 			carte.Clear();
 			key = 'a';
 			compteur++;

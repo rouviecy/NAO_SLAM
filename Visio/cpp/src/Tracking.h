@@ -29,7 +29,7 @@ public:
 
 	void GoodFeatures(const int nb_max_amers);		// générer des amers intéressants
 	bool Tracker();						// trouver les points à tracker dans l'image suivante
-	bool Try_match();					// Vérifier si les deux images dans le buffer sont similaires, avec les 4 rotations possibles
+	bool Try_match(int nb_test, int minimum);		// Vérifier si les deux images dans le buffer sont similaires, avec les 4 rotations possibles
 
 private:
 

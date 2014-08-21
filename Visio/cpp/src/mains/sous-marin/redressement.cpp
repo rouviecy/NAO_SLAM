@@ -72,7 +72,7 @@ int main(int argc, char *argv[]){
 					for(size_t i = 0; i < liste_vignettes.size() ; i++){
 						tracking.Set_img_prev(old_img);
 						tracking.Set_img_next(liste_vignettes[i]);
-						if(tracking.Try_match()){cout << "\tok avec " << k+1 << "-" << i << " avec orientation " << 90*tracking.Get_orientation() << "°" << endl;}
+						if(tracking.Try_match(10, 5)){cout << "\tok avec " << k+1 << "-" << i << " avec orientation " << 90*tracking.Get_orientation() << "°" << endl;}
 					}
 				}
 			}
