@@ -28,6 +28,7 @@ set(INCLUDE_PATHS
 include_directories(${INCLUDE_PATHS})
 
 add_library(MYLIBS
+	src/Arbre.h		src/Arbre.cpp
 	src/Blobs.h		src/Blobs.cpp
 	src/Body.h		src/Body.cpp
 	src/Calibrate.h		src/Calibrate.cpp

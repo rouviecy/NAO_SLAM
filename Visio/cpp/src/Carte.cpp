@@ -253,3 +253,5 @@ void Carte::Nouveaux_cardinaux(STRUCT_VIGNETTE *nouveau, int somme, int id_fixe)
 		case 3:	nouveau->est = id_fixe;		break;
 	}
 }
+
+std::vector <STRUCT_VIGNETTE> Carte::Get_cases() const{return liste;}
