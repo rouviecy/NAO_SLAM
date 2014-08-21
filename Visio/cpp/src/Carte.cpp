@@ -207,10 +207,9 @@ cv::Mat Carte::Print(){
 	int map_h = vignette_h * (max_y - min_y + 1);
 	cv::Mat map(cv::Size(map_w, map_h), liste[0].image.type(), cv::Scalar(0, 0, 0));
 	for(size_t i = 0; i < liste.size(); i++){
-cout << liste[i].A << " | " << liste[i].B << " | " << liste[i].C << " | " << liste[i].D << endl;
 		cv::Size taille = liste[i].image.size();
 		cv::Mat vignette_rot;
-		cv::Mat mat_rot = cv::getRotationMatrix2D(cv::Point2i(taille.width / 2, taille.height / 2), liste[i].orientation * 90, 1);
+		cv::Mat mat_rot = cv::getRotationMatrix2D(cv::Point2i(taille.width / 2, taille.height / 2), - liste[i].orientation * 90, 1);
 		cv::warpAffine(liste[i].image, vignette_rot, mat_rot, taille);
 		int pos_x = vignette_w * (liste[i].x - min_x);
 		int pos_y = vignette_h * (liste[i].y - min_y);
