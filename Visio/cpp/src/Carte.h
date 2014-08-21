@@ -24,7 +24,7 @@ public:
 	void Traiter_buffer();
 	void Clear();
 	cv::Mat Print();
-	std::vector <STRUCT_VIGNETTE> Get_cases() const;
+	std::vector <STRUCT_VIGNETTE> Get_cases();
 
 private:
 

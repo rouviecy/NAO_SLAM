@@ -18,6 +18,7 @@
 #include "../../Reco.h"
 #include "../../IO_file.h"
 #include "../../Carte.h"
+#include "../../Arbre.h"
 
 #include <opencv2/opencv.hpp>
 
@@ -37,6 +38,7 @@ int main(int argc, char *argv[]){
 	Reco reco;
 	IO_file io;
 	Carte carte;
+	Arbre arbre;
 	Tracking tracking(40);
 	int compteur = 0;
 	int force_blur = atoi(argv[1]);
@@ -69,7 +71,9 @@ int main(int argc, char *argv[]){
 				carte.Remplir_buffer(img_redressee, liste_quadrillage[i]);
 			}
 			carte.Traiter_buffer();
+			arbre.Add_cases(carte.Get_cases());
 			cv::imshow("map", carte.Print());
+			carte.Clear();
 			key = 'a';
 			compteur++;
 		}

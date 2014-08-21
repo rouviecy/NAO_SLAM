@@ -194,6 +194,7 @@ void Carte::Clear(){
 }
 
 cv::Mat Carte::Print(){
+	if(liste.size() == 0){return cv::Mat();}
 	int min_x = 0, max_x = 0, min_y = 0, max_y = 0;
 	int vignette_w = liste[0].image.size().width;
 	int vignette_h = liste[0].image.size().height;
@@ -217,7 +218,6 @@ cv::Mat Carte::Print(){
 		cv::Mat destinationROI = map(roi);
 		vignette_rot.copyTo(destinationROI);
 	}
-Clear();
 	return map;
 }
 
@@ -254,4 +254,4 @@ void Carte::Nouveaux_cardinaux(STRUCT_VIGNETTE *nouveau, int somme, int id_fixe)
 	}
 }
 
-std::vector <STRUCT_VIGNETTE> Carte::Get_cases() const{return liste;}
+std::vector <STRUCT_VIGNETTE> Carte::Get_cases(){return liste;}
