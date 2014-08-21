@@ -193,7 +193,7 @@ void Carte::Clear(){
 	is_empty = true;
 }
 
-cv::Mat Carte::Print(){
+cv::Mat Carte::Print(bool numeros){
 	if(liste.size() == 0){return cv::Mat();}
 	int min_x = 0, max_x = 0, min_y = 0, max_y = 0;
 	int vignette_w = liste[0].image.size().width;
@@ -217,6 +217,8 @@ cv::Mat Carte::Print(){
 		cv::Rect roi(cv::Point(pos_x, pos_y), taille);
 		cv::Mat destinationROI = map(roi);
 		vignette_rot.copyTo(destinationROI);
+		if(numeros){cv::putText(destinationROI, to_string(i), cv::Point2i(vignette_w / 2, vignette_h / 2), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 0), 2);}
+
 	}
 	return map;
 }

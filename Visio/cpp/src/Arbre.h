@@ -12,6 +12,7 @@
 #define ARBRE
 
 #include <opencv2/opencv.hpp>
+#include "Tracking.h"
 #include "struct_vignette.h"
 
 class Arbre{
@@ -20,10 +21,16 @@ public:
 
 	Arbre();
 	
-	void Add_cases(std::vector <STRUCT_VIGNETTE> liste);
+	void Add_cases(std::vector <STRUCT_VIGNETTE> new_liste);
 
 
 private:
+
+	std::vector <STRUCT_VIGNETTE> liste;
+	
+	Tracking tracking;
+	
+	void Copy_cells(std::vector <STRUCT_VIGNETTE> new_liste);
 
 };
 

@@ -23,7 +23,7 @@ public:
 	void Remplir_buffer(cv::Mat image, std::vector <cv::Point2i> quad);
 	void Traiter_buffer();
 	void Clear();
-	cv::Mat Print();
+	cv::Mat Print(bool numeros);
 	std::vector <STRUCT_VIGNETTE> Get_cases();
 
 private:

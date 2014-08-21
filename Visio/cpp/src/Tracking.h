@@ -18,7 +18,7 @@ class Tracking{
 
 public:
 
-	Tracking(const int vitesse_max);
+	Tracking(const int vitesse_max = 40);
 
 	void Set_img_prev(cv::Mat img_prev);			// setter image N-1
 	void Set_img_next(cv::Mat img_next);			// setter image N
