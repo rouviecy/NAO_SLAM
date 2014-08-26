@@ -14,6 +14,7 @@
 #include <opencv2/opencv.hpp>
 #include "Tracking.h"
 #include "struct_vignette.h"
+#include "Utils.h"
 
 class Arbre{
 

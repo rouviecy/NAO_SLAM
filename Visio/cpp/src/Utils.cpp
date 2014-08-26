@@ -19,3 +19,15 @@ int Utils::Distance_carree(int x1, int y1, int x2, int y2){
 bool Utils::In_img(cv::Point pt, int max_x, int max_y){
 	return pt.x > 0 && pt.x < max_x && pt.y > 0 && pt.y < max_y;
 }
+
+// Effectue une rotation 2D
+vector <int> Utils::Rot2D(int x, int y, int theta){
+	vector <int> resultat(2);
+	switch(theta){
+		case 0:	resultat[0] = +x; resultat[1] = +y; break;
+		case 1:	resultat[0] = -y; resultat[1] = +x; break;
+		case 2:	resultat[0] = -x; resultat[1] = -y; break;
+		case 3:	resultat[0] = +y; resultat[1] = -x; break;
+	}
+	return resultat;
+}

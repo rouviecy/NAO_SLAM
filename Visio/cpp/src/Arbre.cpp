@@ -26,39 +26,12 @@ void Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 		}
 	}
 	if(!found){return;}
-	switch(delta_theta){
-		case 0:
-			for(size_t i = 0; i < new_liste.size(); i++){
-				STRUCT_VIGNETTE nouveau = new_liste[i];
-				nouveau.x -= delta_x;
-				nouveau.y -= delta_y;
-				liste.push_back(nouveau);
-			}
-			break;
-		case 1:
-			for(size_t i = 0; i < new_liste.size(); i++){
-				STRUCT_VIGNETTE nouveau = new_liste[i];
-				nouveau.x += delta_y;
-				nouveau.y -= delta_x;
-				liste.push_back(nouveau);
-			}
-			break;
-		case 2:
-			for(size_t i = 0; i < new_liste.size(); i++){
-				STRUCT_VIGNETTE nouveau = new_liste[i];
-				nouveau.x += delta_x;
-				nouveau.y += delta_y;
-				liste.push_back(nouveau);
-			}
-			break;
-		case 3:
-			for(size_t i = 0; i < new_liste.size(); i++){
-				STRUCT_VIGNETTE nouveau = new_liste[i];
-				nouveau.x -= delta_y;
-				nouveau.y += delta_x;
-				liste.push_back(nouveau);
-			}
-			break;
+	for(size_t i = 0; i < new_liste.size(); i++){
+		STRUCT_VIGNETTE nouveau = new_liste[i];
+		vector <int> delta = Utils::Rot2D(delta_x, delta_y, delta_theta);
+		nouveau.x -= delta[0];
+		nouveau.y -= delta[1];
+		liste.push_back(nouveau);
 	}
 }
 
