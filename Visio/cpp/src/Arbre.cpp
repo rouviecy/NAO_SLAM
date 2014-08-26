@@ -3,8 +3,9 @@
 using namespace std;
 
 // Constructeur
-Arbre::Arbre(){
-		tracking = Tracking(40);
+Arbre::Arbre(bool allow_overwrite){
+	tracking = Tracking(40);
+	this->allow_overwrite = allow_overwrite;
 }
 
 // Ajouter des nouvelles cases à la carte en essayant de trouver des liens
@@ -31,8 +32,9 @@ void Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 		vector <int> delta = Utils::Rot2D(delta_x, delta_y, delta_theta);
 		nouveau.x -= delta[0];
 		nouveau.y -= delta[1];
-		liste.push_back(nouveau);
+		candidats.push_back(nouveau);
 	}
+	Overwrite_management();
 }
 
 // Copier les nouvelles cases dans l'arbre
@@ -72,3 +74,24 @@ cout << liste.size() << endl;
 	}
 	return map;
 }
+
+void Arbre::Overwrite_management(){
+	vector <STRUCT_VIGNETTE> ::iterator it1, it2;
+	for(it1 = candidats.begin(); it1 != candidats.end(); it1++){
+		int test_x = it1->x, test_y = it1->y;
+		for(it2 = it1 + 1; it2 != candidats.end(); it2++){
+			if(test_x == it2->x && test_y == it2->y){
+				candidats.erase(it2); it2--;
+			}
+		}
+		bool ajouter = true;
+		for(it2 = liste.begin(); it2 != liste.end(); it2++){
+			if(test_x == it2->x && test_y == it2->y){
+				ajouter = false; break;
+			}
+		}
+		if(ajouter){liste.push_back(*it1);}
+	}
+}
+
+void Arbre::Set_overwrite(bool allow_overwrite){this->allow_overwrite = allow_overwrite;}

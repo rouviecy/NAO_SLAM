@@ -20,18 +20,22 @@ class Arbre{
 
 public:
 
-	Arbre();
-	
+	Arbre(bool allow_overwrite = false);
+
+	void Set_overwrite(bool allow_overwrite);
 	void Add_cases(std::vector <STRUCT_VIGNETTE> new_liste);
 	cv::Mat Print(bool numeros);
 
 
 private:
 
-	std::vector <STRUCT_VIGNETTE> liste;
-	
+	std::vector <STRUCT_VIGNETTE> liste, candidats;
+
 	Tracking tracking;
-	
+
+	bool allow_overwrite;
+
+	void Overwrite_management();
 	void Copy_cells(std::vector <STRUCT_VIGNETTE> new_liste);
 
 };

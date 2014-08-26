@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 	Reco reco;
 	IO_file io;
 	Carte carte;
-	Arbre arbre;
+	Arbre arbre(false);
 	Tracking tracking(40);
 	int compteur = 0;
 	int force_blur = atoi(argv[1]);
