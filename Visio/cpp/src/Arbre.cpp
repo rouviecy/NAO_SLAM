@@ -20,9 +20,8 @@ void Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 			if(tracking.Try_match(30, 20)){
 				delta_x = new_liste[i].x - liste[j].x;	x_orig = new_liste[i].x;
 				delta_y = new_liste[i].y - liste[j].y;	y_orig = new_liste[i].y;
-				delta_theta =  ( tracking.Get_orientation() - (new_liste[i].orientation + liste[j].orientation)) % 4;
+				delta_theta =  ( tracking.Get_orientation() - (new_liste[i].orientation - liste[j].orientation)) % 4;
 				if(delta_theta < 0){delta_theta += 4;}
-cout << "n°" << j << " theta = " << delta_theta << " | tracking = " << tracking.Get_orientation() << " | new = " << new_liste[i].orientation << " | old = " << liste[j].orientation << endl;
 				found = true;
 				break;
 			}
@@ -34,7 +33,7 @@ cout << "n°" << j << " theta = " << delta_theta << " | tracking = " << tracking
 		vector <int> delta = Utils::Rot2D(nouveau.x - x_orig, nouveau.y - y_orig, delta_theta);
 		nouveau.x = x_orig + delta[0] - delta_x;
 		nouveau.y = y_orig + delta[1] - delta_y;
-//		nouveau.orientation += delta_theta;
+		nouveau.orientation += delta_theta;
 		candidats.push_back(nouveau);
 	}
 	Overwrite_management();
