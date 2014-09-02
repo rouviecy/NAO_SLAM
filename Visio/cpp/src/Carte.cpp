@@ -218,7 +218,6 @@ cv::Mat Carte::Print(bool numeros){
 		cv::Mat destinationROI = map(roi);
 		vignette_rot.copyTo(destinationROI);
 		if(numeros){cv::putText(destinationROI, to_string(i), cv::Point2i(vignette_w / 2, vignette_h / 2), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 0), 2);}
-
 	}
 	return map;
 }

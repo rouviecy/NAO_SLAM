@@ -34,16 +34,17 @@ void Tracking::GoodFeatures(const int nb_max_amers){
 // Vérifier si les deux images dans le buffer sont similaires, avec les 4 rotations possibles
 bool Tracking::Try_match(int nb_test, int minimum){
 	GoodFeatures(nb_test);
-	if(amers.size() < nb_test){cout << "error" << endl;}
+	vector <cv::Point2f> old_amers(amers);
 	orientation = -1;
-	cv::Mat rot_90 = cv::getRotationMatrix2D(cv::Point2i(img_next.size().width / 2, img_next.size().height / 2), 90, 1);
+	cv::Mat rot_90 = cv::getRotationMatrix2D(cv::Point2i(img_next_nvg.size().width / 2, img_next_nvg.size().height / 2), 90, 1);
 	for(int i = 0; i < 4; i++){
 		Tracker();
-		if(Get_nv().size() > minimum){
+		if(nv.size() > minimum){
 			orientation = i;
 			return true;
 		}
-		cv::warpAffine(img_next, img_next, rot_90, img_next.size());
+		cv::warpAffine(img_next_nvg, img_next_nvg, rot_90, img_next_nvg.size());
+		amers = vector <cv::Point2f> (old_amers);
 	}
 	return false;
 }
