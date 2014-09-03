@@ -43,7 +43,6 @@ int main(int argc, char *argv[]){
 	int compteur = 0;
 	int force_blur = atoi(argv[1]);
 	cv::Size kernel_blur(force_blur, force_blur);
-	cv::namedWindow("map", cv::WINDOW_NORMAL);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
 	while(key != 'q'){
@@ -72,6 +71,7 @@ int main(int argc, char *argv[]){
 			}
 			carte.Traiter_buffer();
 			multimap.Add_map(carte.Get_cases());
+			multimap.Show_maps();
 			carte.Clear();
 			key = 'a';
 			compteur++;

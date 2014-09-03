@@ -22,11 +22,13 @@ public:
 	Multimap();
 	
 	void Add_map(std::vector <STRUCT_VIGNETTE> input);
+	void Show_maps();
 
 
 private:
 
 	std::vector <Arbre> liste_maps;
+	int nb_windows;
 	
 	void Create_map(std::vector <STRUCT_VIGNETTE> input);
 
