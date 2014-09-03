@@ -97,3 +97,4 @@ void Arbre::Overwrite_management(){
 }
 
 void Arbre::Set_overwrite(bool allow_overwrite){this->allow_overwrite = allow_overwrite;}
+vector <STRUCT_VIGNETTE> Arbre::get_liste() const{return liste;}

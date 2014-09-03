@@ -71,6 +71,7 @@ int main(int argc, char *argv[]){
 			}
 			carte.Traiter_buffer();
 			multimap.Add_map(carte.Get_cases());
+			multimap.Try_fusion();
 			multimap.Show_maps();
 			carte.Clear();
 			key = 'a';

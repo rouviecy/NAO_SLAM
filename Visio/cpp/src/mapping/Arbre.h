@@ -25,6 +25,7 @@ public:
 	void Set_overwrite(bool allow_overwrite);
 	bool Add_cases(std::vector <STRUCT_VIGNETTE> new_liste);
 	cv::Mat Print(bool numeros);
+	std::vector <STRUCT_VIGNETTE> get_liste() const;
 
 
 private:

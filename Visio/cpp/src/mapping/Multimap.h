@@ -22,6 +22,7 @@ public:
 	Multimap();
 	
 	void Add_map(std::vector <STRUCT_VIGNETTE> input);
+	void Try_fusion();
 	void Show_maps();
 
 

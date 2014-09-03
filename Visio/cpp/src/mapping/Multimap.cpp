@@ -25,6 +25,20 @@ void Multimap::Add_map(vector <STRUCT_VIGNETTE> input){
 	if(!ajout_actif){Create_map(input);}
 }
 
+void Multimap::Try_fusion(){
+	vector <Arbre> ::iterator it1, it2;
+	for(it1 = liste_maps.begin(); it1 != liste_maps.end(); it1++){
+		bool ajout_actif = false;
+		for(it2 = it1 + 1; it2 != liste_maps.end(); it2++){
+			if(it1->Add_cases(it2->get_liste())){
+				liste_maps.erase(it2); it2--;
+				ajout_actif = true;
+				break;
+			}
+		}
+	}
+}
+
 void Multimap::Show_maps(){
 	for(int i = 0; i < liste_maps.size(); i++){
 		string name = "map" + to_string(i);
