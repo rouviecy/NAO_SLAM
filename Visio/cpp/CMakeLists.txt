@@ -28,11 +28,12 @@ set(INCLUDE_PATHS
 include_directories(${INCLUDE_PATHS})
 
 add_library(MYLIBS
-	src/Arbre.h		src/Arbre.cpp
+	src/mapping/Arbre.h	src/mapping/Arbre.cpp
+	src/mapping/Carte.h	src/mapping/Carte.cpp
+	src/mapping/Multimap.h	src/mapping/Multimap.cpp
 	src/Blobs.h		src/Blobs.cpp
 	src/Body.h		src/Body.cpp
 	src/Calibrate.h		src/Calibrate.cpp
-	src/Carte.h		src/Carte.cpp
 	src/Flux_cam.h		src/Flux_cam.cpp
 	src/Gui.h		src/Gui.cpp
 	src/Instruments.h	src/Instruments.cpp

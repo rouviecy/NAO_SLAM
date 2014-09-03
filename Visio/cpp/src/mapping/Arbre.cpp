@@ -9,8 +9,8 @@ Arbre::Arbre(bool allow_overwrite){
 }
 
 // Ajouter des nouvelles cases à la carte en essayant de trouver des liens
-void Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
-	if(liste.size() == 0){Copy_cells(new_liste); return;}
+bool Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
+	if(liste.size() == 0){Copy_cells(new_liste); return true;}
 	int delta_x = 0, delta_y = 0, delta_theta = 0, x_orig = 0, y_orig = 0;
 	bool found = false;
 	for(size_t i = 0; i < new_liste.size() && !found; i++){
@@ -20,14 +20,14 @@ void Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 			if(tracking.Try_match(30, 20)){
 				delta_x = new_liste[i].x - liste[j].x;	x_orig = new_liste[i].x;
 				delta_y = new_liste[i].y - liste[j].y;	y_orig = new_liste[i].y;
-				delta_theta =  ( tracking.Get_orientation() - (new_liste[i].orientation - liste[j].orientation)) % 4;
+				delta_theta = (tracking.Get_orientation() - (new_liste[i].orientation - liste[j].orientation)) % 4;
 				if(delta_theta < 0){delta_theta += 4;}
 				found = true;
 				break;
 			}
 		}
 	}
-	if(!found){return;}
+	if(!found){return false;}
 	for(size_t i = 0; i < new_liste.size(); i++){
 		STRUCT_VIGNETTE nouveau = new_liste[i];
 		vector <int> delta = Utils::Rot2D(nouveau.x - x_orig, nouveau.y - y_orig, delta_theta);
@@ -37,6 +37,7 @@ void Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 		candidats.push_back(nouveau);
 	}
 	Overwrite_management();
+	return true;
 }
 
 // Copier les nouvelles cases dans l'arbre

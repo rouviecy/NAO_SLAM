@@ -12,9 +12,9 @@
 #define ARBRE
 
 #include <opencv2/opencv.hpp>
-#include "Tracking.h"
-#include "struct_vignette.h"
-#include "Utils.h"
+#include "../Tracking.h"
+#include "../struct_vignette.h"
+#include "../Utils.h"
 
 class Arbre{
 
@@ -23,7 +23,7 @@ public:
 	Arbre(bool allow_overwrite = false);
 
 	void Set_overwrite(bool allow_overwrite);
-	void Add_cases(std::vector <STRUCT_VIGNETTE> new_liste);
+	bool Add_cases(std::vector <STRUCT_VIGNETTE> new_liste);
 	cv::Mat Print(bool numeros);
 
 

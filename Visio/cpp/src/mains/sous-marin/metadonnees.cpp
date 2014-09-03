@@ -17,8 +17,8 @@
 #include "../../Tracking.h"
 #include "../../Reco.h"
 #include "../../IO_file.h"
-#include "../../Carte.h"
-#include "../../Arbre.h"
+#include "../../mapping/Carte.h"
+#include "../../mapping/Arbre.h"
 
 #include <opencv2/opencv.hpp>
 

@@ -12,7 +12,7 @@
 #define CARTE
 
 #include <opencv2/opencv.hpp>
-#include "struct_vignette.h"
+#include "../struct_vignette.h"
 
 class Carte{
 
