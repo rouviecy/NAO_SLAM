@@ -18,7 +18,7 @@
 #include "../../Reco.h"
 #include "../../IO_file.h"
 #include "../../mapping/Carte.h"
-#include "../../mapping/Arbre.h"
+#include "../../mapping/Multimap.h"
 
 #include <opencv2/opencv.hpp>
 
@@ -31,14 +31,14 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
-	char key = 'a';				// clef de contrôle du programme
+	char key = 'a';						// clef de contrôle du programme
 	Flux_cam flux(-1, 40, 1, 3, 0);		// initialisation du flux webcam (/dev/video0)
-	Gui gui;				// IHM
+	Gui gui;							// IHM
 	Transfo transfo;
 	Reco reco;
 	IO_file io;
 	Carte carte;
-	Arbre arbre(false);
+	Multimap multimap;
 	Tracking tracking(40);
 	int compteur = 0;
 	int force_blur = atoi(argv[1]);
@@ -71,8 +71,7 @@ int main(int argc, char *argv[]){
 				carte.Remplir_buffer(img_redressee, liste_quadrillage[i]);
 			}
 			carte.Traiter_buffer();
-			arbre.Add_cases(carte.Get_cases());
-			cv::imshow("map", arbre.Print(true));
+			multimap.Add_map(carte.Get_cases());
 			carte.Clear();
 			key = 'a';
 			compteur++;

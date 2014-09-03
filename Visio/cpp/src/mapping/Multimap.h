@@ -12,16 +12,23 @@
 #define MULTIMAP
 
 #include <opencv2/opencv.hpp>
+#include "Arbre.h"
+#include "../struct_vignette.h"
 
 class Multimap{
 
 public:
 
 	Multimap();
+	
+	void Add_map(std::vector <STRUCT_VIGNETTE> input);
 
 
 private:
 
+	std::vector <Arbre> liste_maps;
+	
+	void Create_map(std::vector <STRUCT_VIGNETTE> input);
 
 };
 
