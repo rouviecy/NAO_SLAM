@@ -6,9 +6,9 @@ from Configuration import Configuration as c
 
 class GUI(object):
 
-	def __init__(self, actionneur):
+	def __init__(self, serveur):
 		self.clock = pygame.time.Clock()
-		self.act = actionneur
+		self.serveur = serveur
 		self.initialisation()
 		self.rafraishissement()
 		self.bouclage()
@@ -30,11 +30,11 @@ class GUI(object):
 
 	def action_clavier(self, downing, key):
 		if		key == c.K_QUIT:	return False
-		elif	key == c.K_LEFT:	self.act.go_left(downing)
-		elif	key == c.K_RIGHT:	self.act.go_right(downing)
-		elif	key == c.K_UP:		self.act.go_up(downing)
-		elif	key == c.K_DOWN:	self.act.go_down(downing)
-		elif	key == c.K_INHIB:	self.act.inhiber(downing)
+		elif	key == c.K_LEFT:	self.serveur.go_left(downing)
+		elif	key == c.K_RIGHT:	self.serveur.go_right(downing)
+		elif	key == c.K_UP:		self.serveur.go_up(downing)
+		elif	key == c.K_DOWN:	self.serveur.go_down(downing)
+		elif	key == c.K_INHIB:	self.serveur.inhiber(downing)
 		return True
 
 	def action_joystick_bouton(self, bouton):
@@ -44,11 +44,11 @@ class GUI(object):
 
 	def action_joystick_axe(self, axe, valeur):
 		if axe == c.J_AXIS_WE:
-			if c.J_INTERVAL_L[0] <= valeur <= c.J_INTERVAL_L[1]:	self.act.go_left()
-			if c.J_INTERVAL_R[0] <= valeur <= c.J_INTERVAL_R[1]:	self.act.go_right()
+			if c.J_INTERVAL_L[0] <= valeur <= c.J_INTERVAL_L[1]:	self.serveur.go_left()
+			if c.J_INTERVAL_R[0] <= valeur <= c.J_INTERVAL_R[1]:	self.serveur.go_right()
 		if axe == c.J_AXIS_NS:
-			if c.J_INTERVAL_N[0] <= valeur <= c.J_INTERVAL_N[1]:	self.act.go_up()
-			if c.J_INTERVAL_S[0] <= valeur <= c.J_INTERVAL_S[1]:	self.act.go_down()
+			if c.J_INTERVAL_N[0] <= valeur <= c.J_INTERVAL_N[1]:	self.serveur.go_up()
+			if c.J_INTERVAL_S[0] <= valeur <= c.J_INTERVAL_S[1]:	self.serveur.go_down()
 
 	def bouclage(self):
 		continuer = True
