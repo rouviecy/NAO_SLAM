@@ -33,6 +33,7 @@ class GUI(object):
 		elif	key == c.K_RIGHT:	self.act.go_right(downing)
 		elif	key == c.K_UP:		self.act.go_up(downing)
 		elif	key == c.K_DOWN:	self.act.go_down(downing)
+		elif	key == c.K_INHIB:	self.act.inhiber(downing)
 		return True
 
 	def action_joystick_bouton(self, bouton):

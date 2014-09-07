@@ -5,12 +5,14 @@ class Actionneur(object):
 	def __init__(self):
 		self.rotation = 0
 		self.avance = 0
+		self.inhibation = False
 #		self.ssc = serial.Serial('/dev/ttyUSB0', 115200)
 
 	def go_left(self, activer):		self.modifier_vitesse(-1 if activer else +1, 0)
 	def go_right(self, activer):	self.modifier_vitesse(+1 if activer else -1, 0)
 	def go_up(self, activer):		self.modifier_vitesse(0, +1 if activer else -1)
 	def go_down(self, activer):		self.modifier_vitesse(0, -1 if activer else +1)
+	def inhiber(self, activer):		self.inhibation = activer
 
 	def modifier_vitesse(self, dx, dy):
 		self.rotation += dx
@@ -22,7 +24,7 @@ class Actionneur(object):
 		if self.avance < 0: str_av = "recule"
 		if self.avance > 0: str_av = "avance"
 		print str_rot + " et " + str_av
-		str_serial = self.serial_order(False)
+		str_serial = self.serial_order(self.inhibation)
 		print str_serial
 #		self.ssc.write(str_serial)
 		print "------------------------------------------"
