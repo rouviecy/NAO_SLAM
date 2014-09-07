@@ -4,6 +4,7 @@ class Configuration(object):
 	K_DOWN =		274
 	K_LEFT =		276
 	K_RIGHT =		275
+	K_INHIB =		105
 	K_QUIT =		113
 
 	J_INDEX =		0
