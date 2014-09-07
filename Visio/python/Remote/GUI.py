@@ -27,12 +27,12 @@ class GUI(object):
 	def rafraishissement(self):
 		pygame.display.flip()
 
-	def action_clavier(self, key):
+	def action_clavier(self, downing, key):
 		if		key == c.K_QUIT:	return False
-		elif	key == c.K_LEFT:	self.act.go_left()
-		elif	key == c.K_RIGHT:	self.act.go_right()
-		elif	key == c.K_UP:		self.act.go_up()
-		elif	key == c.K_DOWN:	self.act.go_down()
+		elif	key == c.K_LEFT:	self.act.go_left(downing)
+		elif	key == c.K_RIGHT:	self.act.go_right(downing)
+		elif	key == c.K_UP:		self.act.go_up(downing)
+		elif	key == c.K_DOWN:	self.act.go_down(downing)
 		return True
 
 	def action_joystick_bouton(self, bouton):
@@ -53,7 +53,8 @@ class GUI(object):
 		while continuer:
 			for event in pygame.event.get():
 				if		event.type == QUIT:				continuer = False
-				elif	event.type == KEYDOWN:			continuer = self.action_clavier(event.key)
+				elif	event.type == KEYDOWN:			continuer = self.action_clavier(True, event.key)
+				elif	event.type == KEYUP:			continuer = self.action_clavier(False, event.key)
 				elif	event.type == JOYBUTTONDOWN:	continuer = self.action_joystick_bouton(event.button)
 				elif	event.type == JOYAXISMOTION:	continuer = self.action_joystick_axe(event.axis, event.value)
 			continue
