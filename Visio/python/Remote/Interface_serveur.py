@@ -1,10 +1,30 @@
+# -*- coding: utf-8 -*-
+
+import socket
+import select
+import time
+
 class Interface_serveur(object):
+	
+	def __init__(self):
+		host = ''
+		port = 4242
+		self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.s.bind((host, port))
+		self.s.listen(5)
+		print("Écoute sur le port {}".format(port))
+		self.client, _ = self.s.accept()
 
-	def __init__(self, client):
-		self.client = client
+	def go_left(self, activer):		self.envoyer("gl" + ("1" if activer else "0"))
+	def go_right(self, activer):	self.envoyer("gr" + ("1" if activer else "0"))
+	def go_up(self, activer):		self.envoyer("gu" + ("1" if activer else "0"))
+	def go_down(self, activer):		self.envoyer("gd" + ("1" if activer else "0"))
+	def inhiber(self, activer):		self.envoyer("in" + ("1" if activer else "0"))
+	def quitter(self):
+		self.envoyer("bye")
+		time.sleep(1)
+		self.s.close()
 
-	def go_left(self, activer):		self.client.go_left(activer)
-	def go_right(self, activer):	self.client.go_right(activer)
-	def go_up(self, activer):		self.client.go_up(activer)
-	def go_down(self, activer):		self.client.go_down(activer)
-	def inhiber(self, activer):		self.client.inhiber(activer)
+	def envoyer(self, message):
+		self.client.send(message.encode())
+		

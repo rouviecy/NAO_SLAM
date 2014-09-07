@@ -12,6 +12,7 @@ class GUI(object):
 		self.initialisation()
 		self.rafraishissement()
 		self.bouclage()
+		self.serveur.quitter()
 
 	def initialisation(self):
 		pygame.init()
