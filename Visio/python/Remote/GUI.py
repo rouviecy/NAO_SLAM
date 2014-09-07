@@ -7,6 +7,7 @@ from Configuration import Configuration as c
 class GUI(object):
 
 	def __init__(self, actionneur):
+		self.clock = pygame.time.Clock()
 		self.act = actionneur
 		self.initialisation()
 		self.rafraishissement()
@@ -58,4 +59,4 @@ class GUI(object):
 				elif	event.type == KEYUP:			continuer = self.action_clavier(False, event.key)
 				elif	event.type == JOYBUTTONDOWN:	continuer = self.action_joystick_bouton(event.button)
 				elif	event.type == JOYAXISMOTION:	continuer = self.action_joystick_axe(event.axis, event.value)
-			continue
+			self.clock.tick(20)
