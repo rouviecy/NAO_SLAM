@@ -30,7 +30,7 @@ class Actionneur(object):
 		print "------------------------------------------"
 
 	def serial_order(self, immediat):
-		tempo = "" if immediat else " T1000"
+		tempo = "" if immediat else " T300"
 		if 		self.avance == +0 and self.rotation == -1:	return "#0 P1250" + tempo + " #1 P1750" + tempo + "\r"
 		elif	self.avance == +0 and self.rotation == +0:	return "#0 P1500" + tempo + " #1 P1500" + tempo + "\r"
 		elif	self.avance == +0 and self.rotation == +1:	return "#0 P1750" + tempo + " #1 P1250" + tempo + "\r"
