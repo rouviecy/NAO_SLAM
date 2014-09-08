@@ -41,8 +41,8 @@ class GUI(object):
 		return True
 
 	def action_joystick_bouton(self, bouton):
-		if		key == c.J_BUTTON_A:	print "A"
-		elif	key == c.J_BUTTON_B:	print "B"
+		if		bouton == c.J_BUTTON_A:	print "A"
+		elif	bouton == c.J_BUTTON_B:	print "B"
 		return True
 
 	def action_joystick_axe(self, axe, valeur):

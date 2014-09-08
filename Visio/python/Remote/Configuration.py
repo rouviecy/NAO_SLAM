@@ -12,9 +12,9 @@ class Configuration(object):
 	J_BUTTON_B =		2
 	J_AXIS_WE =			2
 	J_AXIS_NS =			1
-	J_INTERVAL_L =		[-2.0, -0.5]
-	J_INTERVAL_R =		[+0.5, +2.0]
-	J_INTERVAL_0WE =	[-0.3, +0.3]
+	J_INTERVAL_L =		[-2.0, -0.9]
+	J_INTERVAL_R =		[+0.9, +2.0]
+	J_INTERVAL_0WE =	[-0.8, +0.8]
 	J_INTERVAL_U =		[-2.0, -0.5]
 	J_INTERVAL_D =		[+0.5, +2.0]
 	J_INTERVAL_0NS =	[-0.3, +0.3]

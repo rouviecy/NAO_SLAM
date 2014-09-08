@@ -29,6 +29,7 @@ def bouclage():
 			if event.type == JOYBUTTONDOWN:
 				print "Appui sur le bouton joystick :\t" + str(event.button)
 			if event.type == JOYAXISMOTION:
+				if event.axis != 2 : continue
 				print "Mouvement d'axe :\t" + str(event.axis) + "\tà la position :\t" + str(event.value)
 		continue;
 
