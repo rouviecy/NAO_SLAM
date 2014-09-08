@@ -48,4 +48,11 @@ void Multimap::Show_maps(){
 		}
 		cv::imshow(name, liste_maps[i].Print(true));
 	}
+	int nouv_nb_windows = nb_windows;
+	for(int i = liste_maps.size(); i < nb_windows; i++){
+		string name = "map" + to_string(i);
+		cv::destroyWindow(name);
+		nouv_nb_windows--;
+	}
+	nb_windows = nouv_nb_windows;
 }

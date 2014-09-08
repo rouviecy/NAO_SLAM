@@ -17,7 +17,7 @@ bool Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 		tracking.Set_img_prev(new_liste[i].image);
 		for(size_t j = 0; j < liste.size(); j++){
 			tracking.Set_img_next(liste[j].image);
-			if(tracking.Try_match(30, 10)){
+			if(tracking.Try_match(30, 5)){
 				delta_x = new_liste[i].x - liste[j].x;	x_orig = new_liste[i].x;
 				delta_y = new_liste[i].y - liste[j].y;	y_orig = new_liste[i].y;
 				delta_theta = (tracking.Get_orientation() - (new_liste[i].orientation - liste[j].orientation)) % 4;
