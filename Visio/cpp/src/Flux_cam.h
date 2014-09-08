@@ -21,13 +21,14 @@ class Flux_cam{
 
 public:
 
-	Flux_cam();
-	Flux_cam(const int num_device, const int delais);
-	Flux_cam(	const int num_device,	// /dev/video[X]
-			const int delais,	// delais entre deux images
-			const int code_couleur,	// changement espace couleurs
-			const int lissage,	// flou de force lissage
-			const int flip);	// miroir (0 : aucun | 1 : selon x | 2 : selon y | 3 : selon x et y)
+	Flux_cam(
+		const int num_device =		-1,	// /dev/video[X] (-2 : réseau, -1 : auto)
+		const int delais =			40,	// delais entre deux images
+		const int code_couleur =	-1,	// changement espace couleurs
+		const int lissage =			-1,	// flou de force lissage
+		const int flip =			0,	// miroir (0 : aucun | 1 : selon x | 2 : selon y | 3 : selon x et y)
+		const char* adresse =		""	// URL d'un flux réseau
+	);
 
 	void Update();			// mettre à jour les images
 	char Get_key() const;		// getter sur la clé

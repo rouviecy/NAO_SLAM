@@ -31,9 +31,9 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
-	char key = 'a';						// clef de contrôle du programme
-	Flux_cam flux(-1, 40, 1, 3, 0);		// initialisation du flux webcam (/dev/video0)
-	Gui gui;							// IHM
+	char key = 'a';								// clef de contrôle du programme
+	Flux_cam flux(-2, 40, 1, 3, 3, argv[1]);	// initialisation du flux webcam (/dev/video0)
+	Gui gui;									// IHM
 	Transfo transfo;
 	Reco reco;
 	IO_file io;
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 	Multimap multimap;
 	Tracking tracking(40);
 	int compteur = 0;
-	int force_blur = atoi(argv[1]);
+	int force_blur = atoi(argv[2]);
 	cv::Size kernel_blur(force_blur, force_blur);
 
 	// boucle d'exécution : appuyer sur 'q' pour quitter
