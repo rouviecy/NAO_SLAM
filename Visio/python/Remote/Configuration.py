@@ -10,7 +10,7 @@ class Configuration(object):
 	J_INDEX =			0
 	J_BUTTON_A =		1
 	J_BUTTON_B =		2
-	J_AXIS_WE =			0
+	J_AXIS_WE =			2
 	J_AXIS_NS =			1
 	J_INTERVAL_L =		[-2.0, -0.5]
 	J_INTERVAL_R =		[+0.5, +2.0]
