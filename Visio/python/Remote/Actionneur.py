@@ -6,7 +6,7 @@ class Actionneur(object):
 		self.rotation = 0
 		self.avance = 0
 		self.inhibation = False
-#		self.ssc = serial.Serial('/dev/ttyUSB0', 115200)
+		self.ssc = serial.Serial('/dev/ttyUSB0', 115200)
 
 	def go_left(self, activer):		self.modifier_vitesse(-1 if activer else +1, 0)
 	def go_right(self, activer):	self.modifier_vitesse(+1 if activer else -1, 0)
@@ -26,7 +26,7 @@ class Actionneur(object):
 		print str_rot + " et " + str_av
 		str_serial = self.serial_order(self.inhibation)
 		print str_serial
-#		self.ssc.write(str_serial)
+		self.ssc.write(str_serial)
 		print "------------------------------------------"
 
 	def serial_order(self, immediat):
