@@ -7,6 +7,8 @@ from Configuration import Configuration as c
 class GUI(object):
 
 	def __init__(self, serveur):
+		self.joystick_WE = 0
+		self.joystick_NS = 0
 		self.clock = pygame.time.Clock()
 		self.serveur = serveur
 		self.initialisation()
@@ -45,11 +47,54 @@ class GUI(object):
 
 	def action_joystick_axe(self, axe, valeur):
 		if axe == c.J_AXIS_WE:
-			if c.J_INTERVAL_L[0] <= valeur <= c.J_INTERVAL_L[1]:	self.serveur.go_left()
-			if c.J_INTERVAL_R[0] <= valeur <= c.J_INTERVAL_R[1]:	self.serveur.go_right()
-		if axe == c.J_AXIS_NS:
-			if c.J_INTERVAL_N[0] <= valeur <= c.J_INTERVAL_N[1]:	self.serveur.go_up()
-			if c.J_INTERVAL_S[0] <= valeur <= c.J_INTERVAL_S[1]:	self.serveur.go_down()
+			if		c.J_INTERVAL_L[0] <= valeur <= c.J_INTERVAL_L[1]:
+				if		self.joystick_WE == 0:
+					self.joystick_WE = -1
+					self.serveur.go_left(True)
+				elif	self.joystick_WE == 1:
+					self.joystick_WE = -1
+					self.serveur.go_right(False)
+					self.serveur.go_left(True)
+			elif	c.J_INTERVAL_R[0] <= valeur <= c.J_INTERVAL_R[1]:
+				if		self.joystick_WE == 0:
+					self.joystick_WE = +1
+					self.serveur.go_right(True)
+				elif	self.joystick_WE == -1:
+					self.joystick_WE = +1
+					self.serveur.go_left(False)
+					self.serveur.go_right(True)
+			elif	c.J_INTERVAL_0WE[0] <= valeur <= c.J_INTERVAL_0WE[1]:
+				if		self.joystick_WE == -1:
+					self.joystick_WE = 0
+					self.serveur.go_left(False)
+				elif	self.joystick_WE == +1:
+					self.joystick_WE = 0
+					self.serveur.go_right(False)
+		if		axe == c.J_AXIS_NS:
+			if c.J_INTERVAL_U[0] <= valeur <= c.J_INTERVAL_U[1]:
+				if		self.joystick_NS == 0:
+					self.joystick_NS = -1
+					self.serveur.go_up(True)
+				elif	self.joystick_NS == 1:
+					self.joystick_NS = -1
+					self.serveur.go_down(False)
+					self.serveur.go_up(True)
+			elif	c.J_INTERVAL_D[0] <= valeur <= c.J_INTERVAL_D[1]:
+				if		self.joystick_NS == 0:
+					self.joystick_NS = +1
+					self.serveur.go_down(True)
+				elif	self.joystick_NS == -1:
+					self.joystick_NS = +1
+					self.serveur.go_up(False)
+					self.serveur.go_down(True)
+			elif	c.J_INTERVAL_0NS[0] <= valeur <= c.J_INTERVAL_0NS[1]:
+				if		self.joystick_NS == -1:
+					self.joystick_NS = 0
+					self.serveur.go_up(False)
+				elif	self.joystick_NS == +1:
+					self.joystick_NS = 0
+					self.serveur.go_down(False)
+		return True
 
 	def bouclage(self):
 		continuer = True

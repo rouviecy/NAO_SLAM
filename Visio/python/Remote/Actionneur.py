@@ -40,3 +40,6 @@ class Actionneur(object):
 		elif	self.avance == -1 and self.rotation == -1:	return "#0 P1000" + tempo + " #1 P1250" + tempo + "\r"
 		elif	self.avance == -1 and self.rotation == +0:	return "#0 P1000" + tempo + " #1 P1000" + tempo + "\r"
 		elif	self.avance == -1 and self.rotation == +1:	return "#0 P1250" + tempo + " #1 P1000" + tempo + "\r"
+
+	def quitter(self):
+		pass;
