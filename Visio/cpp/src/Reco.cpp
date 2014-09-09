@@ -64,8 +64,8 @@ void Reco::Detecter_quadrillage(){
 	image.copyTo(image_quadrillage);
 	cv::cvtColor(image, image, CV_RGB2GRAY, 1);
 	cv::equalizeHist(image, image);
-	cv::Canny(image, image_contours, 100, 255);
-//	cv::imshow("Canny", image_contours);
+	cv::Canny(image, image_contours, 150, 400);
+	cv::imshow("Canny", image_contours);
 
 	// Trouver les lignes
 	vector <cv::Vec4i> lignes;

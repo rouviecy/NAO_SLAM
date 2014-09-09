@@ -8,7 +8,7 @@ Multimap::Multimap(){
 }
 
 void Multimap::Create_map(vector <STRUCT_VIGNETTE> input){
-	Arbre arbre(false);
+	Arbre arbre(true);
 	arbre.Add_cases(input);
 	liste_maps.push_back(arbre);
 }

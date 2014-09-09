@@ -17,7 +17,7 @@ bool Arbre::Add_cases(std::vector <STRUCT_VIGNETTE> new_liste){
 		tracking.Set_img_prev(new_liste[i].image);
 		for(size_t j = 0; j < liste.size(); j++){
 			tracking.Set_img_next(liste[j].image);
-			if(tracking.Try_match(30, 5)){
+			if(tracking.Try_match(30, 15)){
 				delta_x = new_liste[i].x - liste[j].x;	x_orig = new_liste[i].x;
 				delta_y = new_liste[i].y - liste[j].y;	y_orig = new_liste[i].y;
 				delta_theta = (tracking.Get_orientation() - (new_liste[i].orientation - liste[j].orientation)) % 4;
@@ -50,8 +50,8 @@ void Arbre::Copy_cells(std::vector <STRUCT_VIGNETTE> new_liste){
 cv::Mat Arbre::Print(bool numeros){
 	if(liste.size() == 0){return cv::Mat();}
 	int min_x = 0, max_x = 0, min_y = 0, max_y = 0;
-	int vignette_w = liste[0].image.size().width;
-	int vignette_h = liste[0].image.size().height;
+	int vignette_w = liste[0].image.size().width + 20;
+	int vignette_h = liste[0].image.size().height + 20;
 	for(size_t i = 0; i < liste.size(); i++){
 		if(liste[i].x < min_x){min_x = liste[i].x;}
 		if(liste[i].x > max_x){max_x = liste[i].x;}
