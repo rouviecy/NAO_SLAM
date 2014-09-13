@@ -21,9 +21,9 @@ class GUI(object):
 		fenetre = pygame.display.set_mode((640, 480))
 		nb = pygame.joystick.get_count()
 		print str(nb) + " joystick(s) détectés"
-		if(nb > 0):
+		if(nb > c.J_INDEX):
 			print "Activation du 1er joystick"
-			mon_joystick = pygame.joystick.Joystick(0)
+			mon_joystick = pygame.joystick.Joystick(c.J_INDEX)
 			mon_joystick.init()
 			return True
 		return False
