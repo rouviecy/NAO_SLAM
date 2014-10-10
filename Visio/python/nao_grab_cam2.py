@@ -20,11 +20,16 @@ HSV_min = np.array((2, 150, 120))
 HSV_max = np.array((14, 255, 255))
 
 # Movement parameters
-bangbang = 0.9
-Kp_head_x = 0.01
-Kp_head_y = 0.01
-Kp_walk_theta = 0.01
-Kp_walk_vitesse = 0.001
+Kp_head_x = -0.3
+Kp_head_y = +0.3
+Kp_walk_theta = +0.3
+Kp_walk_vitesse = 0.5
+delta_t_dead_reckoning = 2.
+last_t = time.time()
+last_head_x = 0.
+last_head_y = 0.
+last_walk_theta = 0.
+last_walk_vitesse = 0.
 
 def StiffnessOn(proxy, ok):
 	pNames = "Body"
@@ -87,6 +92,7 @@ for i in range(0, temps):
 	best_area = 0
 	x_head, y_head = recordData()
 	theta_body = x_head
+	v_theta_body = 0.0
 	vitesse = 0.0
 
 	for c in contours:
@@ -103,16 +109,29 @@ for i in range(0, temps):
 		dy_img = (float(cy) - middle_y) / imageHeight
 
 		# NAO jobs
-
 		x_head += Kp_head_x * dx_img
 		y_head += Kp_head_y * dy_img
 		print "aire : ", best_area, " | dx : ", dx_img, " | dy : ", dy_img
-
 		v_theta_body = Kp_walk_theta * theta_body
-		vitesse = abs(seuil_max - best_area) * Kp_walk_vitesse
+		if best_area > seuil_min:
+			vitesse = (seuil_mid - best_area) * Kp_walk_vitesse
 		if v_theta_body < -0.9 : v_theta_body = -0.9
 		if v_theta_body > +0.9 : v_theta_body = +0.9
 		if vitesse > +0.9 : vitesse = +0.9
+		if vitesse < -0.9 : vitesse = -0.9
+		last_t = time.time()
+		last_head_x = x_head
+		last_head_y = y_head
+		last_walk_theta = v_theta_body
+		last_walk_vitesse = vitesse
+
+	else:
+		# Keep tracking if goal is lost
+		if time.time() - last_t < delta_t_dead_reckoning:
+			x_head = last_head_x
+			y_head = last_head_y
+			v_theta_body = last_walk_theta 
+			vitesse = last_walk_vitesse
 
 	motionProxy.setWalkTargetVelocity(vitesse, 0.0, v_theta_body, 0.8)
 	motionProxy.setAngles("HeadYaw", x_head, 0.3)
@@ -121,7 +140,7 @@ for i in range(0, temps):
 	if best_area == 0: setLeds(0, 255, 0)
 	else: setLeds(255, 0, 0)
 
-	time.sleep(0.1)
+	time.sleep(0.01)
 
 camProxy.unsubscribe(videoClient)
 postureProxy.goToPosture("Sit", 0.8)
