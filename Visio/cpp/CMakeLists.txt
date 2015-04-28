@@ -42,7 +42,7 @@ add_library(MYLIBS
 	src/Tracking.h		src/Tracking.cpp
 	src/Transfo.h		src/Transfo.cpp
 	src/Utils.h		src/Utils.cpp
-	src/struct_HSV_bound.h
+	src/hsv_params.h
 	src/struct_wrap_bound.h
 	src/struct_nom.h
 	src/struct_vignette.h

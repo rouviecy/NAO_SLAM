@@ -32,7 +32,8 @@ using namespace std;
 int main(int argc, char *argv[]){
 
 	char key = 'a';								// clef de contrôle du programme
-	Flux_cam flux(-2, 40, 1, 3, 3, argv[1]);	// initialisation du flux webcam (/dev/video0)
+	Flux_cam flux(-2, 40, 1, 3, 3, argv[1]);	// adresse web rentrée en paramètre
+//	Flux_cam flux(-1, 40, 1, 3, 3);				// initialisation du flux webcam (/dev/video0)
 	Gui gui;									// IHM
 	Transfo transfo;
 	Reco reco;

@@ -17,7 +17,7 @@
 #include <string.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
-#include "struct_HSV_bound.h"
+#include "hsv_params.h"
 #include "struct_wrap_bound.h"
 
 class Gui{
@@ -29,8 +29,8 @@ public:
 	void Creer_trackbar_HSV_sep(const char* titre_fenetre);				// initialisation de la fenêtre des trackbars de séparation HSV
 	void Creer_trackbar_HSV_sep2(const char* titre_fenetre);			// initialisation de la fenêtre des trackbars de séparation HSV
 	void Creer_trackbar_transfo(const char* titre_fenetre);				// initialisation de la fenêtre des trackbars de transformation
-	STRUCT_HSV_BOUND *Get_HSV_bound() const;					// pointeur vers la structure contenant les paramètres de séparation
-	STRUCT_HSV_BOUND *Get_HSV_bound2() const;					// pointeur vers la structure contenant les paramètres de séparation 2
+	hsv_params *Get_HSV_bound() const;						// pointeur vers la structure contenant les paramètres de séparation
+	hsv_params *Get_HSV_bound2() const;						// pointeur vers la structure contenant les paramètres de séparation 2
 	STRUCT_WRAP_BOUND *Get_wrap_bound() const;					// pointeur vers la structure contenant les paramètres de transformation
 	void Controler_souris(std::vector <cv::Point2i> mc, int width, int height);	// contrôler la souris en fonction de la position du 1er blob
 	void Cliquer(std::vector <cv::Point2i> mc);					// cliquer si le vecteur n'est pas vide
@@ -46,8 +46,8 @@ private:
 
 	#define TAILLE_POD 200
 
-	STRUCT_HSV_BOUND *hsv;
-	STRUCT_HSV_BOUND *hsv2;
+	hsv_params *hsv;
+	hsv_params *hsv2;
 	STRUCT_WRAP_BOUND *wrap;
 
 	cv::Scalar rouge;

@@ -64,7 +64,7 @@ void Reco::Detecter_quadrillage(){
 	image.copyTo(image_quadrillage);
 	cv::cvtColor(image, image, CV_RGB2GRAY, 1);
 	cv::equalizeHist(image, image);
-	cv::Canny(image, image_contours, 150, 400);
+	cv::Canny(image, image_contours, 300, 800);
 	cv::imshow("Canny", image_contours);
 
 	// Trouver les lignes
@@ -297,6 +297,56 @@ vector <int> Reco::Liste_edges_int(cv::Subdiv2D s, int max_x, int max_y, cv::Mat
 		resultat_vector.push_back(*it);
 	}
 	return resultat_vector;
+}
+
+cv::Mat Reco::Trouver_ligne_principale(bool* detected, float* angle, float* ecart){
+	// Extraire les contours
+	cv::Mat image_contours;
+	image.copyTo(image_quadrillage);
+	cv::cvtColor(image, image, CV_RGB2GRAY, 1);
+	cv::equalizeHist(image, image);
+	cv::Canny(image, image_contours, 300, 800);
+	cv::imshow("Canny", image_contours);
+
+	// Trouver les lignes
+	vector <cv::Vec4i> lignes;
+	cv::HoughLinesP(image_contours, lignes, 1, CV_PI/90, 25, 100, 500);
+	if(lignes.size() < 2){
+		*detected = false;
+		*angle = 0.;
+		*ecart = 0.;
+		return image;
+	}
+
+	// Calculer les angles et distances par rapport à la verticale
+	vector <float> angles, distances;
+	float angle_moyen = 0.;
+	float distance_moyenne = 0.;
+	cv::Point2i centre(image.size().width / 2, image.size().height / 2);
+	for(size_t i = 0; i < lignes.size(); i++){
+		float dx = (float) (lignes[i][2] - lignes[i][0]);
+		float dy = (float) (lignes[i][3] - lignes[i][1]);
+		float angle = atan2(dy, dx);
+		angle = (angle > 0 ? +M_PI_2 : -M_PI_2) - angle;
+		angles.push_back(angle);
+		if(fabs(angle) < M_PI_4){
+			float distance = (dy * ((float) centre.x - lignes[i][0]) - dx * ((float) centre.y - lignes[i][1])) / sqrt((dx * dx + dy * dy));
+			if(angle > 0){distance = -distance;}
+			if(fabs(angle) < 0.0001){distance = -distance;}
+			distances.push_back(distance);
+		}
+	}
+	angle_moyen = accumulate(angles.begin(), angles.end(), 0.0) / angles.size();
+	cv::Point2i pt_excentre((int) (1000. * sin(angle_moyen)), (int) (1000. * cos(angle_moyen)));
+	if(distances.size() > 0){
+		distance_moyenne = accumulate(distances.begin(), distances.end(), 0.0) / distances.size();
+		centre += cv::Point2i(distance_moyenne / cos(angle_moyen), 0);
+	}
+	cv::line(image, centre + pt_excentre, centre - pt_excentre, blanc, 5);
+	*detected = true;
+	*angle = angle_moyen;
+	*ecart = distance_moyenne;
+	return image;
 }
 
 // Getters et Setters

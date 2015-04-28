@@ -4,14 +4,14 @@ using namespace std;
 
 // Constructeur - Destructeur
 Body::Body(){
-	hsv_jaune =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_vert =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_rose =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_lavande =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_turq =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_beige =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_pastis =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
-	hsv_mauve =	(STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_jaune =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_vert =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_rose =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_lavande =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_turq =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_beige =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_pastis =	(hsv_params*) malloc(sizeof(hsv_params));
+	hsv_mauve =	(hsv_params*) malloc(sizeof(hsv_params));
 	blobs = new Blobs[2];
 	Couleurs();
 	Membres();
@@ -67,7 +67,7 @@ void Body::Membres(){
 }
 
 // Mettre à jour le détecteur de blobs
-vector <cv::Point2i> Body::Update_blobs(STRUCT_HSV_BOUND *hsv_1, STRUCT_HSV_BOUND *hsv_2){
+vector <cv::Point2i> Body::Update_blobs(hsv_params *hsv_1, hsv_params *hsv_2){
 	blobs[0].Definir_limites_separation(hsv_1);
 	blobs[1].Definir_limites_separation(hsv_2);
 	for(int i = 0; i < 2; i++){

@@ -18,7 +18,7 @@
 #include <opencv2/opencv.hpp>
 #include "Blobs.h"
 #include "Reco.h"
-#include "struct_HSV_bound.h"
+#include "hsv_params.h"
 
 class Body{
 
@@ -45,22 +45,22 @@ public:
 
 private:
 
-	STRUCT_HSV_BOUND *hsv_jaune;
-	STRUCT_HSV_BOUND *hsv_vert;
-	STRUCT_HSV_BOUND *hsv_rose;
-	STRUCT_HSV_BOUND *hsv_lavande;
-	STRUCT_HSV_BOUND *hsv_turq;
-	STRUCT_HSV_BOUND *hsv_beige;
-	STRUCT_HSV_BOUND *hsv_mauve;
-	STRUCT_HSV_BOUND *hsv_pastis;
+	hsv_params *hsv_jaune;
+	hsv_params *hsv_vert;
+	hsv_params *hsv_rose;
+	hsv_params *hsv_lavande;
+	hsv_params *hsv_turq;
+	hsv_params *hsv_beige;
+	hsv_params *hsv_mauve;
+	hsv_params *hsv_pastis;
 
-	STRUCT_HSV_BOUND *hsv_Tete[2];
-	STRUCT_HSV_BOUND *hsv_T_torso[2];	STRUCT_HSV_BOUND *hsv_B_torso[2];
-	STRUCT_HSV_BOUND *hsv_L_shoulder[2];	STRUCT_HSV_BOUND *hsv_R_shoulder[2];
-	STRUCT_HSV_BOUND *hsv_L_elbow[2];	STRUCT_HSV_BOUND *hsv_R_elbow[2];
-	STRUCT_HSV_BOUND *hsv_L_hand[2];	STRUCT_HSV_BOUND *hsv_R_hand[2];
-	STRUCT_HSV_BOUND *hsv_L_knee[2];	STRUCT_HSV_BOUND *hsv_R_knee[2];
-	STRUCT_HSV_BOUND *hsv_L_foot[2];	STRUCT_HSV_BOUND *hsv_R_foot[2];
+	hsv_params *hsv_Tete[2];
+	hsv_params *hsv_T_torso[2];	hsv_params *hsv_B_torso[2];
+	hsv_params *hsv_L_shoulder[2];	hsv_params *hsv_R_shoulder[2];
+	hsv_params *hsv_L_elbow[2];	hsv_params *hsv_R_elbow[2];
+	hsv_params *hsv_L_hand[2];	hsv_params *hsv_R_hand[2];
+	hsv_params *hsv_L_knee[2];	hsv_params *hsv_R_knee[2];
+	hsv_params *hsv_L_foot[2];	hsv_params *hsv_R_foot[2];
 
 	cv::Mat img;
 	cv::Point2i Tete, T_torso, B_torso, L_shoulder, R_shoulder, L_elbow, R_elbow, L_hand, R_hand, L_knee, R_knee, L_foot, R_foot;
@@ -70,7 +70,7 @@ private:
 
 	void Couleurs();
 	void Membres();
-	std::vector <cv::Point2i> Update_blobs(STRUCT_HSV_BOUND *hsv_1, STRUCT_HSV_BOUND *hsv_2);
+	std::vector <cv::Point2i> Update_blobs(hsv_params *hsv_1, hsv_params *hsv_2);
 
 };
 

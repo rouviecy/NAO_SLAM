@@ -6,12 +6,12 @@ using namespace std;
 Blobs::Blobs(){
 	rouge = cv::Scalar(0, 0, 255); bleu = cv::Scalar(255, 0, 0);
 	morpho_kern = cv::Mat::ones(cv::Size(3,3), CV_8U);
-	STRUCT_HSV_BOUND *hsv = (STRUCT_HSV_BOUND*) malloc(sizeof(STRUCT_HSV_BOUND));
+	hsv_params *hsv = (hsv_params*) malloc(sizeof(hsv_params));
 	hsv->H_min =		80;
 	hsv->H_max =		130;
-	hsv->S_min =		50;
+	hsv->S_min =		100;
 	hsv->S_max =		255;
-	hsv->V_min =		50;
+	hsv->V_min =		100;
 	hsv->V_max =		255;
 	hsv->nb_dilate =	5;
 	hsv->nb_erode =		5;
@@ -22,6 +22,7 @@ Blobs::Blobs(){
 
 // Séparateur de couleurs et appliquer les filtres morphologiques
 void Blobs::Separer(){
+	mut.lock();
 	if(sep_min[0] <= 180 && sep_max[0] <= 180){
 		inRange(img_HSV, sep_min, sep_max, img_sep);
 	}
@@ -42,14 +43,17 @@ void Blobs::Separer(){
 	}
 	if(nb_dilate > 0)	{dilate(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_dilate);}
 	if(nb_erode > 0)	{erode(img_sep, img_sep, morpho_kern, cv::Point(-1, -1), nb_erode);}
+	mut.unlock();
 }
 
 // Mise à jour des paramètres de segmentation HSV
-void Blobs::Definir_limites_separation(STRUCT_HSV_BOUND *hsv){
+void Blobs::Definir_limites_separation(hsv_params *hsv){
+	mut.lock();
 	sep_min = cv::Scalar(hsv->H_min, hsv->S_min, hsv->V_min);
 	sep_max = cv::Scalar(hsv->H_max, hsv->S_max, hsv->V_max);
 	seuil_taille_blobs = hsv->seuil;
 	nb_dilate = hsv->nb_dilate; nb_erode = hsv->nb_erode;
+	mut.unlock();
 }
 
 // Séparer les blobs
@@ -70,8 +74,8 @@ void Blobs::Trouver_blobs(){
 		rect.push_back(rect_[i]);
 		taille.push_back(aire);
 		drawContours(img_blobs, liste_blobs, i, bleu, CV_FILLED, 8, hierarchie_blobs);
-		cv::circle(img_blobs, mc_[i], 4, rouge, -1, 8, 0);
-		cv::rectangle(img_blobs, rect_[i], rouge);
+//		cv::circle(img_blobs, mc_[i], 4, rouge, -1, 8, 0);
+//		cv::rectangle(img_blobs, rect_[i], rouge);
 	}
 }
 

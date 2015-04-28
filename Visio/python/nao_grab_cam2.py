@@ -3,6 +3,8 @@ import Image, cv2
 import sys, time, math
 from naoqi import ALProxy
 
+pi = 3.14
+
 #** NAO keeps watching JOGs and protects himself from them
 #*
 #*  by Cyril Rouviere
@@ -10,26 +12,52 @@ from naoqi import ALProxy
 # NAO parameters
 IP, PORT = "127.0.0.1", 9559
 ALMEMORY_KEY_NAMES = ["Device/SubDeviceList/HeadYaw/Position/Sensor/Value", "Device/SubDeviceList/HeadPitch/Position/Sensor/Value"]
+ALMEMORY_KEY_ARMS = [
+	"Device/SubDeviceList/LShoulderPitch/Position/Sensor/Value",
+	"Device/SubDeviceList/LShoulderRoll/Position/Sensor/Value",
+	"Device/SubDeviceList/LElbowYaw/Position/Sensor/Value",
+	"Device/SubDeviceList/LWristYaw/Position/Sensor/Value",
+	"Device/SubDeviceList/LHand/Position/Sensor/Value",
+	"Device/SubDeviceList/RShoulderPitch/Position/Sensor/Value",
+	"Device/SubDeviceList/RShoulderRoll/Position/Sensor/Value",
+	"Device/SubDeviceList/RElbowYaw/Position/Sensor/Value",
+	"Device/SubDeviceList/RWristYaw/Position/Sensor/Value",
+	"Device/SubDeviceList/RHand/Position/Sensor/Value"]
+
+angles_punch = [
+	[0., -0.3, -pi/2, -pi/2, -pi/2, 0.,		0., +0.3, pi/2, pi/2, pi/2, 0.],
+	[0., 0., 0., 0., 0., 0.,				0., +0.3, pi/2, pi/2, pi/2, 0.]
+]
+commandes_punch = [
+	"LShoulderPitch",
+	"LShoulderRoll",
+	"LElbowYaw",
+	"LElbowRoll",
+	"LWristYaw",
+	"LHand",
+	"RShoulderPitch",
+	"RShoulderRoll",
+	"RElbowYaw",
+	"RElbowRoll",
+	"RWristYaw",
+	"RHand"	
+]
 
 # Detection threshold and counter parameters
 temps = 200000
-seuil_max = 150	# area > seuil => unwalk
-seuil_mid = 100	# area > seuil => stay
-seuil_min = 4	# area > seuil => walk
+seuil_mid = 300
+seuil_ecart = 100
+seuil_min = 4
+seuil_punch = 400
+state_punch = 0
 HSV_min = np.array((2, 150, 120))
 HSV_max = np.array((14, 255, 255))
 
 # Movement parameters
 Kp_head_x = -0.3
 Kp_head_y = +0.3
-Kp_walk_theta = +0.3
-Kp_walk_vitesse = 0.5
-delta_t_dead_reckoning = 2.
-last_t = time.time()
-last_head_x = 0.
-last_head_y = 0.
-last_walk_theta = 0.
-last_walk_vitesse = 0.
+Kp_walk_theta = +0.5
+Kp_walk_vitesse = 0.01
 
 def StiffnessOn(proxy, ok):
 	pNames = "Body"
@@ -45,6 +73,17 @@ def recordData():
 		data.append(value)
 	return data
 
+def armData():
+	memory = ALProxy("ALMemory", IP, PORT)
+	data = list()
+	for key in ALMEMORY_KEY_ARMS:
+		value = memory.getData(key)
+		data.append(value)
+	return data
+
+def punch(prox, n):
+	prox.setAngles(commandes_punch, angles_punch[n], 0.3)
+
 # LEDs parameters
 def setLeds(R, G, B):
 	ledsProxy = ALProxy("ALLeds", IP, PORT)
@@ -58,7 +97,7 @@ postureProxy = ALProxy("ALRobotPosture", IP, PORT)
 StiffnessOn(motionProxy, True)
 postureProxy.goToPosture("StandInit", 1.0)
 motionProxy.moveInit()
-motionProxy.setWalkArmsEnabled(True, True)
+motionProxy.setWalkArmsEnabled(False, False)
 motionProxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
 
 # Camera
@@ -112,35 +151,37 @@ for i in range(0, temps):
 		x_head += Kp_head_x * dx_img
 		y_head += Kp_head_y * dy_img
 		print "aire : ", best_area, " | dx : ", dx_img, " | dy : ", dy_img
-		v_theta_body = Kp_walk_theta * theta_body
-		if best_area > seuil_min:
+		if abs(theta_body) > 0.5:
+			v_theta_body = Kp_walk_theta * theta_body
+		if best_area > seuil_min and abs(best_area - seuil_min) > seuil_ecart:
 			vitesse = (seuil_mid - best_area) * Kp_walk_vitesse
 		if v_theta_body < -0.9 : v_theta_body = -0.9
 		if v_theta_body > +0.9 : v_theta_body = +0.9
+		if abs(v_theta_body) < 0.2 : v_theta_body = 0.0
 		if vitesse > +0.9 : vitesse = +0.9
 		if vitesse < -0.9 : vitesse = -0.9
-		last_t = time.time()
-		last_head_x = x_head
-		last_head_y = y_head
-		last_walk_theta = v_theta_body
-		last_walk_vitesse = vitesse
+		if abs(vitesse) < 0.2 : vitesse = 0.0
 
+	if state_punch > 0:
+		state_punch += 1
+		if state_punch == 10:
+			state_punch = 0
+	elif best_area > seuil_punch:
+		punch(motionProxy, 1)
+		vitesse = 0.
+		v_theta_body = 0.
 	else:
-		# Keep tracking if goal is lost
-		if time.time() - last_t < delta_t_dead_reckoning:
-			x_head = last_head_x
-			y_head = last_head_y
-			v_theta_body = last_walk_theta 
-			vitesse = last_walk_vitesse
+		punch(motionProxy, 0)
+
 
 	motionProxy.setWalkTargetVelocity(vitesse, 0.0, v_theta_body, 0.8)
 	motionProxy.setAngles("HeadYaw", x_head, 0.3)
 	motionProxy.setAngles("HeadPitch", y_head, 0.3)
 
+
 	if best_area == 0: setLeds(0, 255, 0)
 	else: setLeds(255, 0, 0)
 
-	time.sleep(0.01)
 
 camProxy.unsubscribe(videoClient)
 postureProxy.goToPosture("Sit", 0.8)
